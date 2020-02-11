@@ -34,21 +34,22 @@ typedef struct			s_stack
 	int					num;
 	char				stack_id;
 	struct s_stack		*next;
+	struct s_stack		*prev;
 }						t_stack;
 
-typedef void	(*operation_func)(t_stack *stack_a, t_stack *stack_b);
+typedef int		(*operation_func)(t_stack **stack_a, t_stack **stack_b);
 
-void	ft_swap_a(t_stack *stack_a, t_stack *stack_b);
-void	ft_swap_b(t_stack *stack_a, t_stack *stack_b);
-void	ft_swap_both(t_stack *stack_a, t_stack *stack_b);
-void	ft_push_a(t_stack *stack_a, t_stack *stack_b);
-void	ft_push_b(t_stack *stack_a, t_stack *stack_b);
-void	ft_rotate_a(t_stack *stack_a, t_stack *stack_b);
-void	ft_rotate_b(t_stack *stack_a, t_stack *stack_b);
-void	ft_rotate_both(t_stack *stack_a, t_stack *stack_b);
-void	ft_reverserotate_a(t_stack *stack_a, t_stack *stack_b);
-void	ft_reverserotate_b(t_stack *stack_a, t_stack *stack_b);
-void	ft_reverserotate_both(t_stack *stack_a, t_stack *stack_b);
+int		ft_swap_a(t_stack **stack_a, t_stack **stack_b);
+int		ft_swap_b(t_stack **stack_a, t_stack **stack_b);
+int		ft_swap_both(t_stack **stack_a, t_stack **stack_b);
+int		ft_push_a(t_stack **stack_a, t_stack **stack_b);
+int		ft_push_b(t_stack **stack_a, t_stack **stack_b);
+int		ft_rotate_a(t_stack **stack_a, t_stack **stack_b);
+int		ft_rotate_b(t_stack **stack_a, t_stack **stack_b);
+int		ft_rotate_both(t_stack **stack_a, t_stack **stack_b);
+int		ft_reverserotate_a(t_stack **stack_a, t_stack **stack_b);
+int		ft_reverserotate_b(t_stack **stack_a, t_stack **stack_b);
+int		ft_reverserotate_both(t_stack **stack_a, t_stack **stack_b);
 
 typedef struct			s_instr
 {
@@ -79,8 +80,8 @@ int			ft_numexists(t_stack *lst, int num);
 */
 
 int			ft_saveinstructions(t_instr	**instr_lst, char *operation);
-void		ft_call_instructfunctions(t_instr *instr_lst, t_stack *stack_a, \
-									t_stack *stack_b);
+void		ft_call_instructfunctions(t_instr *instr_lst, t_stack **stack_a, \
+									t_stack **stack_b);
 /*
 ** Auxiliary functions
 */

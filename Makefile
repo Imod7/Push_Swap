@@ -13,7 +13,8 @@
 NAME = checker
 LIBFT = libft/libft.a
 CC = gcc -Wall -Wextra -Werror -g
-OBJDIR = checker
+OBJDIR = checker_files
+EXEDIR = ./
 
 RED=\033[0;31m
 GREEN=\033[0;32m
@@ -33,15 +34,15 @@ OBJ = $(SRC:%.c=$(OBJDIR)/%.o)
 
 INCL = libft/libft.a
 
-all: $(NAME)
+all: $(EXEDIR)$(NAME)
 
 $(LIBFT):
 	@echo "${CYAN}Calling libft makefile from push_swap${NC}"
 	@$(MAKE) -C libft
 
-$(NAME): $(OBJ) $(LIBFT)
+$(EXEDIR)$(NAME): $(OBJ) $(LIBFT)
 	@echo "${GREEN}Making checker${NC}"
-	@$(CC) $(OBJ) -o $(OBJDIR)/checker $(INCL) 
+	$(CC) $(OBJ) -o $(EXEDIR)$(NAME) $(INCL) 
 
 $(OBJDIR)/%.o: %.c $(INCL)
 	@$(CC) -c -o $@ $<
@@ -55,7 +56,7 @@ clean:
 
 fclean: clean
 	@echo "${RED}Deleting checker executable${NC}"
-	@rm -f $(OBJDIR)/$(NAME)
+	@rm -f $(EXEDIR)$(NAME)
 	@echo "${CYAN}Calling fclean of libft${NC}"
 	@$(MAKE) fclean -C libft
 
