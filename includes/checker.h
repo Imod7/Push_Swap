@@ -61,7 +61,7 @@ typedef struct			s_instr
 ** Check User Input functions
 */
 
-int			ft_checkargs(int argc, char **argv, t_stack	**stack_lst);
+int			ft_build_stacka(int argc, char **argv, t_stack	**stack_lst);
 int			ft_build_stackb(t_stack	**stack_b);
 
 /*

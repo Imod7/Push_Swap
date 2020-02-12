@@ -15,6 +15,8 @@ NAME = libft.a
 CC = gcc
 FLAGS = -Wall -Wextra -Werror -g
 OBJDIR = ft_printf
+LIBFT_OBJDIR = .obj-libft
+PRINTF_OBJDIR = ft_printf/.obj-printf
 
 RED=\033[0;31m
 GREEN=\033[0;32m
@@ -114,34 +116,39 @@ SRCPRINTF = ft_printf.c \
 			ft_writer_manager.c \
 			ft_zero_arg.c \
 
-OBJLIBFT = $(SRC:%.c=%.o) 
-OBJPRINTF = $(SRCPRINTF:%.c=$(OBJDIR)/%.o)
+OBJLIBFT = $(SRC:%.c=$(LIBFT_OBJDIR)/%.o)
+OBJPRINTF = $(SRCPRINTF:%.c=$(PRINTF_OBJDIR)/%.o)
 
 INCL = ../includes/
 
 all: $(NAME)
 
 $(NAME): $(OBJLIBFT) $(OBJPRINTF)
-	@echo "${GREEN}Created all object files of libft & ft_printf${NC}"
-	@echo "${GREEN}Making libft.a${NC}"
+	@echo "${GREEN} [ + ] ${NC}Created libft & ft_printf object files"
+	@echo "${GREEN} [ + ] ${NC}Creating libft.a"
 	@ar crs $(NAME) $(OBJLIBFT) $(OBJPRINTF)
 
 # Object Files of printf
-$(OBJDIR)/%.o: %.c $(INCL)
+$(PRINTF_OBJDIR)/%.o: $(OBJDIR)/%.c $(INCL)
+	@mkdir -p $(PRINTF_OBJDIR)
+	@$(CC) -c -o $@ $<
 	@$(CC) $(FLAGS) -c -o $@ $<
 
 # Object Files of libft
-%.o: %.c $(INCL)
+$(LIBFT_OBJDIR)/%.o: %.c $(INCL)
+	@mkdir -p $(LIBFT_OBJDIR)
+	@$(CC) -c -o $@ $<
 	@$(CC) $(FLAGS) -c -o $@ $<
 
 .PHONY: clean
 
 clean:
-	@echo "${RED}Cleaning all object files of libft & ft_printf${NC}"
-	@rm -f $(OBJLIBFT) $(OBJPRINTF)
+	@echo "${RED} [ - ] ${NC}Deleting libft & ft_printf object files"
+	@rm -rf $(LIBFT_OBJDIR)
+	@rm -rf $(PRINTF_OBJDIR)
 
 fclean: clean
-	@echo "${RED}Deleting the libft.a file${NC}"
+	@echo "${RED} [ - ] ${NC}Deleting the libft.a file"
 	@rm -f $(NAME)
 
 re: fclean all

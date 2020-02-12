@@ -13,7 +13,8 @@
 NAME = checker
 LIBFT = libft/libft.a
 CC = gcc -Wall -Wextra -Werror -g
-OBJDIR = checker_files
+CHECKER_SRCDIR = checker_files
+CHECKER_OBJDIR = .obj-checker
 EXEDIR = ./
 
 RED=\033[0;31m
@@ -23,42 +24,45 @@ NC=\033[0m # No Color
 
 SRC =	\
 		checker.c \
-		ft_checkinput.c \
+		ft_saveinput.c \
 		ft_listfunctions.c \
 		ft_freelist.c \
-		ft_instructions.c \
+		ft_saveinstructions.c \
+		ft_callinstructions.c \
 		ft_stackoperations.c \
 		ft_bitwise.c \
 
-OBJ = $(SRC:%.c=$(OBJDIR)/%.o)
+OBJ = $(SRC:%.c=$(CHECKER_OBJDIR)/%.o)
 
 INCL = libft/libft.a
 
 all: $(EXEDIR)$(NAME)
 
 $(LIBFT):
-	@echo "${CYAN}Calling libft makefile from push_swap${NC}"
+	@echo "${CYAN} [ * ] ${NC}Calling libft makefile from push_swap"
 	@$(MAKE) -C libft
 
 $(EXEDIR)$(NAME): $(OBJ) $(LIBFT)
-	@echo "${GREEN}Making checker${NC}"
-	$(CC) $(OBJ) -o $(EXEDIR)$(NAME) $(INCL) 
+	@echo "${GREEN} [ + ] ${NC}Creating checker object files"
+	@echo "${GREEN} [ + ] ${NC}Creating checker executable"
+	@$(CC) $(OBJ) -o $(EXEDIR)$(NAME) $(INCL)
 
-$(OBJDIR)/%.o: %.c $(INCL)
+$(CHECKER_OBJDIR)/%.o: $(CHECKER_SRCDIR)/%.c $(INCL)
+	@mkdir -p $(CHECKER_OBJDIR)
 	@$(CC) -c -o $@ $<
 
 .PHONY: clean
 
 clean:
-	@echo "${RED}Cleaning all object files of checker${NC}"
-	@rm -f $(OBJ)
+	@echo "${RED} [ - ] ${NC}Deleting checker object files"
+	@rm -rf $(CHECKER_OBJDIR)
 	@$(MAKE) clean -C libft
 
 fclean: clean
-	@echo "${RED}Deleting checker executable${NC}"
+	@echo "${RED} [ - ] ${NC}Deleting checker executable"
 	@rm -f $(EXEDIR)$(NAME)
-	@echo "${CYAN}Calling fclean of libft${NC}"
-	@$(MAKE) fclean -C libft
+	@echo "${RED} [ - ] ${NC}Deleting the libft.a file"
+	@rm -f $(LIBFT)
 
 re: fclean all
 

@@ -42,7 +42,7 @@ int			ft_build_stackb(t_stack	**stack_b)
 	return (0);
 }
 
-int			ft_checkargs(int argc, char **argv, t_stack	**stack_a)
+int			ft_build_stacka(int argc, char **argv, t_stack	**stack_a)
 {
 	int		i;
 	int		num;

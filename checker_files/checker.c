@@ -36,7 +36,7 @@ int			main(int argc, char **argv)
 		return (0);
 	else
 	{
-		if (ft_checkargs(argc, argv, &stack_a) == -1)
+		if (ft_build_stacka(argc, argv, &stack_a) == -1)
 			return (ft_exitprogram(-1, &stack_a));
 	}
 	ft_build_stackb(&stack_b);
