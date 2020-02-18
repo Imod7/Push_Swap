@@ -29,6 +29,12 @@
 # define INSTR_RRB		(1 | (1 << 0) | (1 << 3))
 # define INSTR_RRR		((1 << 1) | (1 << 3))
 
+typedef struct			s_stack_prop
+{
+	char				stackprop_id;
+	struct s_stack		*stack_lst;
+}						t_stack_prop;
+
 typedef struct			s_stack
 {
 	int					num;
@@ -62,7 +68,8 @@ typedef struct			s_instr
 */
 
 int			ft_build_stacka(int argc, char **argv, t_stack	**stack_lst);
-int			ft_build_stackb(t_stack	**stack_b);
+int			ft_build_stackb(t_stack_prop **stack_b);
+void		ft_print_stacktemp(t_stack_prop *stackp_lst);
 
 /*
 ** Linked List (=Stack) functions

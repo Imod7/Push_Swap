@@ -73,6 +73,8 @@ int				ft_push_b(t_stack **stacka_ref, t_stack **stack_b)
 	t_stack	*temp_b;
 
 	temp_b = *stack_b;
+	if (temp_b == NULL)
+		temp_b = ft_memalloc(sizeof(t_stack));
 	ft_printf("push_b function called\n");
 	first_node = *stacka_ref;
 	second_node = (*stacka_ref)->next;

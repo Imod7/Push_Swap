@@ -62,6 +62,28 @@ void		ft_print_stack(t_stack *lst)
 	// ft_printf("Length of the stack = %d \n", len);
 }
 
+void		ft_print_stacktemp(t_stack_prop *stackp_lst)
+{
+	t_stack	*temp;
+	int		len;
+
+	ft_printf(ANSI_COLOR_CYAN"\n-----------------------------------------\n");
+	ft_printf("----\t\tStack %c\t\t     ----\n", stackp_lst->stackprop_id);
+	ft_printf("-----------------------------------------\n"ANSI_COLOR_RESET);
+	temp = stackp_lst->stack_lst;
+	len = 0;
+	if (temp == NULL)
+		ft_printf("|\t\tlist is NULL\t\t|\n");
+	while (temp != NULL)
+	{
+		len++;
+		ft_printf("|\t\t%-15d\t\t|\n", temp->num);
+		temp = temp->next;
+	}
+	ft_printf("-----------------------------------------\n");
+	// ft_printf("Length of the stack = %d \n", len);
+}
+
 int			ft_stack_length(t_stack *lst)
 {
 	t_stack *temp;
