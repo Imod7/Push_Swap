@@ -71,14 +71,29 @@ int				ft_push_b(t_stack **stacka_ref, t_stack **stack_b)
 	t_stack	*first_node;
 	t_stack	*second_node;
 	t_stack	*temp_b;
+	t_stack *newnode_b;
 
-	temp_b = *stack_b;
-	if (temp_b == NULL)
-		temp_b = ft_memalloc(sizeof(t_stack));
 	ft_printf("push_b function called\n");
 	first_node = *stacka_ref;
 	second_node = (*stacka_ref)->next;
 	*stacka_ref = second_node;
+	temp_b = *stack_b;
+	// temp_b = ft_memalloc(sizeof(t_stack));
+	if (temp_b == NULL)
+	{
+		newnode_b = ft_stack_newnode(first_node->num);
+		newnode_b->next = temp_b;
+		newnode_b->prev = NULL;
+		(*stack_b) = newnode_b;
+	}
+	else
+	{
+		newnode_b = ft_stack_newnode(first_node->num);
+		newnode_b->next = temp_b;
+		newnode_b->prev = NULL;
+		newnode_b->next->prev = newnode_b;
+		(*stack_b) = newnode_b;
+	}
 	return (0);
 }
 

@@ -35,9 +35,7 @@ int			ft_build_stackb(t_stack_prop **stack_b)
 {
 	// (*stack_b) = NULL;
 	// (*stack_b) = ft_memalloc(sizeof(t_stack));
-	ft_printf("EDW EIMAI \n");
 	(*stack_b)->stackprop_id = 'B';
-	ft_printf(" id = %c \n", (*stack_b)->stackprop_id);
 	ft_print_stacktemp(*stack_b);
 	return (0);
 }

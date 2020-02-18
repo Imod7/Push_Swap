@@ -46,12 +46,13 @@ void		ft_print_stack(t_stack *lst)
 	int		len;
 
 	ft_printf(ANSI_COLOR_CYAN"\n-----------------------------------------\n");
-	ft_printf("----\t\tStack %c\t\t     ----\n", lst->stack_id);
+	// ft_printf("----\t\tStack %c\t\t     ----\n", lst->stack_id);
+	ft_printf("----\t\tStack \t\t     ----\n");
 	ft_printf("-----------------------------------------\n"ANSI_COLOR_RESET);
 	temp = lst;
 	len = 0;
 	if (temp == NULL)
-		;
+		ft_printf("|\t\t	\t\t|\n");
 	while (temp != NULL)
 	{
 		len++;
@@ -73,7 +74,7 @@ void		ft_print_stacktemp(t_stack_prop *stackp_lst)
 	temp = stackp_lst->stack_lst;
 	len = 0;
 	if (temp == NULL)
-		ft_printf("|\t\tlist is NULL\t\t|\n");
+		ft_printf("|\t\t	\t\t|\n");
 	while (temp != NULL)
 	{
 		len++;
