@@ -34,7 +34,8 @@ void				ft_call_instructfunctions(t_instr *lst, t_stack **stack_a, \
 		;
 	while (temp != NULL)
 	{
-		oper_func[temp->instruction](stack_a, stack_b);
+		oper_func[temp->instruction](&(*stack_a)->stack_lst, \
+									&(*stack_b)->stack_lst);
 		temp = temp->next;
 	}
 	ft_print_stack(*stack_a);

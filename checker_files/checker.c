@@ -12,7 +12,7 @@
 
 #include "../includes/checker.h"
 
-int					ft_exitprogram(int signal, t_stack **stack_lst)
+int					ft_exitprogram(int signal, t_stack_list **stack_lst)
 {
 	if (signal == -1)
 	{
@@ -25,19 +25,19 @@ int					ft_exitprogram(int signal, t_stack **stack_lst)
 int					main(int argc, char **argv)
 {
 	t_stack			*stack_a;
-	t_stack_prop	*stack_b;
+	t_stack			*stack_b;
 	t_instr			*instr_lst;
 	char			operation[BUFFER_SIZE + 1];
 
 	stack_a = NULL;
-	stack_b = ft_memalloc(sizeof(t_stack_prop));
+	stack_b = ft_memalloc(sizeof(t_stack));
 	instr_lst = NULL;
 	if (argc < 2)
 		return (0);
 	else
 	{
 		if (ft_build_stacka(argc, argv, &stack_a) == -1)
-			return (ft_exitprogram(-1, &stack_a));
+			return (ft_exitprogram(-1, &stack_a->stack_lst));
 	}
 	ft_build_stackb(&stack_b);
 	ft_bzero(operation, BUFFER_SIZE + 1);
@@ -45,12 +45,12 @@ int					main(int argc, char **argv)
 	while (ft_strcmp(operation, "\n") != 0)
 	{
 		if (ft_saveinstructions(&instr_lst, operation) == -1)
-			return (ft_exitprogram(-1, &stack_a));
+			return (ft_exitprogram(-1, &stack_a->stack_lst));
 		ft_bzero(operation, BUFFER_SIZE + 1);
 		read(0, operation, BUFFER_SIZE);
 	}
 	// ft_print_instructions(instr_lst);
-	// ft_call_instructfunctions(instr_lst, &stack_a, &stack_b);
-	ft_call_instructfunctions(instr_lst, &stack_a, &(stack_b->stack_lst));
+	ft_call_instructfunctions(instr_lst, &stack_a, &stack_b);
+	// ft_call_instructfunctions(instr_lst, &(stack_a->stack_lst), &(stack_b->stack_lst));
 	return (0);
 }

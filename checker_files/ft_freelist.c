@@ -12,10 +12,10 @@
 
 #include "../includes/checker.h"
 
-void		ft_free_list(t_stack **stack_lst)
+void				ft_free_list(t_stack_list **stack_lst)
 {
-	t_stack	*curr_node;
-	t_stack	*next_node;
+	t_stack_list	*curr_node;
+	t_stack_list	*next_node;
 
 	curr_node = *stack_lst;
 	while (curr_node != NULL)

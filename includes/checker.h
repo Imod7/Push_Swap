@@ -29,33 +29,32 @@
 # define INSTR_RRB		(1 | (1 << 0) | (1 << 3))
 # define INSTR_RRR		((1 << 1) | (1 << 3))
 
-typedef struct			s_stack_prop
-{
-	char				stackprop_id;
-	struct s_stack		*stack_lst;
-}						t_stack_prop;
-
 typedef struct			s_stack
 {
-	int					num;
 	char				stack_id;
-	struct s_stack		*next;
-	struct s_stack		*prev;
+	struct s_stack		*stack_lst;
 }						t_stack;
+
+typedef struct			s_stack_list
+{
+	int					num;
+	struct s_stack_list	*next;
+	struct s_stack_list	*prev;
+}						t_stack_list;
 
 typedef int		(*operation_func)(t_stack **stack_a, t_stack **stack_b);
 
-int		ft_swap_a(t_stack **stack_a, t_stack **stack_b);
-int		ft_swap_b(t_stack **stack_a, t_stack **stack_b);
-int		ft_swap_both(t_stack **stack_a, t_stack **stack_b);
-int		ft_push_a(t_stack **stack_a, t_stack **stack_b);
-int		ft_push_b(t_stack **stack_a, t_stack **stack_b);
-int		ft_rotate_a(t_stack **stack_a, t_stack **stack_b);
-int		ft_rotate_b(t_stack **stack_a, t_stack **stack_b);
-int		ft_rotate_both(t_stack **stack_a, t_stack **stack_b);
-int		ft_reverserotate_a(t_stack **stack_a, t_stack **stack_b);
-int		ft_reverserotate_b(t_stack **stack_a, t_stack **stack_b);
-int		ft_reverserotate_both(t_stack **stack_a, t_stack **stack_b);
+int		ft_swap_a(t_stack_list **stack_a, t_stack_list **stack_b);
+int		ft_swap_b(t_stack_list **stack_a, t_stack_list **stack_b);
+int		ft_swap_both(t_stack_list **stack_a, t_stack_list **stack_b);
+int		ft_push_a(t_stack_list **stack_a, t_stack_list **stack_b);
+int		ft_push_b(t_stack_list **stack_a, t_stack_list **stack_b);
+int		ft_rotate_a(t_stack_list **stack_a, t_stack_list **stack_b);
+int		ft_rotate_b(t_stack_list **stack_a, t_stack_list **stack_b);
+int		ft_rotate_both(t_stack_list **stack_a, t_stack_list **stack_b);
+int		ft_reverserotate_a(t_stack_list **stack_a, t_stack_list **stack_b);
+int		ft_reverserotate_b(t_stack_list **stack_a, t_stack_list **stack_b);
+int		ft_reverserotate_both(t_stack_list **stack_a, t_stack_list **stack_b);
 
 typedef struct			s_instr
 {
@@ -67,28 +66,27 @@ typedef struct			s_instr
 ** Check User Input functions
 */
 
-int			ft_build_stacka(int argc, char **argv, t_stack	**stack_lst);
-int			ft_build_stackb(t_stack_prop **stack_b);
-void		ft_print_stacktemp(t_stack_prop *stackp_lst);
+int			ft_build_stacka(int argc, char **argv, t_stack **stack_lst);
+int			ft_build_stackb(t_stack **stack_b);
 
 /*
 ** Linked List (=Stack) functions
 */
 
-t_stack		*ft_stack_newnode(int content);
-void		ft_stack_addend(t_stack **lst, t_stack *new);
-void		ft_print_stack(t_stack *lst);
-int			ft_stack_length(t_stack *lst);
-void		ft_free_list(t_stack **stack_lst);
-int			ft_numexists(t_stack *lst, int num);
+t_stack_list		*ft_stack_newnode(int content);
+void				ft_stack_addend(t_stack_list **lst, t_stack_list *new);
+void				ft_print_stack(t_stack *lst);
+int					ft_stack_length(t_stack_list *lst);
+void				ft_free_list(t_stack_list **stack_lst);
+int					ft_numexists(t_stack_list *lst, int num);
 
 /*
 ** Linked List (=Instructions) functions
 */
 
 int			ft_saveinstructions(t_instr	**instr_lst, char *operation);
-void		ft_call_instructfunctions(t_instr *instr_lst, t_stack **stack_a, \
-									t_stack **stack_b);
+void		ft_call_instructfunctions(t_instr *instr_lst, \
+								t_stack **stack_a, t_stack **stack_b);
 /*
 ** Auxiliary functions
 */

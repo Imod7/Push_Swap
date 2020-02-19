@@ -17,7 +17,7 @@
 // 	long	num;
 // }
 
-int			ft_isnum(char *str)
+int					ft_isnum(char *str)
 {
 	int		i;
 
@@ -31,23 +31,24 @@ int			ft_isnum(char *str)
 	return (0);
 }
 
-int			ft_build_stackb(t_stack_prop **stack_b)
+int					ft_build_stackb(t_stack **stack_b)
 {
 	// (*stack_b) = NULL;
 	// (*stack_b) = ft_memalloc(sizeof(t_stack));
-	(*stack_b)->stackprop_id = 'B';
-	ft_print_stacktemp(*stack_b);
+	(*stack_b)->stack_id = 'B';
+	ft_print_stack(*stack_b);
 	return (0);
 }
 
-int			ft_build_stacka(int argc, char **argv, t_stack	**stack_a)
+int					ft_build_stacka(int argc, char **argv, t_stack	**stack_a)
 {
-	int		i;
-	int		num;
-	int		num_len;
-	t_stack	*stack_node;
+	int				i;
+	int				num;
+	int				num_len;
+	t_stack_list	*stack_node;
 
 	stack_node = NULL;
+	(*stack_a) = ft_memalloc(sizeof(t_stack));
 	i = 1;
 	while (i < argc)
 	{
@@ -64,16 +65,17 @@ int			ft_build_stacka(int argc, char **argv, t_stack	**stack_a)
 		{
 			// ft_printf(ANSI_COLOR_GREEN"VALID %d\n"ANSI_COLOR_RESET, num);
 			stack_node = ft_stack_newnode(num);
-			if (ft_numexists(*stack_a, num) == 1)
+			if (ft_numexists((*stack_a)->stack_lst, num) == 1)
 			{
 				ft_printf(ANSI_COLOR_RED"Error\n"ANSI_COLOR_RESET);
 				return (-1);
 			}
-			ft_stack_addend(stack_a, stack_node);
+			ft_stack_addend(&(*stack_a)->stack_lst, stack_node);
 		}
 		i++;
 	}
 	(*stack_a)->stack_id = 'A';
+	// ft_print_stack((*stack_a)->stack_lst);
 	ft_print_stack(*stack_a);
 	return (0);
 }
