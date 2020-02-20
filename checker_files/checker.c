@@ -12,11 +12,11 @@
 
 #include "../includes/checker.h"
 
-int					ft_exitprogram(int signal, t_stack_list **stack_lst)
+int					ft_exitprogram(int signal, t_stack_list **stacklst_ref)
 {
 	if (signal == -1)
 	{
-		ft_free_list(stack_lst);
+		ft_free_list(stacklst_ref);
 		return (-1);
 	}
 	return (0);
@@ -37,7 +37,7 @@ int					main(int argc, char **argv)
 	else
 	{
 		if (ft_build_stacka(argc, argv, &stack_a) == -1)
-			return (ft_exitprogram(-1, &stack_a->stack_lst));
+			return (ft_exitprogram(-1, &(stack_a->stack_lst)));
 	}
 	ft_build_stackb(&stack_b);
 	ft_bzero(operation, BUFFER_SIZE + 1);
@@ -45,7 +45,7 @@ int					main(int argc, char **argv)
 	while (ft_strcmp(operation, "\n") != 0)
 	{
 		if (ft_saveinstructions(&instr_lst, operation) == -1)
-			return (ft_exitprogram(-1, &stack_a->stack_lst));
+			return (ft_exitprogram(-1, &(stack_a->stack_lst)));
 		ft_bzero(operation, BUFFER_SIZE + 1);
 		read(0, operation, BUFFER_SIZE);
 	}

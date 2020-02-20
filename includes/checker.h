@@ -14,7 +14,6 @@
 # define CHECKER_H
 
 # include "ft_printf.h"
-// # include <stdio.h>
 # include <fcntl.h>
 
 # define INSTR_SA		(0)
@@ -32,7 +31,7 @@
 typedef struct			s_stack
 {
 	char				stack_id;
-	struct s_stack		*stack_lst;
+	struct s_stack_list	*stack_lst;
 }						t_stack;
 
 typedef struct			s_stack_list
@@ -42,7 +41,7 @@ typedef struct			s_stack_list
 	struct s_stack_list	*prev;
 }						t_stack_list;
 
-typedef int		(*operation_func)(t_stack **stack_a, t_stack **stack_b);
+typedef int		(*operation_func)(t_stack_list **stack_a, t_stack_list **stack_b);
 
 int		ft_swap_a(t_stack_list **stack_a, t_stack_list **stack_b);
 int		ft_swap_b(t_stack_list **stack_a, t_stack_list **stack_b);

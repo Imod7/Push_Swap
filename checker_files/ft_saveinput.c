@@ -53,7 +53,6 @@ int					ft_build_stacka(int argc, char **argv, t_stack	**stack_a)
 	while (i < argc)
 	{
 		num_len = ft_strlen(argv[i]);
-		// ft_printf("str_len = %d, string = %s --> ", num_len, argv[i]);
 		num = ft_atoi(argv[i]);
 		if (((num == 0) && ((num_len != 1) || (ft_strcmp(argv[i], "0") != 0))) \
 		|| (ft_isnum(argv[i]) == -1))
@@ -63,7 +62,6 @@ int					ft_build_stacka(int argc, char **argv, t_stack	**stack_a)
 		}
 		else
 		{
-			// ft_printf(ANSI_COLOR_GREEN"VALID %d\n"ANSI_COLOR_RESET, num);
 			stack_node = ft_stack_newnode(num);
 			if (ft_numexists((*stack_a)->stack_lst, num) == 1)
 			{
@@ -75,7 +73,6 @@ int					ft_build_stacka(int argc, char **argv, t_stack	**stack_a)
 		i++;
 	}
 	(*stack_a)->stack_id = 'A';
-	// ft_print_stack((*stack_a)->stack_lst);
 	ft_print_stack(*stack_a);
 	return (0);
 }
