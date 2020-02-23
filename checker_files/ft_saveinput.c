@@ -40,7 +40,8 @@ int					ft_build_stackb(t_stack **stack_b)
 	return (0);
 }
 
-int					ft_build_stacka(int argc, char **argv, t_stack	**stack_a)
+int					ft_build_stacka(int argc, char **argv, t_stack	**stack_a, \
+									t_prgm_props *prgm_sets)
 {
 	int				i;
 	int				num;
@@ -50,6 +51,8 @@ int					ft_build_stacka(int argc, char **argv, t_stack	**stack_a)
 	stack_node = NULL;
 	(*stack_a) = ft_memalloc(sizeof(t_stack));
 	i = 1;
+	if (prgm_sets->debug_mode == 1)
+		i = 2;
 	while (i < argc)
 	{
 		num_len = ft_strlen(argv[i]);

@@ -14,6 +14,8 @@
 
 int					valid_instruction(char *str)
 {
+	if (str == NULL)
+		return (0);
 	if (!ft_strcmp(str, "sa") || !ft_strcmp(str, "sb") || \
 	!ft_strcmp(str, "ss") || !ft_strcmp(str, "pa") || \
 	!ft_strcmp(str, "pb") || !ft_strcmp(str, "ra") || \
@@ -21,12 +23,12 @@ int					valid_instruction(char *str)
 	!ft_strcmp(str, "rra") || !ft_strcmp(str, "rrb") || \
 	!ft_strcmp(str, "rrr"))
 	{
-		// ft_printf(ANSI_COLOR_GREEN"\n%s"ANSI_COLOR_RESET, str);
+		// ft_printf(ANSI_COLOR_GREEN"\n'%s'\n"ANSI_COLOR_RESET, str);
 		return (1);
 	}
 	else
 	{
-		// ft_printf(ANSI_COLOR_RED"\n%s"ANSI_COLOR_RESET, str);
+		// ft_printf(ANSI_COLOR_RED"\n'%s'\n"ANSI_COLOR_RESET, str);
 		return (0);
 	}
 }
@@ -110,6 +112,7 @@ int					ft_saveinstructions(t_instr **instr_lst, char *operation)
 	char			**strarr;
 	t_instr			*instr_node;
 
+	// ft_printf(ANSI_COLOR_GREEN"\noperation='%s'\n"ANSI_COLOR_RESET, operation);
 	strarr = ft_strsplit(operation, '\n');
 	operation = strarr[0];
 	if (valid_instruction(operation) == 0)

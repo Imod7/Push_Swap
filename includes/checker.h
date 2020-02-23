@@ -28,6 +28,11 @@
 # define INSTR_RRB		(1 | (1 << 0) | (1 << 3))
 # define INSTR_RRR		((1 << 1) | (1 << 3))
 
+typedef struct 			s_prgm_props
+{
+	int					debug_mode;
+}						t_prgm_props;
+
 typedef struct			s_stack
 {
 	char				stack_id;
@@ -65,7 +70,8 @@ typedef struct			s_instr
 ** Check User Input functions
 */
 
-int			ft_build_stacka(int argc, char **argv, t_stack **stack_lst);
+int			ft_build_stacka(int argc, char **argv, t_stack **stack_lst, \
+							t_prgm_props *prgm_sets);
 int			ft_build_stackb(t_stack **stack_b);
 
 /*
@@ -75,6 +81,7 @@ int			ft_build_stackb(t_stack **stack_b);
 t_stack_list		*ft_stack_newnode(int content);
 void				ft_stack_addend(t_stack_list **lst, t_stack_list *new);
 void				ft_print_stack(t_stack *lst);
+void				ft_print_doublyll(t_stack_list *temp);
 int					ft_stack_length(t_stack_list *lst);
 void				ft_free_list(t_stack_list **stack_lst);
 int					ft_numexists(t_stack_list *lst, int num);
@@ -85,7 +92,8 @@ int					ft_numexists(t_stack_list *lst, int num);
 
 int			ft_saveinstructions(t_instr	**instr_lst, char *operation);
 void		ft_call_instructfunctions(t_instr *instr_lst, \
-								t_stack **stack_a, t_stack **stack_b);
+								t_stack **stack_a, t_stack **stack_b, \
+								t_prgm_props *prgm_sets);
 /*
 ** Auxiliary functions
 */
