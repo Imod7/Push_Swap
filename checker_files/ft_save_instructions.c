@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_instructions.c                                  :+:    :+:            */
+/*   ft_save_instructions.c                             :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/02/07 14:16:19 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/02/07 14:16:21 by dsaripap      ########   odam.nl         */
+/*   Created: 2020/02/24 14:52:10 by dsaripap      #+#    #+#                 */
+/*   Updated: 2020/02/24 14:52:13 by dsaripap      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,20 +58,6 @@ void				ft_setinstruction(char *operation, t_instr *instr_node)
 	else if (!ft_strcmp(operation, "rrr"))
 		instr_node->instruction |= INSTR_RRR;
 }
-
-// t_instr				*ft_instr_newnode(char *operation)
-// {
-// 	t_instr			*newnode;
-
-// 	ft_printf("%s \n", operation);
-// 	newnode = malloc(sizeof(t_instr));
-// 	if (newnode == NULL)
-// 		return (NULL);
-// 	// ft_printf("Num = %d Size : %d \n", content, sizeof(content));
-// 	newnode->instruction = 1;
-// 	newnode->next = NULL;
-// 	return (newnode);
-// }
 
 void				ft_instr_addend(t_instr **lst, t_instr *new)
 {

@@ -31,6 +31,7 @@
 typedef struct 			s_prgm_props
 {
 	int					debug_mode;
+	int					number_operations;
 }						t_prgm_props;
 
 typedef struct			s_stack
@@ -67,6 +68,13 @@ typedef struct			s_instr
 }						t_instr;
 
 /*
+** Program Checks
+*/
+
+int					ft_exitprogram(int signal, t_stack_list **stacklst_ref);
+int					check_v_option(char *argv, t_prgm_props *prgm_sets);
+
+/*
 ** Check User Input functions
 */
 
@@ -100,5 +108,12 @@ void		ft_call_instructfunctions(t_instr *instr_lst, \
 
 void		print_binary(int instr);
 void		ft_print_instructions(t_instr *lst);
+
+/*
+** Sorting functions
+*/
+
+void		ft_sorting(t_prgm_props *prgm_sets, t_stack **stack_a, \
+						t_stack **stack_b);
 
 #endif
