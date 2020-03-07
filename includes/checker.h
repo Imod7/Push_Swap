@@ -115,5 +115,6 @@ void		ft_print_instructions(t_instr *lst);
 
 void		ft_sorting(t_prgm_props *prgm_sets, t_stack **stack_a, \
 						t_stack **stack_b);
+t_stack		*ft_presort(t_stack_list *stack_a);
 
 #endif

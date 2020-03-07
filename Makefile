@@ -35,6 +35,7 @@ SRC_CHECKER =	\
 SRC_PUSHSWAP =	\
 		push_swap.c \
 		sorting.c \
+		ft_presort.c \
 
 SRC_SHARED =	\
 		ft_save_input.c \
