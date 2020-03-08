@@ -52,7 +52,7 @@ t_stack_list		*ft_mergeback(t_stack_list **ahalf, t_stack_list **bhalf)
 	t_stack_list	*result_list;
 
 	result_list = NULL;
-	result_list = malloc(sizeof(t_stack_list));
+	// result_list = malloc(sizeof(t_stack_list));
 	// ft_printf(ANSI_COLOR_BLUE"\n\n>>>>> START MERGEBACK COMPLETE LIST <<<<<<");
 	// ft_printf(ANSI_COLOR_BLUE"\n>>>>>>> first half <<<<<<<");
 	// ft_print_doublyll(*ahalf);
@@ -103,19 +103,16 @@ void				ft_mergesort(t_stack_list **completelist)
 	// ft_print_doublyll(*completelist);
 }
 
-t_stack_list		*ft_presort(t_stack_list *stack_a)
+void				*ft_presort(t_stack_list *stack_a, t_stack **sorted_stacka)
 {
-	t_stack			*stacka_cpy;
-
 	if ((stack_a == NULL) || (stack_a->next == NULL))
 		return (stack_a);
 	else
 	{
-		stacka_cpy = ft_memalloc(sizeof(t_stack_list));
 		// &(*stack_a)->stack_lst
-		stacka_cpy->stack_id = 'C';
-		stacka_cpy->stack_lst = ft_copy_list(stack_a);
-		ft_mergesort(&stacka_cpy->stack_lst);
+		(*sorted_stacka)->stack_id = 'C';
+		(*sorted_stacka)->stack_lst = ft_copy_list(stack_a);
+		ft_mergesort(&(*sorted_stacka)->stack_lst);
 	}
-	return (stacka_cpy->stack_lst);
+	return (0);
 }

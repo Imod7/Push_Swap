@@ -33,7 +33,7 @@ t_stack_list		*ft_copy_list(t_stack_list *stacklst)
 	t_stack_list	*newnode;
 	t_stack_list	*newlist;
 
-	newlist = ft_memalloc(sizeof(t_stack_list));
+	// newlist = ft_memalloc(sizeof(t_stack_list));
 	newlist = NULL;
 	if (stacklst == NULL)
 	{
