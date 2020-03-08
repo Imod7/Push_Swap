@@ -40,7 +40,7 @@ SRC_PUSHSWAP =	\
 SRC_SHARED =	\
 		ft_save_input.c \
 		ft_list_functions.c \
-		ft_program_checks.c \
+		ft_aux_functions.c \
 		ft_call_instructions.c \
 		ft_freelist.c \
 		ft_stack_operations.c \

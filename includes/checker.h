@@ -71,7 +71,8 @@ typedef struct			s_instr
 ** Program Checks
 */
 
-int					ft_exitprogram(int signal, t_stack_list **stacklst_ref);
+// int					ft_exitprogram(int signal, t_stack_list **stacklst_ref);
+int					ft_exitprogram(t_stack_list **stacklst_ref);
 int					check_v_option(char *argv, t_prgm_props *prgm_sets);
 
 /*
@@ -83,7 +84,7 @@ int			ft_build_stacka(int argc, char **argv, t_stack **stack_lst, \
 int			ft_build_stackb(t_stack **stack_b);
 
 /*
-** Linked List (=Stack) functions
+** Linked List functions related to the Stack List
 */
 
 t_stack_list		*ft_stack_newnode(int content);
@@ -93,9 +94,10 @@ void				ft_print_doublyll(t_stack_list *temp);
 int					ft_stack_length(t_stack_list *lst);
 void				ft_free_list(t_stack_list **stack_lst);
 int					ft_numexists(t_stack_list *lst, int num);
+t_stack_list		*ft_copy_list(t_stack_list *stacklst);
 
 /*
-** Linked List (=Instructions) functions
+** Linked List functions related to the Instructions List
 */
 
 int			ft_saveinstructions(t_instr	**instr_lst, char *operation);
@@ -115,6 +117,6 @@ void		ft_print_instructions(t_instr *lst);
 
 void		ft_sorting(t_prgm_props *prgm_sets, t_stack **stack_a, \
 						t_stack **stack_b);
-t_stack		*ft_presort(t_stack_list *stack_a);
+t_stack_list	*ft_presort(t_stack_list *stack_a);
 
 #endif

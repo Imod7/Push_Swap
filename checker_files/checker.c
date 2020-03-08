@@ -33,7 +33,7 @@ int					main(int argc, char **argv)
 		// ft_printf("debug_mode = %d \n", prgm_settings->debug_mode);
 		// print_binary(prgm_settings->debug_mode);
 		if (ft_build_stacka(argc, argv, &stack_a, prgm_settings) == -1)
-			return (ft_exitprogram(-1, &(stack_a->stack_lst)));
+			return (ft_exitprogram(&(stack_a->stack_lst)));
 	}
 	ft_build_stackb(&stack_b);
 	ft_bzero(operation, BUFFER_SIZE + 1);
@@ -42,7 +42,7 @@ int					main(int argc, char **argv)
 	while (buffer_read != 0)
 	{
 		if (ft_saveinstructions(&instr_lst, operation) == -1)
-			return (ft_exitprogram(-1, &(stack_a->stack_lst)));
+			return (ft_exitprogram(&(stack_a->stack_lst)));
 		ft_bzero(operation, BUFFER_SIZE + 1);
 		buffer_read = read(0, operation, BUFFER_SIZE);
 	}
@@ -55,5 +55,9 @@ int					main(int argc, char **argv)
 	ft_print_doublyll(stack_a->stack_lst);
 	ft_print_doublyll(stack_b->stack_lst);
 	// ft_call_instructfunctions(instr_lst, &(stack_a->stack_lst), &(stack_b->stack_lst));
+	ft_exitprogram(&(stack_a->stack_lst));
+	ft_exitprogram(&(stack_b->stack_lst));
+	while (1)
+		;
 	return (0);
 }
