@@ -12,6 +12,11 @@
 
 #include "../includes/checker.h"
 
+// int					ft__find_median()
+// {
+
+// }
+
 void				ft_splitlist(t_stack_list *completelist, \
 							t_stack_list **ahalf, t_stack_list **bhalf)
 {
@@ -103,16 +108,16 @@ void				ft_mergesort(t_stack_list **completelist)
 	// ft_print_doublyll(*completelist);
 }
 
-void				*ft_presort(t_stack_list *stack_a, t_stack **sorted_stacka)
+void				*ft_presort(t_stack_list *stack_a, t_stack_list **sorted_stacka)
 {
 	if ((stack_a == NULL) || (stack_a->next == NULL))
 		return (stack_a);
 	else
 	{
 		// &(*stack_a)->stack_lst
-		(*sorted_stacka)->stack_id = 'C';
-		(*sorted_stacka)->stack_lst = ft_copy_list(stack_a);
-		ft_mergesort(&(*sorted_stacka)->stack_lst);
+		// (*sorted_stacka)->stack_id = 'C';
+		*sorted_stacka = ft_copy_list(stack_a);
+		ft_mergesort(sorted_stacka);
 	}
 	return (0);
 }

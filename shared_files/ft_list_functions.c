@@ -42,15 +42,15 @@ void				ft_stack_addend(t_stack_list **lst, t_stack_list *new)
 	new->prev = temp;
 }
 
-void				ft_print_stack(t_stack *stack)
+void				ft_print_stack(t_stack_list *stack_lst, char c)
 {
 	t_stack_list	*temp;
 	int		len;
 
 	ft_printf(ANSI_COLOR_CYAN"\n-----------------------------------------\n");
-	ft_printf("|\t\tStack %c\t\t        |\n", stack->stack_id);
+	ft_printf("|\t\tStack %c\t\t        |\n", c);
 	ft_printf("-----------------------------------------\n"ANSI_COLOR_RESET);
-	temp = stack->stack_lst;
+	temp = stack_lst;
 	len = 0;
 	if (temp == NULL)
 		ft_printf("|\t\t	\t\t|\n");

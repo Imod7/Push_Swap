@@ -32,7 +32,30 @@ typedef struct 			s_prgm_props
 {
 	int					debug_mode;
 	int					number_operations;
+	struct s_instr		*instr_lst;
 }						t_prgm_props;
+
+typedef struct			s_instr
+{
+	int					instruction;
+	struct s_instr		*next;
+}						t_instr;
+
+/*
+** Testing on using 1 t_stacks with my 2 stacks in
+*/
+
+typedef struct			s_stacks
+{
+	char				stacka_id;
+	struct s_stack_list	*stacka_lst;
+	char				stackb_id;
+	struct s_stack_list	*stackb_lst;
+}						t_stacks;
+
+/*
+** or continue using 2 t_stack
+*/
 
 typedef struct			s_stack
 {
@@ -61,12 +84,6 @@ int		ft_reverserotate_a(t_stack_list **stack_a, t_stack_list **stack_b);
 int		ft_reverserotate_b(t_stack_list **stack_a, t_stack_list **stack_b);
 int		ft_reverserotate_both(t_stack_list **stack_a, t_stack_list **stack_b);
 
-typedef struct			s_instr
-{
-	int					instruction;
-	struct s_instr		*next;
-}						t_instr;
-
 /*
 ** Program Checks
 */
@@ -79,9 +96,9 @@ int					check_v_option(char *argv, t_prgm_props *prgm_sets);
 ** Check User Input functions
 */
 
-int			ft_build_stacka(int argc, char **argv, t_stack **stack_lst, \
+int			ft_build_stacka(int argc, char **argv, t_stacks **stacks, \
 							t_prgm_props *prgm_sets);
-int			ft_build_stackb(t_stack **stack_b);
+int			ft_build_stackb(t_stacks **stacks);
 
 /*
 ** Linked List functions related to the Stack List
@@ -89,7 +106,8 @@ int			ft_build_stackb(t_stack **stack_b);
 
 t_stack_list		*ft_stack_newnode(int content);
 void				ft_stack_addend(t_stack_list **lst, t_stack_list *new);
-void				ft_print_stack(t_stack *lst);
+// void				ft_print_stack(t_stack *lst);
+void				ft_print_stack(t_stack_list *stack, char c);
 void				ft_print_doublyll(t_stack_list *temp);
 int					ft_stack_length(t_stack_list *lst);
 void				ft_free_list(t_stack_list **stack_lst);
@@ -102,7 +120,7 @@ t_stack_list		*ft_copy_list(t_stack_list *stacklst);
 
 int			ft_saveinstructions(t_instr	**instr_lst, char *operation);
 void		ft_call_instructfunctions(t_instr *instr_lst, \
-								t_stack **stack_a, t_stack **stack_b, \
+								t_stacks **stacks, \
 								t_prgm_props *prgm_sets);
 /*
 ** Auxiliary functions
@@ -117,6 +135,6 @@ void		ft_print_instructions(t_instr *lst);
 
 void		ft_sorting(t_prgm_props *prgm_sets, t_stack **stack_a, \
 						t_stack **stack_b);
-void		*ft_presort(t_stack_list *stack_a, t_stack **sorted_stacka);
+void		*ft_presort(t_stack_list *stack_a, t_stack_list **sorted_stacka);
 
 #endif

@@ -12,8 +12,7 @@
 
 #include "../includes/checker.h"
 
-void				ft_print_mode(t_prgm_props *prgm_sets, t_stack *stack_a, \
-								t_stack *stack_b)
+void				ft_print_mode(t_prgm_props *prgm_sets, t_stacks *stacks)
 {
 	if (prgm_sets->debug_mode == 1)
 		ft_printf(ANSI_COLOR_YELLOW"\nPrinting Intermediate State of Stacks"\
@@ -23,13 +22,12 @@ void				ft_print_mode(t_prgm_props *prgm_sets, t_stack *stack_a, \
 				ANSI_COLOR_RESET);
 	if ((prgm_sets->debug_mode == 1) || (prgm_sets->debug_mode == 2))
 	{
-		ft_print_stack(stack_a);
-		ft_print_stack(stack_b);
+		ft_print_stack(stacks->stacka_lst, 'A');
+		ft_print_stack(stacks->stackb_lst, 'B');
 	}
 }
 
-void				ft_call_instructfunctions(t_instr *lst, t_stack **stack_a, \
-											t_stack **stack_b, \
+void				ft_call_instructfunctions(t_instr *lst, t_stacks **stacks, \
 											t_prgm_props *prgm_sets)
 {
 	t_instr			*temp;
@@ -51,11 +49,11 @@ void				ft_call_instructfunctions(t_instr *lst, t_stack **stack_a, \
 		;
 	while (temp != NULL)
 	{
-		oper_func[temp->instruction](&(*stack_a)->stack_lst, \
-									&(*stack_b)->stack_lst);
-		ft_print_mode(prgm_sets, *stack_a, *stack_b);
+		oper_func[temp->instruction](&(*stacks)->stacka_lst, \
+									&(*stacks)->stackb_lst);
+		ft_print_mode(prgm_sets, *stacks);
 		temp = temp->next;
 	}
 	prgm_sets->debug_mode = 2;
-	ft_print_mode(prgm_sets, *stack_a, *stack_b);
+	ft_print_mode(prgm_sets, *stacks);
 }
