@@ -18,7 +18,7 @@ int					ft_exitprogram(t_stack_list **stacklst_ref)
 	return (0);
 }
 
-int					check_v_option(char *argv, t_prgm_props *prgm_sets)
+int					check_v_option(char *argv, t_prgm *prgm_sets)
 {
 	if (prgm_sets == NULL)
 		return (0);

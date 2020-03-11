@@ -18,14 +18,14 @@ int					main(int argc, char **argv)
 	// t_stack			*stack_b;
 	t_stacks		*stacks;
 	// t_instr			*instr_lst;
-	t_prgm_props	*prgm_settings;
+	t_prgm			*prgm_settings;
 	char			operation[BUFFER_SIZE + 1];
 	int				buffer_read;
 
 	stacks = ft_memalloc(sizeof(t_stacks));
 	stacks->stacka_lst = NULL;
 	// stacks->stackb_lst = ft_memalloc(sizeof(t_stack_list));
-	prgm_settings = ft_memalloc(sizeof(t_prgm_props));
+	prgm_settings = ft_memalloc(sizeof(t_prgm));
 	prgm_settings->instr_lst = NULL;
 	if (argc < 2)
 		return (0);
@@ -59,7 +59,7 @@ int					main(int argc, char **argv)
 	// ft_call_instructfunctions(instr_lst, &(stack_a->stack_lst), &(stack_b->stack_lst));
 	ft_exitprogram(&(stacks->stacka_lst));
 	ft_exitprogram(&(stacks->stackb_lst));
-	while (1)
-		;
+	// while (1)
+	// 	;
 	return (0);
 }

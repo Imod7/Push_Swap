@@ -28,12 +28,12 @@
 # define INSTR_RRB		(1 | (1 << 0) | (1 << 3))
 # define INSTR_RRR		((1 << 1) | (1 << 3))
 
-typedef struct 			s_prgm_props
+typedef struct			s_prgm
 {
 	int					debug_mode;
 	int					number_operations;
 	struct s_instr		*instr_lst;
-}						t_prgm_props;
+}						t_prgm;
 
 typedef struct			s_instr
 {
@@ -42,7 +42,7 @@ typedef struct			s_instr
 }						t_instr;
 
 /*
-** Testing on using 1 t_stacks with my 2 stacks in
+** Testing on using the 1 struct t_stacks with my 2 stacks (A, B) inside
 */
 
 typedef struct			s_stacks
@@ -53,36 +53,29 @@ typedef struct			s_stacks
 	struct s_stack_list	*stackb_lst;
 }						t_stacks;
 
-/*
-** or continue using 2 t_stack
-*/
-
-typedef struct			s_stack
-{
-	char				stack_id;
-	struct s_stack_list	*stack_lst;
-}						t_stack;
-
 typedef struct			s_stack_list
 {
 	int					num;
 	struct s_stack_list	*next;
 	struct s_stack_list	*prev;
+	int					cur_pos;
+	int					goal_pos;
+	int					move_cost;
 }						t_stack_list;
 
-typedef int		(*operation_func)(t_stack_list **stack_a, t_stack_list **stack_b);
+typedef int			(*operation_func)(t_stacks **stacks);
 
-int		ft_swap_a(t_stack_list **stack_a, t_stack_list **stack_b);
-int		ft_swap_b(t_stack_list **stack_a, t_stack_list **stack_b);
-int		ft_swap_both(t_stack_list **stack_a, t_stack_list **stack_b);
-int		ft_push_a(t_stack_list **stack_a, t_stack_list **stack_b);
-int		ft_push_b(t_stack_list **stack_a, t_stack_list **stack_b);
-int		ft_rotate_a(t_stack_list **stack_a, t_stack_list **stack_b);
-int		ft_rotate_b(t_stack_list **stack_a, t_stack_list **stack_b);
-int		ft_rotate_both(t_stack_list **stack_a, t_stack_list **stack_b);
-int		ft_reverserotate_a(t_stack_list **stack_a, t_stack_list **stack_b);
-int		ft_reverserotate_b(t_stack_list **stack_a, t_stack_list **stack_b);
-int		ft_reverserotate_both(t_stack_list **stack_a, t_stack_list **stack_b);
+int		ft_swap_a(t_stacks **stacks);
+int		ft_swap_b(t_stacks **stacks);
+int		ft_swap_both(t_stacks **stacks);
+int		ft_push_a(t_stacks **stacks);
+int		ft_push_b(t_stacks **stacks);
+int		ft_rotate_a(t_stacks **stacks);
+int		ft_rotate_b(t_stacks **stacks);
+int		ft_rotate_both(t_stacks **stacks);
+int		ft_reverserotate_a(t_stacks **stacks);
+int		ft_reverserotate_b(t_stacks **stacks);
+int		ft_reverserotate_both(t_stacks **stacks);
 
 /*
 ** Program Checks
@@ -90,14 +83,14 @@ int		ft_reverserotate_both(t_stack_list **stack_a, t_stack_list **stack_b);
 
 // int					ft_exitprogram(int signal, t_stack_list **stacklst_ref);
 int					ft_exitprogram(t_stack_list **stacklst_ref);
-int					check_v_option(char *argv, t_prgm_props *prgm_sets);
+int					check_v_option(char *argv, t_prgm *prgm_sets);
 
 /*
 ** Check User Input functions
 */
 
 int			ft_build_stacka(int argc, char **argv, t_stacks **stacks, \
-							t_prgm_props *prgm_sets);
+							t_prgm *prgm_sets);
 int			ft_build_stackb(t_stacks **stacks);
 
 /*
@@ -106,22 +99,26 @@ int			ft_build_stackb(t_stacks **stacks);
 
 t_stack_list		*ft_stack_newnode(int content);
 void				ft_stack_addend(t_stack_list **lst, t_stack_list *new);
-// void				ft_print_stack(t_stack *lst);
 void				ft_print_stack(t_stack_list *stack, char c);
-void				ft_print_doublyll(t_stack_list *temp);
 int					ft_stack_length(t_stack_list *lst);
 void				ft_free_list(t_stack_list **stack_lst);
 int					ft_numexists(t_stack_list *lst, int num);
 t_stack_list		*ft_copy_list(t_stack_list *stacklst);
 
 /*
+** Linked List Printing functions
+*/
+
+void				ft_print_doublyll(t_stack_list *temp);
+void				ft_print_doubly_all(t_stack_list *temp);
+
+/*
 ** Linked List functions related to the Instructions List
 */
 
 int			ft_saveinstructions(t_instr	**instr_lst, char *operation);
-void		ft_call_instructfunctions(t_instr *instr_lst, \
-								t_stacks **stacks, \
-								t_prgm_props *prgm_sets);
+void		ft_call_instructfunctions(t_instr *instr_lst, t_stacks **stacks, \
+										t_prgm *prgm_sets);
 /*
 ** Auxiliary functions
 */
@@ -133,8 +130,14 @@ void		ft_print_instructions(t_instr *lst);
 ** Sorting functions
 */
 
-void		ft_sorting(t_prgm_props *prgm_sets, t_stack **stack_a, \
-						t_stack **stack_b);
-void		*ft_presort(t_stack_list *stack_a, t_stack_list **sorted_stacka);
+void		ft_sorting(t_prgm *prgm_sets, t_stacks **stacks);
+void		*ft_presort(t_stacks **stacks, t_stack_list **sorted_stacka);
+
+/*
+** Algorithm functions
+*/
+
+void		ft_goalpos_calculation(t_stacks **stacks, \
+									t_stack_list *sorted_stacka);
 
 #endif

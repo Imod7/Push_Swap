@@ -6,16 +6,32 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/05 13:06:40 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/03/05 13:21:03 by dsaripap      ########   odam.nl         */
+/*   Updated: 2020/03/10 15:51:27 by dsaripap      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/checker.h"
 
-// int					ft__find_median()
-// {
+int					ft_find_median(t_stack_list **sorted_stacka)
+{
+	t_stack_list	*slow;
+	t_stack_list	*fast;
 
-// }
+	slow = *sorted_stacka;
+	fast = *sorted_stacka;
+	if (sorted_stacka != NULL)
+	{
+		while (fast != NULL && fast->next != NULL)
+		{
+			slow = slow->next;
+			fast = fast->next->next;
+		}
+	}
+	if (fast != NULL)
+		return (slow->num);
+	else
+		return ((slow->prev->num + slow->num) / 2);
+}
 
 void				ft_splitlist(t_stack_list *completelist, \
 							t_stack_list **ahalf, t_stack_list **bhalf)
@@ -108,16 +124,21 @@ void				ft_mergesort(t_stack_list **completelist)
 	// ft_print_doublyll(*completelist);
 }
 
-void				*ft_presort(t_stack_list *stack_a, t_stack_list **sorted_stacka)
+void				*ft_presort(t_stacks **stacks, t_stack_list **sorted_stacka)
 {
-	if ((stack_a == NULL) || (stack_a->next == NULL))
-		return (stack_a);
+	if (((*stacks)->stacka_lst == NULL) || \
+	((*stacks)->stacka_lst->next == NULL))
+		return (0);
 	else
 	{
-		// &(*stack_a)->stack_lst
-		// (*sorted_stacka)->stack_id = 'C';
-		*sorted_stacka = ft_copy_list(stack_a);
+		*sorted_stacka = ft_copy_list((*stacks)->stacka_lst);
 		ft_mergesort(sorted_stacka);
+		ft_printf("Median = %d \n", ft_find_median(sorted_stacka));
+		ft_printf(ANSI_COLOR_MAGENTA">>>>> SORTED -- <<<<<"ANSI_COLOR_RESET);
+		ft_print_doublyll(*sorted_stacka);
+		ft_goalpos_calculation(stacks, *sorted_stacka);
+		ft_printf(ANSI_COLOR_MAGENTA">>>>> Stack A ALL <<<<<"ANSI_COLOR_RESET);
+		ft_print_doubly_all((*stacks)->stacka_lst);
 	}
 	return (0);
 }

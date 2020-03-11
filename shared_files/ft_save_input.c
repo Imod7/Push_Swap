@@ -41,7 +41,7 @@ int					ft_build_stackb(t_stacks **stacks)
 }
 
 int					ft_build_stacka(int argc, char **argv, t_stacks	**stacks, \
-									t_prgm_props *prgm_sets)
+									t_prgm *prgm_sets)
 {
 	int				i;
 	int				num;

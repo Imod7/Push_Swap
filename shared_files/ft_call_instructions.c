@@ -12,7 +12,7 @@
 
 #include "../includes/checker.h"
 
-void				ft_print_mode(t_prgm_props *prgm_sets, t_stacks *stacks)
+void				ft_print_mode(t_prgm *prgm_sets, t_stacks *stacks)
 {
 	if (prgm_sets->debug_mode == 1)
 		ft_printf(ANSI_COLOR_YELLOW"\nPrinting Intermediate State of Stacks"\
@@ -28,7 +28,7 @@ void				ft_print_mode(t_prgm_props *prgm_sets, t_stacks *stacks)
 }
 
 void				ft_call_instructfunctions(t_instr *lst, t_stacks **stacks, \
-											t_prgm_props *prgm_sets)
+											t_prgm *prgm_sets)
 {
 	t_instr			*temp;
 	operation_func	oper_func[11];
@@ -49,8 +49,7 @@ void				ft_call_instructfunctions(t_instr *lst, t_stacks **stacks, \
 		;
 	while (temp != NULL)
 	{
-		oper_func[temp->instruction](&(*stacks)->stacka_lst, \
-									&(*stacks)->stackb_lst);
+		oper_func[temp->instruction](stacks);
 		ft_print_mode(prgm_sets, *stacks);
 		temp = temp->next;
 	}
