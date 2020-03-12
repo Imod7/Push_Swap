@@ -38,20 +38,24 @@ int     main(int argc, char **argv)
 			return (ft_exitprogram(&(stacks->stacka_lst)));
 	}
 	ft_build_stackb(&stacks);
+	ft_print_stacks(stacks);
 	// ft_print_instructions(instr_lst);
 	ft_printf(ANSI_COLOR_MAGENTA"\nBEFORE OPERATIONS"ANSI_COLOR_RESET);
 	ft_print_doublyll(stacks->stacka_lst);
 	ft_print_doublyll(stacks->stackb_lst);
+	if (ft_stack_length(stacks->stacka_lst) == 3)
+		ft_sort_three(&stacks);
 	ft_presort(&stacks, &sorted_stack);
 	// ft_sorting(prgm, &stacks);
 	// ft_call_instructfunctions(instr_lst, &stack_a, &stack_b, prgm);
 	ft_printf(ANSI_COLOR_MAGENTA"\n============ AFTER OPERATIONS ============"ANSI_COLOR_RESET);
 	ft_printf("\nStack A");
 	ft_print_doublyll(stacks->stacka_lst);
-	ft_printf("\nStack B");
+	ft_printf("Stack B");
 	ft_print_doublyll(stacks->stackb_lst);
-	ft_printf("\nStack C (copy) Sorted");
+	ft_printf("Stack C (copy) Sorted");
 	ft_print_doublyll(sorted_stack);
+	ft_print_stacks(stacks);
 	// ft_call_instructfunctions(instr_lst, &(stack_a->stack_lst), &(stack_b->stack_lst));
 	ft_printf(ANSI_COLOR_YELLOW"Number of Operations = %d\n"ANSI_COLOR_RESET, prgm->number_operations);
 	ft_free_list(&(stacks->stacka_lst));

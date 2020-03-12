@@ -60,7 +60,7 @@ typedef struct			s_stack_list
 	struct s_stack_list	*prev;
 	int					cur_pos;
 	int					goal_pos;
-	int					move_cost;
+	int					distance;
 }						t_stack_list;
 
 typedef int			(*operation_func)(t_stacks **stacks);
@@ -99,7 +99,7 @@ int			ft_build_stackb(t_stacks **stacks);
 
 t_stack_list		*ft_stack_newnode(int content);
 void				ft_stack_addend(t_stack_list **lst, t_stack_list *new);
-void				ft_print_stack(t_stack_list *stack, char c);
+void				ft_print_stacks(t_stacks *stacks);
 int					ft_stack_length(t_stack_list *lst);
 void				ft_free_list(t_stack_list **stack_lst);
 int					ft_numexists(t_stack_list *lst, int num);
@@ -139,5 +139,6 @@ void		*ft_presort(t_stacks **stacks, t_stack_list **sorted_stacka);
 
 void		ft_goalpos_calculation(t_stacks **stacks, \
 									t_stack_list *sorted_stacka);
+void		ft_sort_three(t_stacks **stacks);
 
 #endif

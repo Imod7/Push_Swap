@@ -37,6 +37,7 @@ SRC_PUSHSWAP =	\
 		ft_sorting.c \
 		ft_presort.c \
 		ft_algorithm.c \
+		ft_sort_small.c \
 
 SRC_SHARED =	\
 		ft_save_input.c \

@@ -38,6 +38,7 @@ int					main(int argc, char **argv)
 			return (ft_exitprogram(&(stacks->stacka_lst)));
 	}
 	ft_build_stackb(&stacks);
+	ft_print_stacks(stacks);
 	ft_bzero(operation, BUFFER_SIZE + 1);
 	buffer_read = read(0, operation, BUFFER_SIZE);
 	// while (ft_strcmp(operation, "\n") != 0)
@@ -49,13 +50,15 @@ int					main(int argc, char **argv)
 		buffer_read = read(0, operation, BUFFER_SIZE);
 	}
 	// ft_print_instructions(instr_lst);
-	ft_printf(ANSI_COLOR_MAGENTA"BEFORE OPERATIONS\n"ANSI_COLOR_RESET);
+	ft_printf(ANSI_COLOR_MAGENTA"BEFORE OPERATIONS"ANSI_COLOR_RESET);
+	ft_printf("\nStack A");
 	ft_print_doublyll(stacks->stacka_lst);
+	ft_printf("\nStack B");
 	ft_print_doublyll(stacks->stackb_lst);
 	ft_call_instructfunctions(prgm_settings->instr_lst, &stacks, prgm_settings);
-	ft_printf(ANSI_COLOR_MAGENTA"AFTER OPERATIONS\n"ANSI_COLOR_RESET);
-	ft_print_doublyll(stacks->stacka_lst);
-	ft_print_doublyll(stacks->stackb_lst);
+	// ft_printf(ANSI_COLOR_MAGENTA"AFTER OPERATIONS"ANSI_COLOR_RESET);
+	// ft_print_doublyll(stacks->stacka_lst);
+	// ft_print_doublyll(stacks->stackb_lst);
 	// ft_call_instructfunctions(instr_lst, &(stack_a->stack_lst), &(stack_b->stack_lst));
 	ft_exitprogram(&(stacks->stacka_lst));
 	ft_exitprogram(&(stacks->stackb_lst));

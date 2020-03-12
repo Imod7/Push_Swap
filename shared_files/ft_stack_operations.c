@@ -59,6 +59,8 @@ int					ft_push_a(t_stacks **stacks)
 
 	ft_printf("pa\n");
 	first_node = (*stacks)->stackb_lst;
+	if (first_node == NULL)
+		return (0);
 	second_node = (*stacks)->stackb_lst->next;
 	(*stacks)->stackb_lst = second_node;
 	temp_a = (*stacks)->stacka_lst;
@@ -81,6 +83,8 @@ int					ft_push_b(t_stacks **stacks)
 
 	ft_printf("pb\n");
 	first_node = (*stacks)->stacka_lst;
+	if (first_node == NULL)
+		return (0);
 	second_node = (*stacks)->stacka_lst->next;
 	(*stacks)->stacka_lst = second_node;
 	if (second_node != NULL)
@@ -103,9 +107,9 @@ int					ft_rotate_a(t_stacks **stacks)
 	t_stack_list	*temp_a;
 
 	ft_printf("ra\n");
-	(void)(*stacks)->stackb_lst;
+	// (void)(*stacks)->stackb_lst;
 	temp_a = (*stacks)->stacka_lst;
-	if (ft_stack_length(temp_a) < 2)
+	if (temp_a == NULL)
 		return (0);
 	first_node = (*stacks)->stacka_lst;
 	second_node = (*stacks)->stacka_lst->next;
@@ -126,9 +130,9 @@ int					ft_rotate_b(t_stacks **stacks)
 	t_stack_list	*temp_b;
 
 	ft_printf("rb\n");
-	(void)(*stacks)->stacka_lst;
+	// (void)(*stacks)->stacka_lst;
 	temp_b = (*stacks)->stackb_lst;
-	if (ft_stack_length(temp_b) < 2)
+	if (temp_b == NULL)
 		return (0);
 	first_node = (*stacks)->stackb_lst;
 	second_node = ((*stacks)->stackb_lst)->next;
@@ -158,9 +162,9 @@ int					ft_reverserotate_a(t_stacks **stacks)
 	t_stack_list	*last_node;
 
 	ft_printf("rra\n");
-	(void)(*stacks)->stackb_lst;
+	// (void)(*stacks)->stackb_lst;
 	last_node = (*stacks)->stacka_lst;
-	if (ft_stack_length(last_node) < 2)
+	if (last_node == NULL)
 		return (0);
 	first_node = (*stacks)->stacka_lst;
 	while (last_node->next != NULL)

@@ -134,8 +134,8 @@ void				*ft_presort(t_stacks **stacks, t_stack_list **sorted_stacka)
 		*sorted_stacka = ft_copy_list((*stacks)->stacka_lst);
 		ft_mergesort(sorted_stacka);
 		ft_printf("Median = %d \n", ft_find_median(sorted_stacka));
-		ft_printf(ANSI_COLOR_MAGENTA">>>>> SORTED -- <<<<<"ANSI_COLOR_RESET);
-		ft_print_doublyll(*sorted_stacka);
+		// ft_printf(ANSI_COLOR_MAGENTA">>>>> SORTED -- <<<<<"ANSI_COLOR_RESET);
+		// ft_print_doublyll(*sorted_stacka);
 		ft_goalpos_calculation(stacks, *sorted_stacka);
 		ft_printf(ANSI_COLOR_MAGENTA">>>>> Stack A ALL <<<<<"ANSI_COLOR_RESET);
 		ft_print_doubly_all((*stacks)->stacka_lst);

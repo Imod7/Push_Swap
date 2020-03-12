@@ -21,10 +21,7 @@ void				ft_print_mode(t_prgm *prgm_sets, t_stacks *stacks)
 		ft_printf(ANSI_COLOR_GREEN"\nPrinting FINAL State of Stacks"\
 				ANSI_COLOR_RESET);
 	if ((prgm_sets->debug_mode == 1) || (prgm_sets->debug_mode == 2))
-	{
-		ft_print_stack(stacks->stacka_lst, 'A');
-		ft_print_stack(stacks->stackb_lst, 'B');
-	}
+		ft_print_stacks(stacks);
 }
 
 void				ft_call_instructfunctions(t_instr *lst, t_stacks **stacks, \

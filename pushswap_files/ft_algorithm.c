@@ -24,11 +24,11 @@ void				ft_goalpos_calculation(t_stacks **stacks, \
 	temp = (*stacks)->stacka_lst;
 	while (temp != NULL)
 	{
-		ft_printf(ANSI_COLOR_RED"temp = %d , sorted = %d\n", temp->num, sorted_stacka->num);
+		// ft_printf(ANSI_COLOR_RED"temp = %d , sorted = %d\n", temp->num, sorted_stacka->num);
 		if (temp->num == sorted_stacka->num)
 		{
 			temp->goal_pos = index_s;
-			temp->move_cost = index_s - index_a;
+			temp->distance = index_s - index_a;
 			temp = temp->next;
 			index_a += 1;
 			while (index_s != 0)

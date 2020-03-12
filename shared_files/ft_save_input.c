@@ -36,7 +36,6 @@ int					ft_build_stackb(t_stacks **stacks)
 	// (*stack_b) = NULL;
 	// (*stack_b) = ft_memalloc(sizeof(t_stack));
 	(*stacks)->stackb_id = 'B';
-	ft_print_stack((*stacks)->stackb_lst, (*stacks)->stackb_id);
 	return (0);
 }
 
@@ -76,6 +75,5 @@ int					ft_build_stacka(int argc, char **argv, t_stacks	**stacks, \
 		i++;
 	}
 	(*stacks)->stacka_id = 'A';
-	ft_print_stack((*stacks)->stacka_lst, (*stacks)->stacka_id);
 	return (0);
 }

@@ -90,7 +90,6 @@ void				ft_instr_addend(t_instr **lst, t_instr *new)
 // 		ft_printf("%d \n", temp->instruction);
 // 		temp = temp->next;
 // 	}
-// 	ft_printf("Length of the stack = %d \n", len);
 // }
 
 int					ft_saveinstructions(t_instr **instr_lst, char *operation)
