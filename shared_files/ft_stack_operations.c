@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/02/24 14:53:01 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/02/24 14:53:04 by dsaripap      ########   odam.nl         */
+/*   Created: 2020/02/24 14:53:01 by dsaripap       #+#    #+#                */
+/*   Updated: 2020/03/21 16:43:44 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,36 +21,47 @@ static	void		swap_nodes(t_stack_list *node1, t_stack_list *node2)
 	node2->num = temp;
 }
 
-int					ft_swap_a(t_stacks **stacks)
+int					ft_swap_a(t_prgm *prgm, t_stacks **stacks)
 {
-	(void)(*stacks)->stackb_lst;
 	ft_printf("sa\n");
 	if (ft_stack_length((*stacks)->stacka_lst) < 2)
 		return (0);
 	swap_nodes((*stacks)->stacka_lst, ((*stacks)->stacka_lst)->next);
+	prgm->number_operations += 1;
+	ft_metrics_calculation(stacks, prgm, 0);
 	return (0);
 }
 
-int					ft_swap_b(t_stacks **stacks)
+int					ft_swap_b(t_prgm *prgm, t_stacks **stacks)
 {
 	ft_printf("sb\n");
 	if (ft_stack_length((*stacks)->stackb_lst) < 2)
 		return (0);
 	swap_nodes((*stacks)->stackb_lst, ((*stacks)->stackb_lst)->next);
+	prgm->number_operations += 1;
+	ft_metrics_calculation(stacks, prgm, 0);
 	return (0);
 }
 
-int					ft_swap_both(t_stacks **stacks)
+int					ft_swap_both(t_prgm *prgm, t_stacks **stacks)
 {
 	ft_printf("ss\n");
 	if (ft_stack_length((*stacks)->stacka_lst) >= 2)
+	{
 		swap_nodes((*stacks)->stacka_lst, (*stacks)->stacka_lst->next);
+		prgm->number_operations += 1;
+		ft_metrics_calculation(stacks, prgm, 0);
+	}
 	if (ft_stack_length((*stacks)->stackb_lst) >= 2)
+	{
 		swap_nodes((*stacks)->stackb_lst, ((*stacks)->stackb_lst)->next);
+		prgm->number_operations += 1;
+		ft_metrics_calculation(stacks, prgm, 0);
+	}
 	return (0);
 }
 
-int					ft_push_a(t_stacks **stacks)
+int					ft_push_a(t_prgm *prgm, t_stacks **stacks)
 {
 	t_stack_list	*first_node;
 	t_stack_list	*second_node;
@@ -71,10 +82,13 @@ int					ft_push_a(t_stacks **stacks)
 	(*stacks)->stacka_lst = newnode_a;
 	if (temp_a != NULL)
 		newnode_a->next->prev = newnode_a;
+	prgm->number_operations += 1;
+	ft_saveinstructions(prgm, "pa\n");
+	ft_metrics_calculation(stacks, prgm, 0);
 	return (0);
 }
 
-int					ft_push_b(t_stacks **stacks)
+int					ft_push_b(t_prgm *prgm, t_stacks **stacks)
 {
 	t_stack_list	*first_node;
 	t_stack_list	*second_node;
@@ -89,18 +103,23 @@ int					ft_push_b(t_stacks **stacks)
 	(*stacks)->stacka_lst = second_node;
 	if (second_node != NULL)
 		second_node->prev = NULL;
+	// if ((*stacks)->stackb_lst == NULL)
+	// 	(*stacks)->stackb_lst = ft_memalloc(sizeof(t_stack_list));
 	temp_b = (*stacks)->stackb_lst;
 	// temp_b = ft_memalloc(sizeof(t_stack));
 	newnode_b = ft_stack_newnode(first_node->num);
 	newnode_b->next = temp_b;
 	newnode_b->prev = NULL;
-	((*stacks)->stackb_lst) = newnode_b;
+	(*stacks)->stackb_lst = newnode_b;
 	if (temp_b != NULL)
 		newnode_b->next->prev = newnode_b;
+	prgm->number_operations += 1;
+	ft_saveinstructions(prgm, "pb\n");
+	ft_metrics_calculation(stacks, prgm, 0);
 	return (0);
 }
 
-int					ft_rotate_a(t_stacks **stacks)
+int					ft_rotate_a(t_prgm *prgm, t_stacks **stacks)
 {
 	t_stack_list	*first_node;
 	t_stack_list	*second_node;
@@ -120,10 +139,13 @@ int					ft_rotate_a(t_stacks **stacks)
 	first_node->prev = temp_a;
 	first_node->next = NULL;
 	(*stacks)->stacka_lst = second_node;
+	prgm->number_operations += 1;
+	ft_saveinstructions(prgm, "ra\n");
+	ft_metrics_calculation(stacks, prgm, 0);
 	return (0);
 }
 
-int					ft_rotate_b(t_stacks **stacks)
+int					ft_rotate_b(t_prgm *prgm, t_stacks **stacks)
 {
 	t_stack_list	*first_node;
 	t_stack_list	*second_node;
@@ -143,20 +165,31 @@ int					ft_rotate_b(t_stacks **stacks)
 	first_node->prev = temp_b;
 	first_node->next = NULL;
 	(*stacks)->stackb_lst = second_node;
+	prgm->number_operations += 1;
+	ft_saveinstructions(prgm, "rb\n");
+	ft_metrics_calculation(stacks, prgm, 0);
 	return (0);
 }
 
-int					ft_rotate_both(t_stacks **stacks)
+int					ft_rotate_both(t_prgm *prgm, t_stacks **stacks)
 {
-	ft_printf("rr function called\n");
+	ft_printf("rr\n");
 	if (ft_stack_length((*stacks)->stacka_lst) >= 2)
-		ft_rotate_a(stacks);
+	{
+		ft_rotate_a(prgm, stacks);
+		prgm->number_operations += 1;
+		ft_metrics_calculation(stacks, prgm, 0);
+	}
 	if (ft_stack_length((*stacks)->stackb_lst) >= 2)
-		ft_rotate_b(stacks);
+	{
+		ft_rotate_b(prgm, stacks);
+		prgm->number_operations += 1;
+		ft_metrics_calculation(stacks, prgm, 0);
+	}
 	return (0);
 }
 
-int					ft_reverserotate_a(t_stacks **stacks)
+int					ft_reverserotate_a(t_prgm *prgm, t_stacks **stacks)
 {
 	t_stack_list	*first_node;
 	t_stack_list	*last_node;
@@ -174,10 +207,13 @@ int					ft_reverserotate_a(t_stacks **stacks)
 	last_node->next = first_node;
 	first_node->prev = last_node;
 	(*stacks)->stacka_lst = last_node;
+	prgm->number_operations += 1;
+	ft_saveinstructions(prgm, "rra\n");
+	ft_metrics_calculation(stacks, prgm, 0);
 	return (0);
 }
 
-int					ft_reverserotate_b(t_stacks **stacks)
+int					ft_reverserotate_b(t_prgm *prgm, t_stacks **stacks)
 {
 	t_stack_list	*first_node;
 	t_stack_list	*last_node;
@@ -195,15 +231,26 @@ int					ft_reverserotate_b(t_stacks **stacks)
 	last_node->next = first_node;
 	first_node->prev = last_node;
 	(*stacks)->stackb_lst = last_node;
+	prgm->number_operations += 1;
+	ft_saveinstructions(prgm, "rrb\n");
+	ft_metrics_calculation(stacks, prgm, 0);
 	return (0);
 }
 
-int				ft_reverserotate_both(t_stacks **stacks)
+int				ft_reverserotate_both(t_prgm *prgm, t_stacks **stacks)
 {
 	ft_printf("rrr\n");
 	if (ft_stack_length((*stacks)->stacka_lst) >= 2)
-		ft_reverserotate_a(stacks);
+	{
+		ft_reverserotate_a(prgm, stacks);
+		prgm->number_operations += 1;
+		ft_metrics_calculation(stacks, prgm, 0);
+	}
 	if (ft_stack_length((*stacks)->stackb_lst) >= 2)
-		ft_reverserotate_b(stacks);
+	{
+		ft_reverserotate_b(prgm, stacks);
+		prgm->number_operations += 1;
+		ft_metrics_calculation(stacks, prgm, 0);
+	}
 	return (0);
 }

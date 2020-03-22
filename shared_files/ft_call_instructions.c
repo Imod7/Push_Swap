@@ -46,7 +46,7 @@ void				ft_call_instructfunctions(t_instr *lst, t_stacks **stacks, \
 		;
 	while (temp != NULL)
 	{
-		oper_func[temp->instruction](stacks);
+		oper_func[temp->instruction](prgm_sets, stacks);
 		ft_print_mode(prgm_sets, *stacks);
 		temp = temp->next;
 	}

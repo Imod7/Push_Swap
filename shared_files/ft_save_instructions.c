@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/02/24 14:52:10 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/02/24 14:52:13 by dsaripap      ########   odam.nl         */
+/*   Created: 2020/02/24 14:52:10 by dsaripap       #+#    #+#                */
+/*   Updated: 2020/03/21 17:23:57 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,71 +33,56 @@ int					valid_instruction(char *str)
 	}
 }
 
-void				ft_setinstruction(char *operation, t_instr *instr_node)
+void				ft_setinstruction(char *operation, t_instr *instr)
 {
 	if (!ft_strcmp(operation, "sa"))
-		instr_node->instruction |= INSTR_SA;
+		instr->instruction |= INSTR_SA;
 	else if (!ft_strcmp(operation, "sb"))
-		instr_node->instruction |= INSTR_SB;
+		instr->instruction |= INSTR_SB;
 	else if (!ft_strcmp(operation, "ss"))
-		instr_node->instruction |= INSTR_SS;
+		instr->instruction |= INSTR_SS;
 	else if (!ft_strcmp(operation, "pa"))
-		instr_node->instruction |= INSTR_PA;
+		instr->instruction |= INSTR_PA;
 	else if (!ft_strcmp(operation, "pb"))
-		instr_node->instruction |= INSTR_PB;
+		instr->instruction |= INSTR_PB;
 	else if (!ft_strcmp(operation, "ra"))
-		instr_node->instruction |= INSTR_RA;
+		instr->instruction |= INSTR_RA;
 	else if (!ft_strcmp(operation, "rb"))
-		instr_node->instruction |= INSTR_RB;
+		instr->instruction |= INSTR_RB;
 	else if (!ft_strcmp(operation, "rr"))
-		instr_node->instruction |= INSTR_RR;
+		instr->instruction |= INSTR_RR;
 	else if (!ft_strcmp(operation, "rra"))
-		instr_node->instruction |= INSTR_RRA;
+		instr->instruction |= INSTR_RRA;
 	else if (!ft_strcmp(operation, "rrb"))
-		instr_node->instruction |= INSTR_RRB;
+		instr->instruction |= INSTR_RRB;
 	else if (!ft_strcmp(operation, "rrr"))
-		instr_node->instruction |= INSTR_RRR;
+		instr->instruction |= INSTR_RRR;
+	instr->next = NULL;
 }
 
-void				ft_instr_addend(t_instr **lst, t_instr *new)
+void				ft_instr_addend(t_prgm **prgm, t_instr *new)
 {
 	t_instr			*temp;
 
-	if (*lst == NULL)
+	if ((*prgm)->instr_lst == NULL)
 	{
-		*lst = new;
+		(*prgm)->instr_lst = new;
+		// ft_printf(ANSI_COLOR_GREEN"NULL SO ADD : instr='%d'\n"ANSI_COLOR_RESET, (*prgm)->instr_lst->instruction);
 		return ;
 	}
-	temp = *lst;
+	temp = (*prgm)->instr_lst;
 	while (temp->next != NULL)
+	{
 		temp = temp->next;
+	}
 	temp->next = new;
 }
 
-// void				ft_print_instructions(t_instr *lst)
-// {
-// 	t_instr			*temp;
-// 	int				len;
-
-// 	ft_printf("Printing the instructions \n");
-// 	temp = lst;
-// 	len = 0;
-// 	if (temp == NULL)
-// 		;
-// 	while (temp != NULL)
-// 	{
-// 		len++;
-// 		ft_printf("%d \n", temp->instruction);
-// 		temp = temp->next;
-// 	}
-// }
-
-int					ft_saveinstructions(t_instr **instr_lst, char *operation)
+int					ft_saveinstructions(t_prgm *prgm, char *operation)
 {
 	char			**strarr;
 	t_instr			*instr_node;
 
-	// ft_printf(ANSI_COLOR_GREEN"\noperation='%s'\n"ANSI_COLOR_RESET, operation);
 	strarr = ft_strsplit(operation, '\n');
 	operation = strarr[0];
 	if (valid_instruction(operation) == 0)
@@ -107,11 +92,14 @@ int					ft_saveinstructions(t_instr **instr_lst, char *operation)
 	}
 	else
 	{
+		// if (prgm->instr_lst == NULL)
+		// 	prgm->instr_lst = ft_memalloc(sizeof(t_instr));
 		instr_node = ft_memalloc(sizeof(t_instr));
 		ft_setinstruction(operation, instr_node);
-		// ft_printf("\ninstr = %d\t: ", instr_node->instruction);
+		// ft_printf(ANSI_COLOR_GREEN"AFTER the SET FUNCTION : instr='%d'\n"ANSI_COLOR_RESET, instr_node->instruction);
 		// print_binary(instr_node->instruction);
-		ft_instr_addend(instr_lst, instr_node);
+		ft_instr_addend(&prgm, instr_node);
 	}
+	// ft_print_instructions(prgm);
 	return (0);
 }

@@ -20,8 +20,7 @@ void				ft_sorting(t_prgm *prgm_sets, t_stacks **stacks)
 
 	alist = &(*stacks)->stacka_lst;
 	blist = &(*stacks)->stackb_lst;
-	ft_push_b(stacks);
-	prgm_sets->number_operations += 1;
+	ft_push_b(prgm_sets, stacks);
 	temp = (*alist)->num;
 	ft_printf(ANSI_COLOR_CYAN"temp = %d\n"ANSI_COLOR_RESET, temp);
 	ft_print_doublyll(*alist);
@@ -33,9 +32,9 @@ void				ft_sorting(t_prgm *prgm_sets, t_stacks **stacks)
 		{
 			ft_printf(ANSI_COLOR_CYAN"alistnum = %d > blistnum = %d\n", (*alist)->num, (*blist)->num);
 			ft_printf(ANSI_COLOR_CYAN"temp = %d\n", temp);
-			ft_push_b(stacks);
+			ft_push_b(prgm_sets, stacks);
 			ft_printf(" --- dom 111\n");
-			prgm_sets->number_operations += 1;
+			// prgm_sets->number_operations += 1;
 			if (ft_stack_length(*alist) > 0)
 				temp = (*alist)->num;
 			ft_printf(" --- dom \n");
@@ -46,19 +45,19 @@ void				ft_sorting(t_prgm *prgm_sets, t_stacks **stacks)
 		{
 			ft_printf("blistnum = %d > temp = %d\n"ANSI_COLOR_RESET, (*blist)->num, temp);
 			ft_printf("temp = %d\n", temp);
-			ft_rotate_a(stacks);
-			ft_push_a(stacks);
-			ft_reverserotate_a(stacks);
+			ft_rotate_a(prgm_sets, stacks);
+			ft_push_a(prgm_sets, stacks);
+			ft_reverserotate_a(prgm_sets, stacks);
 			ft_print_doublyll(*alist);
 			ft_print_doublyll(*blist);
-			prgm_sets->number_operations += 3;
+			// prgm_sets->number_operations += 3;
 		}
 		if (ft_stack_length(*alist) > 0)
 		{
 			ft_printf(ANSI_COLOR_CYAN"temp = %d\n"ANSI_COLOR_RESET, temp);
-			ft_push_b(stacks);
+			ft_push_b(prgm_sets, stacks);
 			temp = (*alist)->num;
-			prgm_sets->number_operations += 1;
+			// prgm_sets->number_operations += 1;
 		}
 		ft_printf(ANSI_COLOR_CYAN"---------------------------LOOP END-------------------------\n"ANSI_COLOR_RESET);
 		ft_print_doublyll(*alist);
@@ -66,7 +65,7 @@ void				ft_sorting(t_prgm *prgm_sets, t_stacks **stacks)
 	}
 	while (ft_stack_length(*blist) > 0)
 	{
-		ft_push_a(stacks);
-		prgm_sets->number_operations += 1;	
+		ft_push_a(prgm_sets, stacks);
+		// prgm_sets->number_operations += 1;	
 	}
 }

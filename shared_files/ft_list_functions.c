@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/02/24 14:54:47 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/02/24 14:54:51 by dsaripap      ########   odam.nl         */
+/*   Created: 2020/02/24 14:54:47 by dsaripap       #+#    #+#                */
+/*   Updated: 2020/03/21 17:08:38 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,18 +58,18 @@ void				ft_print_stacks(t_stacks *stacks)
 	{
 		if (temp_a != NULL)
 		{
-			ft_printf("|\t\t%-15d\t\t|\t", temp_a->num);
+			ft_printf("|\t\t%-10d\t\t|\t", temp_a->num);
 			temp_a = temp_a->next;
 		}
 		else
-			ft_printf("|\t\t	\t\t|\t");
+			ft_printf("|\t\t\t\t\t|\t");
 		if (temp_b != NULL)
 		{
-			ft_printf("|\t\t%-15d\t\t|\n", temp_b->num);
+			ft_printf("|\t\t%-10d\t\t|\t\n", temp_b->num);
 			temp_b = temp_b->next;
 		}
 		else
-			ft_printf("|\t\t	\t\t|\n");
+			ft_printf("|\t\t\t\t\t|\n");
 	}
 	ft_printf("-----------------------------------------\t");
 	ft_printf("-----------------------------------------\n"ANSI_COLOR_RESET);
@@ -81,24 +81,24 @@ void				ft_print_doublyll(t_stack_list *temp)
 	t_stack_list	*prevn;
 	t_stack_list	*nextn;
 
-	ft_printf(ANSI_COLOR_YELLOW"\n|------------------------------------------");
-	ft_printf("---------------------|\n");
-	ft_printf("|--------------------- Doubly Linked List --------------------");
-	ft_printf("--|\n");
+	ft_printf(ANSI_COLOR_YELLOW"\n-------------------------------------------");
+	ft_printf("----------------------\n");
+	ft_printf("|------------------------ Doubly Linked List -------------");
+	ft_printf("------|\n");
 	ft_printf("|prev\t\t\t\tcurrent \t\tnext----|\n");
 	len = 0;
 	if (temp == NULL)
-		ft_printf("|\t\t	\t\t|\n");
+		ft_printf("|\t\t\t\t\t\t\t|\n");
 	while (temp != NULL)
 	{
 		len++;
 		prevn = temp->prev;
 		nextn = temp->next;
 		if (prevn != NULL)
-			ft_printf("|%d\t\t<-\t", prevn->num);
+			ft_printf("|%d\t\t<-|\t", prevn->num);
 		else
-			ft_printf("|NULL\t\t<-\t");
-		ft_printf("|\t%-15d\t|->", temp->num);
+			ft_printf("NULL\t\t<-|\t");
+		ft_printf("\t%-15d\t|->", temp->num);
 		if (nextn != NULL)
 			ft_printf("\t%d\t|\n", nextn->num);
 		else
@@ -115,14 +115,15 @@ void				ft_print_doubly_all(t_stack_list *temp)
 	t_stack_list	*prevn;
 	t_stack_list	*nextn;
 
-	ft_printf(ANSI_COLOR_CYAN"\n|------------------------------------------");
-	ft_printf("-----------------------------------------|\n");
-	ft_printf("|--------------------- Doubly Linked List -------------------");
-	ft_printf("-----------------------|\n");
-	ft_printf("|prev\t\tcurrent\t\tgoal_pos\tdistance\t\tnext\t|\n");
+	ft_printf(ANSI_COLOR_CYAN"\n---------------------------------------------");
+	ft_printf("--------");
+	ft_printf("------------------------------------------------------------\n");
+	ft_printf("|----------------------------------------------------------- ");
+	ft_printf("Doubly Linked List --------------------------------|\n");
+	ft_printf("|prev_num\tcurrent_num\tbucket\t\tgoal_pos\tdis_from_goal\tdis_from_top\t\tnext_num|\n");
 	len = 0;
 	if (temp == NULL)
-		ft_printf("|\t\t\t\t\t|\n");
+		ft_printf("|\t\t\t\t\t\t\t\t\t\t\t\t\t\t|\n");
 	while (temp != NULL)
 	{
 		len++;
@@ -132,23 +133,20 @@ void				ft_print_doubly_all(t_stack_list *temp)
 			ft_printf("|%d\t<-\t", prevn->num);
 		else
 			ft_printf("|NULL\t<-\t");
-		ft_printf("|%-15d", temp->num);
-		if (temp != NULL)
-			ft_printf("|%d\t\t|", temp->goal_pos);
-		else
-			ft_printf("|NULL\t\t|");
-		if (temp != NULL)
-			ft_printf("%d\t|", temp->distance);
-		else
-			ft_printf("NULL\t|");
+		ft_printf("%-15d", temp->num);
+		ft_printf("%d\t\t", temp->bucket);
+		ft_printf("%d\t\t", temp->goal_pos);
+		ft_printf("%d\t\t", temp->dis_from_goal);
+		ft_printf("%d\t", temp->dis_from_top);
 		if (nextn != NULL)
 			ft_printf("\t->\t%d\t|\n", nextn->num);
 		else
 			ft_printf("\t->\tNULL\t|\n");
 		temp = temp->next;
 	}
-	ft_printf("|--------------------------------------------");
-	ft_printf("--------------------------------------|\n"ANSI_COLOR_RESET);
+	ft_printf("------------------------------------------------------------");
+	ft_printf("-----------");
+	ft_printf("------------------------------------------\n"ANSI_COLOR_RESET);
 }
 
 int					ft_stack_length(t_stack_list *lst)

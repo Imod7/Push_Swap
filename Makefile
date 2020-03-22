@@ -5,8 +5,8 @@
 #                                                      +:+                     #
 #    By: dsaripap <marvin@codam.nl>                   +#+                      #
 #                                                    +#+                       #
-#    Created: 2020/01/31 13:44:11 by dsaripap      #+#    #+#                  #
-#    Updated: 2020/02/24 14:00:58 by dsaripap      ########   odam.nl          #
+#    Created: 2020/01/31 13:44:11 by dsaripap       #+#    #+#                 #
+#    Updated: 2020/03/20 14:26:43 by dominique     ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,6 @@ NC=\033[0m # No Color
 
 SRC_CHECKER =	\
 		checker.c \
-		ft_save_instructions.c \
 		ft_bitwise.c \
 
 SRC_PUSHSWAP =	\
@@ -42,10 +41,12 @@ SRC_PUSHSWAP =	\
 SRC_SHARED =	\
 		ft_save_input.c \
 		ft_list_functions.c \
+		ft_save_instructions.c \
 		ft_aux_functions.c \
 		ft_call_instructions.c \
 		ft_freelist.c \
 		ft_stack_operations.c \
+		ft_metrics.c \
 
 OBJ_CHECKER = $(SRC_CHECKER:%.c=$(CHECKER_OBJDIR)/%.o)
 OBJ_PUSHSWAP = $(SRC_PUSHSWAP:%.c=$(PUSHSWAP_OBJDIR)/%.o)

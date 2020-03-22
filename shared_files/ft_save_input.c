@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/02/24 14:55:25 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/02/24 14:55:28 by dsaripap      ########   odam.nl         */
+/*   Created: 2020/02/24 14:55:25 by dsaripap       #+#    #+#                */
+/*   Updated: 2020/03/20 13:09:33 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ int					ft_isnum(char *str)
 int					ft_build_stackb(t_stacks **stacks)
 {
 	// (*stack_b) = NULL;
-	// (*stack_b) = ft_memalloc(sizeof(t_stack));
+	// (*stacks)->stackb_lst = ft_memalloc(sizeof(t_stack));
+	// (*stacks) = ft_memalloc(sizeof(t_stacks));
 	(*stacks)->stackb_id = 'B';
 	return (0);
 }
@@ -48,7 +49,8 @@ int					ft_build_stacka(int argc, char **argv, t_stacks	**stacks, \
 	t_stack_list	*stack_node;
 
 	stack_node = NULL;
-	(*stacks) = ft_memalloc(sizeof(t_stacks));
+	// (*stacks) = ft_memalloc(sizeof(t_stacks));
+	// (*stacks)->stacka_lst = ft_memalloc(sizeof(t_stack_list));
 	i = 1;
 	if (prgm_sets->debug_mode == 1)
 		i = 2;

@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/01/23 12:18:26 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/01/29 13:06:28 by dsaripap      ########   odam.nl         */
+/*   Created: 2020/01/23 12:18:26 by dsaripap       #+#    #+#                */
+/*   Updated: 2020/03/21 16:29:43 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,26 @@
 # include "ft_printf.h"
 # include <fcntl.h>
 
-# define INSTR_SA		(0)
-# define INSTR_SB		(1 << 0)
-# define INSTR_SS		(1 << 1)
-# define INSTR_PA		(1 | (1 << 0) | (1 << 1))
-# define INSTR_PB		(1 << 2)
-# define INSTR_RA		(1 | (1 << 0) | (1 << 2))
-# define INSTR_RB		((1 << 1) | (1 << 2))
-# define INSTR_RR		(1 | (1 << 0) | (1 << 1) | (1 << 2))
-# define INSTR_RRA		(1 << 3)
-# define INSTR_RRB		(1 | (1 << 0) | (1 << 3))
-# define INSTR_RRR		((1 << 1) | (1 << 3))
+# define INSTR_SA		(1 << 0)
+# define INSTR_SB		(1 << 1)
+# define INSTR_SS		(1 << 2)
+# define INSTR_PA		(1 << 3)
+# define INSTR_PB		(1 << 4)
+# define INSTR_RA		(1 << 5)
+# define INSTR_RB		(1 << 6)
+# define INSTR_RR		(1 << 7)
+# define INSTR_RRA		(1 << 8)
+# define INSTR_RRB		(1 << 9)
+# define INSTR_RRR		(1 << 10)
 
 typedef struct			s_prgm
 {
 	int					debug_mode;
 	int					number_operations;
+	int					buckets;
+	int					bucket_size;
 	struct s_instr		*instr_lst;
+	struct s_stack_list	*sorted_stack;
 }						t_prgm;
 
 typedef struct			s_instr
@@ -60,22 +63,24 @@ typedef struct			s_stack_list
 	struct s_stack_list	*prev;
 	int					cur_pos;
 	int					goal_pos;
-	int					distance;
+	int					bucket;
+	int					dis_from_goal;
+	int					dis_from_top;
 }						t_stack_list;
 
-typedef int			(*operation_func)(t_stacks **stacks);
+typedef int			(*operation_func)(t_prgm *prgm, t_stacks **stacks);
 
-int		ft_swap_a(t_stacks **stacks);
-int		ft_swap_b(t_stacks **stacks);
-int		ft_swap_both(t_stacks **stacks);
-int		ft_push_a(t_stacks **stacks);
-int		ft_push_b(t_stacks **stacks);
-int		ft_rotate_a(t_stacks **stacks);
-int		ft_rotate_b(t_stacks **stacks);
-int		ft_rotate_both(t_stacks **stacks);
-int		ft_reverserotate_a(t_stacks **stacks);
-int		ft_reverserotate_b(t_stacks **stacks);
-int		ft_reverserotate_both(t_stacks **stacks);
+int		ft_swap_a(t_prgm *prgm, t_stacks **stacks);
+int		ft_swap_b(t_prgm *prgm, t_stacks **stacks);
+int		ft_swap_both(t_prgm *prgm, t_stacks **stacks);
+int		ft_push_a(t_prgm *prgm, t_stacks **stacks);
+int		ft_push_b(t_prgm *prgm, t_stacks **stacks);
+int		ft_rotate_a(t_prgm *prgm, t_stacks **stacks);
+int		ft_rotate_b(t_prgm *prgm, t_stacks **stacks);
+int		ft_rotate_both(t_prgm *prgm, t_stacks **stacks);
+int		ft_reverserotate_a(t_prgm *prgm, t_stacks **stacks);
+int		ft_reverserotate_b(t_prgm *prgm, t_stacks **stacks);
+int		ft_reverserotate_both(t_prgm *prgm, t_stacks **stacks);
 
 /*
 ** Program Checks
@@ -116,7 +121,7 @@ void				ft_print_doubly_all(t_stack_list *temp);
 ** Linked List functions related to the Instructions List
 */
 
-int			ft_saveinstructions(t_instr	**instr_lst, char *operation);
+int			ft_saveinstructions(t_prgm *prgm, char *operation);
 void		ft_call_instructfunctions(t_instr *instr_lst, t_stacks **stacks, \
 										t_prgm *prgm_sets);
 /*
@@ -124,21 +129,23 @@ void		ft_call_instructfunctions(t_instr *instr_lst, t_stacks **stacks, \
 */
 
 void		print_binary(int instr);
-void		ft_print_instructions(t_instr *lst);
+void		ft_print_instructions(t_prgm *prgm);
 
 /*
 ** Sorting functions
 */
 
 void		ft_sorting(t_prgm *prgm_sets, t_stacks **stacks);
-void		*ft_presort(t_stacks **stacks, t_stack_list **sorted_stacka);
+void		*ft_presort(t_stacks **stacks, t_prgm *prgm);
+int			ft_find_median(t_stack_list **stacklst);
 
 /*
 ** Algorithm functions
 */
 
-void		ft_goalpos_calculation(t_stacks **stacks, \
-									t_stack_list *sorted_stacka);
-void		ft_sort_three(t_stacks **stacks);
+void		ft_metrics_calculation(t_stacks **stacks, t_prgm *prgm, int init);
+void		ft_sort_three(t_prgm *prgm_sets, t_stacks **stacks);
+void		ft_calculate_buckets(t_prgm *prgm, int len);
+void		ft_algorithm(t_stacks **stacks, t_prgm *prgm_sets);
 
 #endif
