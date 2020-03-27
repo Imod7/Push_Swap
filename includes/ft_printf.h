@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/07/24 13:23:12 by dsaripap      #+#    #+#                 */
-/*   Updated: 2019/08/13 22:07:07 by dsaripap      ########   odam.nl         */
+/*   Created: 2019/07/24 13:23:12 by dsaripap       #+#    #+#                */
+/*   Updated: 2020/03/25 17:33:57 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define ANSI_COLOR_MAGENTA	"\x1b[35m"
 # define ANSI_COLOR_CYAN    "\x1b[36m"
 
-# define BUFFER_SIZE		512
+# define BUFFER_SIZE		1024
 # define FLOAT_TOTAL_LEN	40000
 # define FLOAT_MIDDLE		20001
 

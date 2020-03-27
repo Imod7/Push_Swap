@@ -6,7 +6,7 @@
 /*   By: dominique <dominique@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/14 15:47:55 by dominique      #+#    #+#                */
-/*   Updated: 2020/03/20 13:22:50 by dominique     ########   odam.nl         */
+/*   Updated: 2020/03/24 18:29:45 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,28 @@ void				ft_calculate_buckets(t_prgm *prgm, int len)
 		prgm->bucket_size = len / prgm->buckets;
 }
 
+void				ft_update_buckets(t_prgm **prgm)
+{
+	t_stack_list	*sorted;
+	int				i;
+	int				j;
+
+	sorted = (*prgm)->sorted_stack;
+	i = 0;
+	j = -1;
+	while (sorted != NULL)
+	{
+		if ((i % (*prgm)->bucket_size) == 0)
+		{
+			// ft_printf("%d, %d \n", i, (*prgm)->bucket_size);
+			j += 1;
+		}
+		sorted->bucket = j;
+		sorted = sorted->next;
+		i += 1;
+	}
+}
+
 /*
 ** Instead of mallocking a Copy of my Linked List and
 ** doing merge sort to store the numbers in the copy 
@@ -40,7 +62,7 @@ void				ft_calculate_buckets(t_prgm *prgm, int len)
 ** and the distance from top (dis_from_top)
 */
 
-void				ft_metrics_calculation(t_stacks **stacks, t_prgm *prgm, \
+void				ft_metrics_calculation(t_prgm *prgm, t_stacks **stacks, \
 											int init)
 {
 	t_stack_list	*temp;
@@ -57,8 +79,11 @@ void				ft_metrics_calculation(t_stacks **stacks, t_prgm *prgm, \
 	{
 		// ft_printf("j = %d\n", j);
 		// ft_printf("i = %d\n", i);
+		// ft_printf("Stack C (copy) Sorted");
+		// ft_print_doublyll(prgm->sorted_stack);
 		while (sorted->num != temp->num)
 		{
+			// ft_printf("num %d\n", sorted->num);
 			sorted = sorted->next;
 			j += 1;
 		}

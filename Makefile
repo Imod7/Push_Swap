@@ -6,7 +6,7 @@
 #    By: dsaripap <marvin@codam.nl>                   +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/01/31 13:44:11 by dsaripap       #+#    #+#                 #
-#    Updated: 2020/03/20 14:26:43 by dominique     ########   odam.nl          #
+#    Updated: 2020/03/27 17:53:25 by dominique     ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,6 @@ SRC_CHECKER =	\
 SRC_PUSHSWAP =	\
 		push_swap.c \
 		ft_sorting.c \
-		ft_presort.c \
 		ft_algorithm.c \
 		ft_sort_small.c \
 
@@ -45,7 +44,12 @@ SRC_SHARED =	\
 		ft_aux_functions.c \
 		ft_call_instructions.c \
 		ft_freelist.c \
-		ft_stack_operations.c \
+		ft_stack_oper_push.c \
+		ft_stack_oper_rotation.c \
+		ft_stack_oper_rrotation.c \
+		ft_stack_oper_swap.c \
+		ft_printing.c \
+		ft_presort.c \
 		ft_metrics.c \
 
 OBJ_CHECKER = $(SRC_CHECKER:%.c=$(CHECKER_OBJDIR)/%.o)

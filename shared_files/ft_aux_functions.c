@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/03/08 21:57:49 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/03/08 21:57:53 by dsaripap      ########   odam.nl         */
+/*   Created: 2020/03/08 21:57:49 by dsaripap       #+#    #+#                */
+/*   Updated: 2020/03/26 14:56:15 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int					check_v_option(char *argv, t_prgm *prgm_sets)
 		return (0);
 	if ((argv[0] == '-') && (argv[1] == 'v'))
 		prgm_sets->debug_mode = 1;
+	else
+		prgm_sets->debug_mode = 0;
 	prgm_sets->number_operations = 0;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/24 14:52:10 by dsaripap       #+#    #+#                */
-/*   Updated: 2020/03/21 17:23:57 by dominique     ########   odam.nl         */
+/*   Updated: 2020/03/25 17:50:38 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,12 @@ void				ft_instr_addend(t_prgm **prgm, t_instr *new)
 
 int					ft_saveinstructions(t_prgm *prgm, char *operation)
 {
-	char			**strarr;
+	// char			**strarr;
 	t_instr			*instr_node;
 
-	strarr = ft_strsplit(operation, '\n');
-	operation = strarr[0];
+	// strarr = ft_strsplit(operation, '\n');
+	// operation = strarr[0];
+	// ft_printf("%s\n", operation);
 	if (valid_instruction(operation) == 0)
 	{
 		ft_printf("Error\n");

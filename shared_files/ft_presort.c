@@ -6,7 +6,7 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/05 13:06:40 by dsaripap       #+#    #+#                */
-/*   Updated: 2020/03/21 17:12:49 by dominique     ########   odam.nl         */
+/*   Updated: 2020/03/27 17:33:37 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,26 @@
 ** Calculation of median in a sorted linked list
 */
 
-int					ft_find_median(t_stack_list **stacklst)
-{
-	t_stack_list	*slow;
-	t_stack_list	*fast;
+// int					ft_find_median(t_stack_list **stacklst)
+// {
+// 	t_stack_list	*slow;
+// 	t_stack_list	*fast;
 
-	slow = *stacklst;
-	fast = *stacklst;
-	if (stacklst != NULL)
-	{
-		while (fast != NULL && fast->next != NULL)
-		{
-			slow = slow->next;
-			fast = fast->next->next;
-		}
-	}
-	if (fast != NULL)
-		return (slow->num);
-	else
-		return ((slow->prev->num + slow->num) / 2);
-}
+// 	slow = *stacklst;
+// 	fast = *stacklst;
+// 	if (stacklst != NULL)
+// 	{
+// 		while (fast != NULL && fast->next != NULL)
+// 		{
+// 			slow = slow->next;
+// 			fast = fast->next->next;
+// 		}
+// 	}
+// 	if (fast != NULL)
+// 		return (slow->num);
+// 	else
+// 		return ((slow->prev->num + slow->num) / 2);
+// }
 
 /*
 ** The splitting part of merge sort 
@@ -124,54 +124,39 @@ void				ft_mergesort(t_stack_list **completelist)
 	*completelist = ft_mergeback(&first_half, &second_half);
 }
 
-void				ft_update_buckets(t_prgm **prgm)
+void				ft_presort(t_prgm *prgm, t_stacks **stacks)
 {
-	t_stack_list	*sorted;
-	int				i;
-	int				j;
-
-	sorted = (*prgm)->sorted_stack;
-	i = 0;
-	j = -1;
-	while (sorted != NULL)
+	if (((*stacks)->stacka_lst == NULL) || \
+	((*stacks)->stacka_lst->next == NULL))
+		return ;
+	else
 	{
-		if ((i % (*prgm)->bucket_size) == 0)
-		{
-			// ft_printf("%d, %d \n", i, (*prgm)->bucket_size);
-			j += 1;
-		}
-		sorted->bucket = j;
-		sorted = sorted->next;
-		i += 1;
+		prgm->sorted_stack = ft_copy_list((*stacks)->stacka_lst);
+		ft_mergesort(&(prgm->sorted_stack));
 	}
 }
 
-void				*ft_presort(t_stacks **stacks, t_prgm *prgm)
-{
-	int				len;
-
-	len = ft_stack_length((*stacks)->stacka_lst);
-	if (((*stacks)->stacka_lst == NULL) || \
-	((*stacks)->stacka_lst->next == NULL))
+int					ft_check_ifsorted(t_prgm *prgm, t_stacks *stacks)
+{	
+	if ((stacks->stacka_lst == NULL) || \
+	(stacks->stacka_lst->next == NULL))
+	{
+		ft_printf("OK");
 		return (0);
+	}
 	else
 	{
-		ft_calculate_buckets(prgm, len);
-		ft_printf("Buckets = %d \n", prgm->buckets);
-		ft_printf("Bucket Size = %d \n", prgm->bucket_size);
-		prgm->sorted_stack = ft_copy_list((*stacks)->stacka_lst);
-		ft_mergesort(&(prgm->sorted_stack));
-		ft_update_buckets(&prgm);
-		ft_metrics_calculation(stacks, prgm, 1);
-		ft_printf(ANSI_COLOR_MAGENTA">>>>> Stack A ALL <<<<<"ANSI_COLOR_RESET);
-		ft_print_doubly_all((*stacks)->stacka_lst);
-		// ft_printf(ANSI_COLOR_MAGENTA">>>>> Sorted Stack <<<<<"ANSI_COLOR_RESET);
-		// ft_print_doubly_all(prgm->sorted_stack);
-		ft_algorithm(stacks, prgm);
-		// ft_printf(ANSI_COLOR_CYAN);
-		// ft_printf("Median = %d \n", ft_find_median(&(prgm->sorted_stack)));
-		// ft_printf("Length = %d \n", len);
-		ft_print_stacks(*stacks);
+		while (stacks->stacka_lst != NULL)
+		{
+			if (prgm->sorted_stack->num != stacks->stacka_lst->num)
+			{
+				ft_printf("KO\n");
+				return (-1);
+			}
+			prgm->sorted_stack = prgm->sorted_stack->next;
+			stacks->stacka_lst = stacks->stacka_lst->next;
+		}
+		ft_printf("OK\n");
+		return (0);
 	}
-	return (0);
 }

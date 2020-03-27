@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/03/12 13:46:56 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/03/12 14:14:41 by dsaripap      ########   odam.nl         */
+/*   Created: 2020/03/12 13:46:56 by dsaripap       #+#    #+#                */
+/*   Updated: 2020/03/24 10:05:52 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,9 @@ void				ft_sort_three(t_prgm *prgm, t_stacks **stacks)
 	else if ((temp->num < temp->next->num) && \
 	(temp->next->num > temp->next->next->num) && \
 	(temp->next->next->num < temp->num))
+	{
 		ft_reverserotate_a(prgm, stacks);
+	}
 	else if ((temp->num < temp->next->num) && \
 	(temp->next->num > temp->next->next->num) && \
 	(temp->next->next->num > temp->num))
@@ -46,5 +48,7 @@ void				ft_sort_three(t_prgm *prgm, t_stacks **stacks)
 	else if ((temp->num > temp->next->num) && \
 	(temp->next->num < temp->next->next->num) && \
 	(temp->next->next->num < temp->num))
+	{
 		ft_rotate_a(prgm, stacks);
+	}
 }
