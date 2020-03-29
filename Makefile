@@ -6,7 +6,7 @@
 #    By: dsaripap <marvin@codam.nl>                   +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/01/31 13:44:11 by dsaripap       #+#    #+#                 #
-#    Updated: 2020/03/27 17:53:25 by dominique     ########   odam.nl          #
+#    Updated: 2020/03/28 11:48:26 by dominique     ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ SRC_SHARED =	\
 		ft_save_input.c \
 		ft_list_functions.c \
 		ft_save_instructions.c \
-		ft_aux_functions.c \
+		ft_prgm_functions.c \
 		ft_call_instructions.c \
 		ft_freelist.c \
 		ft_stack_oper_push.c \

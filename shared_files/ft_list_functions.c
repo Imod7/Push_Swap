@@ -6,7 +6,7 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/24 14:54:47 by dsaripap       #+#    #+#                */
-/*   Updated: 2020/03/24 10:48:36 by dominique     ########   odam.nl         */
+/*   Updated: 2020/03/28 11:47:14 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int					ft_stack_length(t_stack_list *lst)
 	return (len);
 }
 
-int					ft_numexists(t_stack_list *lst, int num)
+int					ft_numexists_instack(t_stack_list *lst, int num)
 {
 	t_stack_list	*temp;
 

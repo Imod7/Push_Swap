@@ -6,7 +6,7 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/23 12:08:15 by dsaripap       #+#    #+#                */
-/*   Updated: 2020/03/27 17:32:56 by dominique     ########   odam.nl         */
+/*   Updated: 2020/03/29 18:12:37 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ int					main(int argc, char **argv)
 		return (0);
 	else
 	{
-		check_v_option(argv[1], prgm);
-		// ft_printf("debug_mode = %d \n", prgm_settings->debug_mode);
+		if (set_prgm_options(argv[1], prgm) == -1)
+			return (0);
 		// print_binary(prgm_settings->debug_mode);
 		if (ft_build_stacka(argc, argv, &stacks, prgm) == -1)
 			return (ft_exitprogram(&(stacks->stacka_lst)));
@@ -48,7 +48,7 @@ int					main(int argc, char **argv)
 		// ft_printf("buffer = %s\n", returned_line);
 		if (i != 0)
 		{
-			if (ft_saveinstructions(prgm, returned_line) == -1)
+			if (ft_saveinstructions(prgm, stacks, returned_line) == -1)
 				return (ft_exitprogram(&(stacks->stacka_lst)));
 		}
 		// ft_bzero(returned_line, BUFFER_SIZE + 1);
@@ -63,12 +63,12 @@ int					main(int argc, char **argv)
 	// ft_printf("sorted stack\n");
 	// ft_print_doublyll(prgm->sorted_stack);
 	// ft_print_instructions(prgm);
-	ft_call_instructfunctions(prgm->instr_lst, &stacks, prgm);
-	// ft_print_stacks(stacks);
+	ft_call_operations(prgm->instr_lst, &stacks, prgm);
+	if (prgm->options & OPTION_N)
+		print_number_of_oper(prgm);
 	if (ft_check_ifsorted(prgm, stacks) == -1)
 		return (-1);
-	// ft_printf(ANSI_COLOR_YELLOW"Number of Operations : "ANSI_COLOR_RESET);
-	// ft_printf("%d", prgm->number_operations);
+	// ft_printf("Number of Operations : %d", prgm->number_operations);
 	ft_exitprogram(&(stacks->stacka_lst));
 	ft_exitprogram(&(stacks->stackb_lst));
 	// while (1)

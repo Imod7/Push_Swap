@@ -6,7 +6,7 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/12 13:46:56 by dsaripap       #+#    #+#                */
-/*   Updated: 2020/03/24 10:05:52 by dominique     ########   odam.nl         */
+/*   Updated: 2020/03/29 21:22:51 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,24 @@ void				ft_sort_three(t_prgm *prgm, t_stacks **stacks)
 	{
 		ft_rotate_a(prgm, stacks);
 	}
+}
+
+int					ft_sort_small(t_prgm *prgm, t_stacks **stacks, int len)
+{
+	t_stack_list	*temp;
+
+	temp = (*stacks)->stacka_lst;
+	if (len == 1)
+	{
+		return (0);
+	}
+	else if (len == 2)
+	{
+		if (temp->num > temp->next->num)
+			ft_swap_a(prgm, stacks);
+		return (0);
+	}
+	else
+		ft_sort_three(prgm, stacks);
+	return (0);
 }

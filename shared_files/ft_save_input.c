@@ -6,7 +6,7 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/24 14:55:25 by dsaripap       #+#    #+#                */
-/*   Updated: 2020/03/25 16:54:21 by dominique     ########   odam.nl         */
+/*   Updated: 2020/03/29 21:11:05 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int					ft_build_stackb(t_stacks **stacks)
 }
 
 int					ft_build_stacka(int argc, char **argv, t_stacks	**stacks, \
-									t_prgm *prgm_sets)
+									t_prgm *prgm)
 {
 	int				i;
 	int				num;
@@ -52,8 +52,7 @@ int					ft_build_stacka(int argc, char **argv, t_stacks	**stacks, \
 	// (*stacks) = ft_memalloc(sizeof(t_stacks));
 	// (*stacks)->stacka_lst = ft_memalloc(sizeof(t_stack_list));
 	i = 1;
-	if (prgm_sets->debug_mode == 1)
-		i = 2;
+	i += check_prgm_options(prgm);
 	while (i < argc)
 	{
 		num_len = ft_strlen(argv[i]);
@@ -67,7 +66,7 @@ int					ft_build_stacka(int argc, char **argv, t_stacks	**stacks, \
 		else
 		{
 			stack_node = ft_stack_newnode(num);
-			if (ft_numexists((*stacks)->stacka_lst, num) == 1)
+			if (ft_numexists_instack((*stacks)->stacka_lst, num) == 1)
 			{
 				ft_printf(ANSI_COLOR_RED"Error\n"ANSI_COLOR_RESET);
 				return (-1);

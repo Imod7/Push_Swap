@@ -6,13 +6,47 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/31 18:57:55 by dsaripap       #+#    #+#                */
-/*   Updated: 2020/03/24 17:59:03 by dominique     ########   odam.nl         */
+/*   Updated: 2020/03/29 19:31:57 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/checker.h"
 
-void				ft_print_instructions(t_prgm *prgm)
+void				ft_print_stacks(t_stacks *stacks)
+{
+	t_stack_list	*temp_a;
+	t_stack_list	*temp_b;
+
+	ft_printf(ANSI_COLOR_CYAN"-----------------------------------------\t");
+	ft_printf(ANSI_COLOR_CYAN"-----------------------------------------\n");
+	ft_printf("|\t\tStack %c\t\t        |\t", stacks->stacka_id);
+	ft_printf("|\t\tStack %c\t\t        |\n", stacks->stackb_id);
+	ft_printf("-----------------------------------------");
+	ft_printf("\t-----------------------------------------\n");
+	temp_a = stacks->stacka_lst;
+	temp_b = stacks->stackb_lst;
+	while ((temp_a != NULL) || (temp_b != NULL))
+	{
+		if (temp_a != NULL)
+		{
+			ft_printf("|\t\t%-10d\t\t|\t", temp_a->num);
+			temp_a = temp_a->next;
+		}
+		else
+			ft_printf("|\t\t\t\t\t|\t");
+		if (temp_b != NULL)
+		{
+			ft_printf("|\t\t%-10d\t\t|\t\n", temp_b->num);
+			temp_b = temp_b->next;
+		}
+		else
+			ft_printf("|\t\t\t\t\t|\n");
+	}
+	ft_printf("-----------------------------------------\t");
+	ft_printf("-----------------------------------------\n"ANSI_COLOR_RESET);
+}
+
+void				ft_print_instructions(t_prgm *prgm, t_stacks *stacks)
 {
 	t_instr			*temp;
 
@@ -45,42 +79,11 @@ void				ft_print_instructions(t_prgm *prgm)
 			ft_printf("rrb\n");
 		if (temp->instruction & INSTR_RRR)
 			ft_printf("rrr\n");
+		// if (prgm->options & OPTION_V)
+		// 	ft_print_stacks(stacks);
+		(void)stacks;
 		temp = temp->next;
 	}
-}
-
-void				ft_print_stacks(t_stacks *stacks)
-{
-	t_stack_list	*temp_a;
-	t_stack_list	*temp_b;
-
-	ft_printf(ANSI_COLOR_CYAN"\n-----------------------------------------\t");
-	ft_printf(ANSI_COLOR_CYAN"-----------------------------------------\n");
-	ft_printf("|\t\tStack %c\t\t        |\t", stacks->stacka_id);
-	ft_printf("|\t\tStack %c\t\t        |\n", stacks->stackb_id);
-	ft_printf("-----------------------------------------");
-	ft_printf("\t-----------------------------------------\n");
-	temp_a = stacks->stacka_lst;
-	temp_b = stacks->stackb_lst;
-	while ((temp_a != NULL) || (temp_b != NULL))
-	{
-		if (temp_a != NULL)
-		{
-			ft_printf("|\t\t%-10d\t\t|\t", temp_a->num);
-			temp_a = temp_a->next;
-		}
-		else
-			ft_printf("|\t\t\t\t\t|\t");
-		if (temp_b != NULL)
-		{
-			ft_printf("|\t\t%-10d\t\t|\t\n", temp_b->num);
-			temp_b = temp_b->next;
-		}
-		else
-			ft_printf("|\t\t\t\t\t|\n");
-	}
-	ft_printf("-----------------------------------------\t");
-	ft_printf("-----------------------------------------\n"ANSI_COLOR_RESET);
 }
 
 void				ft_print_doublyll(t_stack_list *temp)

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_stack_oper_rev_rotation.c                       :+:    :+:            */
+/*   ft_stack_oper_rrotation.c                          :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/24 14:53:01 by dsaripap       #+#    #+#                */
-/*   Updated: 2020/03/27 17:51:54 by dominique     ########   odam.nl         */
+/*   Updated: 2020/03/29 18:25:04 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,14 @@ int					ft_reverserotate_a(t_prgm *prgm, t_stacks **stacks)
 	last_node->next = first_node;
 	first_node->prev = last_node;
 	(*stacks)->stacka_lst = last_node;
-	prgm->number_operations += 1;
+	// prgm->number_operations += 1;
 	if (prgm->exec == 1)
 	{
-		ft_saveinstructions(prgm, "rra");
+		ft_saveinstructions(prgm, *stacks, "rra");
 		ft_metrics_calculation(prgm, stacks, 0);
 	}
+	// if (prgm->options & OPTION_V)
+	// 	ft_print_stacks(*stacks);
 	return (0);
 }
 
@@ -57,12 +59,14 @@ int					ft_reverserotate_b(t_prgm *prgm, t_stacks **stacks)
 	last_node->next = first_node;
 	first_node->prev = last_node;
 	(*stacks)->stackb_lst = last_node;
-	prgm->number_operations += 1;
+	// prgm->number_operations += 1;
 	if (prgm->exec == 1)
 	{
-		ft_saveinstructions(prgm, "rrb");
+		ft_saveinstructions(prgm, *stacks, "rrb");
 		ft_metrics_calculation(prgm, stacks, 0);
 	}
+	// if (prgm->options & OPTION_V)
+	// 	ft_print_stacks(*stacks);
 	return (0);
 }
 
@@ -82,12 +86,14 @@ int				ft_reverserotate_both(t_prgm *prgm, t_stacks **stacks)
 		ft_reverserotate_b(prgm, stacks);
 		flag = 2;
 	}
-	if (flag > 0)
-		prgm->number_operations += 1;
+	// if (flag > 0)
+	// 	prgm->number_operations += 1;
 	if ((flag > 0) && (prgm->exec == 1))
 	{
-		ft_saveinstructions(prgm, "rrr");
+		ft_saveinstructions(prgm, *stacks, "rrr");
 		ft_metrics_calculation(prgm, stacks, 0);
 	}
+	// if (prgm->options & OPTION_V)
+	// 	ft_print_stacks(*stacks);
 	return (0);
 }

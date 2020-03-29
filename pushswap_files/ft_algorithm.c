@@ -6,7 +6,7 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/11 12:22:18 by dsaripap       #+#    #+#                */
-/*   Updated: 2020/03/27 17:34:54 by dominique     ########   odam.nl         */
+/*   Updated: 2020/03/28 19:44:05 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,20 +55,24 @@ void				ft_min_ontop(t_stacks **stacks, t_prgm *prgm, int stack_id)
 		{
 			while ((temp->prev != NULL) && (stack_id == 0))
 				ft_rotate_a(prgm, stacks);
+				// ft_saveinstructions(prgm, "ra");
 			while ((temp->prev != NULL) && (stack_id == 1))
 			{
 				// ft_printf("rotate b temp = %d\n", temp->num);
 				ft_rotate_b(prgm, stacks);
+				// ft_saveinstructions(prgm, "rb");
 			}
 		}
 		else
 		{
 			while ((temp->dis_from_top != 0) && (stack_id == 0))
 				ft_reverserotate_a(prgm, stacks);
+				// ft_saveinstructions(prgm, "rra");
 			while ((temp->dis_from_top != 0) && (stack_id == 1))
 			{
 				// ft_printf("reverse rotate b temp = %d\n", temp->num);
 				ft_reverserotate_b(prgm, stacks);
+				// ft_saveinstructions(prgm, "rrb");
 			}
 		}
 	}
@@ -133,11 +137,13 @@ void				ft_b_to_a(t_stacks **stacks, t_prgm *prgm, \
 			// ft_printf("----- ROTATE MAX number = %d\t\tMax->bucket = %d\n", max->num, max->bucket);
 			while (max->dis_from_top != 0)
 				ft_rotate_b(prgm, stacks);
+				// ft_saveinstructions(prgm, "rb");
 		}
 		else
 		{
 			// ft_printf("----- REVERSE ROTATE MAX number = %d\t\tMax->bucket = %d\n", max->num, max->bucket);
 			while (max->dis_from_top != 0)
+				// ft_saveinstructions(prgm, "rrb");
 				ft_reverserotate_b(prgm, stacks);
 		}
 		ft_push_a(prgm, stacks);
@@ -194,17 +200,20 @@ void				ft_algorithm(t_prgm *prgm, t_stacks **stacks)
 				{
 					// ft_printf("----- ROTATE TOP Top number = %d\t\tTop->bucket = %d\n", top->num, top->bucket);
 					while (top->dis_from_top != 0)
+						// ft_saveinstructions(prgm, "ra");
 						ft_rotate_a(prgm, stacks);
 				}
 				else
 				{
 					// ft_printf("----- REVERSE ROTATE BOTTOM  Top number = %d\t\tTop->bucket = %d\n", top->num, top->bucket);
 					while (bottom->dis_from_top != 0)
+						// ft_saveinstructions(prgm, "rra");
 						ft_reverserotate_a(prgm, stacks);
 				}
 				if (ft_stack_length((*stacks)->stackb_lst) > 1)
 					ft_min_ontop(stacks, prgm, 1);
 				ft_push_b(prgm, stacks);
+				// ft_saveinstructions(prgm, "pb");
 				(*stacks)->stackb_lst->bucket = current_bucket;
 				if ((*stacks)->stacka_lst != NULL)
 				{
@@ -246,6 +255,7 @@ void				ft_algorithm(t_prgm *prgm, t_stacks **stacks)
 				if (ft_stack_length((*stacks)->stackb_lst) > 1)
 					ft_min_ontop(stacks, prgm, 1);
 				ft_push_b(prgm, stacks);
+				// ft_saveinstructions(prgm, "pb")
 				(*stacks)->stackb_lst->bucket = current_bucket;
 				top = (*stacks)->stacka_lst;
 				bottom = (*stacks)->stacka_lst;

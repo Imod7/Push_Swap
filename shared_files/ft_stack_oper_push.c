@@ -6,7 +6,7 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/24 14:53:01 by dsaripap       #+#    #+#                */
-/*   Updated: 2020/03/27 17:50:57 by dominique     ########   odam.nl         */
+/*   Updated: 2020/03/29 18:24:30 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,14 @@ int					ft_push_a(t_prgm *prgm, t_stacks **stacks)
 	(*stacks)->stacka_lst = newnode;
 	if (temp != NULL)
 		newnode->next->prev = newnode;
-	prgm->number_operations += 1;
+	// prgm->number_operations += 1;
 	if (prgm->exec == 1)
 	{
-		ft_saveinstructions(prgm, "pa");
+		ft_saveinstructions(prgm, *stacks, "pa");
 		ft_metrics_calculation(prgm, stacks, 0);
 	}
+	// if (prgm->options & OPTION_V)
+	// 	ft_print_stacks(*stacks);
 	return (0);
 }
 
@@ -68,11 +70,13 @@ int					ft_push_b(t_prgm *prgm, t_stacks **stacks)
 	(*stacks)->stackb_lst = newnode;
 	if (temp != NULL)
 		newnode->next->prev = newnode;
-	prgm->number_operations += 1;
+	// prgm->number_operations += 1;
 	if (prgm->exec == 1)
 	{
-		ft_saveinstructions(prgm, "pb");
+		ft_saveinstructions(prgm, *stacks, "pb");
 		ft_metrics_calculation(prgm, stacks, 0);
 	}
+	// if (prgm->options & OPTION_V)
+	// 	ft_print_stacks(*stacks);
 	return (0);
 }

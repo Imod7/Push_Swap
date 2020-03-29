@@ -6,7 +6,7 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/05 13:06:40 by dsaripap       #+#    #+#                */
-/*   Updated: 2020/03/27 17:33:37 by dominique     ########   odam.nl         */
+/*   Updated: 2020/03/29 14:29:15 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,12 @@ void				ft_presort(t_prgm *prgm, t_stacks **stacks)
 
 int					ft_check_ifsorted(t_prgm *prgm, t_stacks *stacks)
 {	
+	if (ft_stack_length(stacks->stacka_lst) != \
+	ft_stack_length(prgm->sorted_stack))
+	{
+		ft_printf("KO\n");
+		return (-1);
+	}
 	if ((stacks->stacka_lst == NULL) || \
 	(stacks->stacka_lst->next == NULL))
 	{

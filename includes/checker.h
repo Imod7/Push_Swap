@@ -6,7 +6,7 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/23 12:18:26 by dsaripap       #+#    #+#                */
-/*   Updated: 2020/03/26 14:33:57 by dominique     ########   odam.nl         */
+/*   Updated: 2020/03/29 21:03:30 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,15 @@
 # define INSTR_RRB		(1 << 9)
 # define INSTR_RRR		(1 << 10)
 
+# define OPTION_U		(1 << 0)
+# define OPTION_V		(1 << 1)
+# define OPTION_C		(1 << 2)
+# define OPTION_N		(1 << 3)
+# define OPTION_F		(1 << 4)
+
 typedef struct			s_prgm
 {
-	int					debug_mode;
+	int					options;
 	size_t				exec;
 	int					number_operations;
 	int					buckets;
@@ -69,63 +75,66 @@ typedef struct			s_stack_list
 	int					dis_from_top;
 }						t_stack_list;
 
-typedef int			(*operation_func)(t_prgm *prgm, t_stacks **stacks);
+typedef int				(*operation_func)(t_prgm *prgm, t_stacks **stacks);
 
-int		ft_swap_a(t_prgm *prgm, t_stacks **stacks);
-int		ft_swap_b(t_prgm *prgm, t_stacks **stacks);
-int		ft_swap_both(t_prgm *prgm, t_stacks **stacks);
-int		ft_push_a(t_prgm *prgm, t_stacks **stacks);
-int		ft_push_b(t_prgm *prgm, t_stacks **stacks);
-int		ft_rotate_a(t_prgm *prgm, t_stacks **stacks);
-int		ft_rotate_b(t_prgm *prgm, t_stacks **stacks);
-int		ft_rotate_both(t_prgm *prgm, t_stacks **stacks);
-int		ft_reverserotate_a(t_prgm *prgm, t_stacks **stacks);
-int		ft_reverserotate_b(t_prgm *prgm, t_stacks **stacks);
-int		ft_reverserotate_both(t_prgm *prgm, t_stacks **stacks);
+int						ft_swap_b(t_prgm *prgm, t_stacks **stacks);
+int						ft_swap_a(t_prgm *prgm, t_stacks **stacks);
+int						ft_swap_both(t_prgm *prgm, t_stacks **stacks);
+int						ft_push_a(t_prgm *prgm, t_stacks **stacks);
+int						ft_push_b(t_prgm *prgm, t_stacks **stacks);
+int						ft_rotate_a(t_prgm *prgm, t_stacks **stacks);
+int						ft_rotate_b(t_prgm *prgm, t_stacks **stacks);
+int						ft_rotate_both(t_prgm *prgm, t_stacks **stacks);
+int						ft_reverserotate_a(t_prgm *prgm, t_stacks **stacks);
+int						ft_reverserotate_b(t_prgm *prgm, t_stacks **stacks);
+int						ft_reverserotate_both(t_prgm *prgm, t_stacks **stacks);
 
 /*
 ** Program Checks
 */
 
 // int					ft_exitprogram(int signal, t_stack_list **stacklst_ref);
-int					ft_exitprogram(t_stack_list **stacklst_ref);
-int					check_v_option(char *argv, t_prgm *prgm_sets);
+int						ft_exitprogram(t_stack_list **stacklst_ref);
+int						set_prgm_options(char *argv, t_prgm *prgm_sets);
+size_t					check_prgm_options(t_prgm *prgm);
 
 /*
 ** Check User Input functions
 */
 
-int			ft_build_stacka(int argc, char **argv, t_stacks **stacks, \
-							t_prgm *prgm_sets);
-int			ft_build_stackb(t_stacks **stacks);
+int						ft_build_stacka(int argc, char **argv, \
+									t_stacks **stacks, t_prgm *prgm_sets);
+int						ft_build_stackb(t_stacks **stacks);
 
 /*
 ** Linked List functions related to the Stack List
 */
 
-t_stack_list		*ft_stack_newnode(int content);
-void				ft_stack_addend(t_stack_list **lst, t_stack_list *new);
-int					ft_stack_length(t_stack_list *lst);
-void				ft_free_list(t_stack_list **stack_lst);
-int					ft_numexists(t_stack_list *lst, int num);
-t_stack_list		*ft_copy_list(t_stack_list *stacklst);
+t_stack_list			*ft_stack_newnode(int content);
+void					ft_stack_addend(t_stack_list **lst, t_stack_list *new);
+int						ft_stack_length(t_stack_list *lst);
+void					ft_free_list(t_stack_list **stack_lst);
+int						ft_numexists_instack(t_stack_list *lst, int num);
+t_stack_list			*ft_copy_list(t_stack_list *stacklst);
 
 /*
 ** Printing functions
 */
 
-void				ft_print_doublyll(t_stack_list *temp);
-void				ft_print_doubly_all(t_stack_list *temp);
-void				ft_print_stacks(t_stacks *stacks);
-void				ft_print_instructions(t_prgm *prgm);
+void					ft_print_doublyll(t_stack_list *temp);
+void					ft_print_doubly_all(t_stack_list *temp);
+void					ft_print_stacks(t_stacks *stacks);
+void					ft_print_instructions(t_prgm *prgm, t_stacks *stacks);
 
 /*
 ** Linked List functions related to the Instructions List
 */
 
-int			ft_saveinstructions(t_prgm *prgm, char *operation);
-void		ft_call_instructfunctions(t_instr *instr_lst, t_stacks **stacks, \
-										t_prgm *prgm_sets);
+int						ft_saveinstructions(t_prgm *prgm, t_stacks *stacks, \
+											char *operation);
+void					ft_call_operations(t_instr *instr_lst, \
+										t_stacks **stacks, t_prgm *prgm_sets);
+void					ft_checkinstruction(size_t instruction);
 /*
 ** Auxiliary functions
 */
@@ -136,19 +145,26 @@ void		ft_call_instructfunctions(t_instr *instr_lst, t_stacks **stacks, \
 ** Sorting functions
 */
 
-void		ft_sorting(t_prgm *prgm, t_stacks **stacks);
-void		ft_presort(t_prgm *prgm, t_stacks **stacks);
+void					ft_sorting(t_prgm *prgm, t_stacks **stacks);
+void					ft_presort(t_prgm *prgm, t_stacks **stacks);
 // int			ft_find_median(t_stack_list **stacklst);
-
+int						ft_sort_small(t_prgm *prgm, t_stacks **stacks, int len);
 /*
 ** Algorithm functions
 */
 
-void		ft_metrics_calculation(t_prgm *prgm, t_stacks **stacks, int init);
-void		ft_sort_three(t_prgm *prgm, t_stacks **stacks);
-void		ft_calculate_buckets(t_prgm *prgm, int len);
-void		ft_update_buckets(t_prgm **prgm);
-void		ft_algorithm(t_prgm *prgm, t_stacks **stacks);
-int			ft_check_ifsorted(t_prgm *prgm, t_stacks *stacks);
+void				ft_metrics_calculation(t_prgm *prgm, t_stacks **stacks, \
+											int init);
+void				ft_sort_three(t_prgm *prgm, t_stacks **stacks);
+void				ft_calculate_buckets(t_prgm *prgm, int len);
+void				ft_update_buckets(t_prgm **prgm);
+void				ft_algorithm(t_prgm *prgm, t_stacks **stacks);
+int					ft_check_ifsorted(t_prgm *prgm, t_stacks *stacks);
+
+/*
+** Bonus options
+*/
+
+void				print_number_of_oper(t_prgm *prgm);
 
 #endif

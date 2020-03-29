@@ -6,7 +6,7 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/24 14:52:10 by dsaripap       #+#    #+#                */
-/*   Updated: 2020/03/25 17:50:38 by dominique     ########   odam.nl         */
+/*   Updated: 2020/03/29 19:31:33 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,32 @@ void				ft_setinstruction(char *operation, t_instr *instr)
 	instr->next = NULL;
 }
 
+void				ft_checkinstruction(size_t instruction)
+{
+	if (instruction & INSTR_SA)
+		ft_printf("sa\n");
+	if (instruction & INSTR_SB)
+		ft_printf("sb\n");
+	if (instruction & INSTR_SS)
+		ft_printf("ss\n");
+	if (instruction & INSTR_PA)
+		ft_printf("pa\n");
+	if (instruction & INSTR_PB)
+		ft_printf("pb\n");
+	if (instruction & INSTR_RA)
+		ft_printf("ra\n");
+	if (instruction & INSTR_RB)
+		ft_printf("rb\n");
+	if (instruction & INSTR_RR)
+		ft_printf("rr\n");
+	if (instruction & INSTR_RRA)
+		ft_printf("rra\n");
+	if (instruction & INSTR_RRB)
+		ft_printf("rrb\n");
+	if (instruction & INSTR_RRR)
+		ft_printf("rrr\n");
+}
+
 void				ft_instr_addend(t_prgm **prgm, t_instr *new)
 {
 	t_instr			*temp;
@@ -78,7 +104,8 @@ void				ft_instr_addend(t_prgm **prgm, t_instr *new)
 	temp->next = new;
 }
 
-int					ft_saveinstructions(t_prgm *prgm, char *operation)
+int					ft_saveinstructions(t_prgm *prgm, t_stacks *stacks, \
+										char *operation)
 {
 	// char			**strarr;
 	t_instr			*instr_node;
@@ -93,6 +120,8 @@ int					ft_saveinstructions(t_prgm *prgm, char *operation)
 	}
 	else
 	{
+		// if (prgm->exec == 1)
+		// 	ft_printf("%s\n", operation);
 		// if (prgm->instr_lst == NULL)
 		// 	prgm->instr_lst = ft_memalloc(sizeof(t_instr));
 		instr_node = ft_memalloc(sizeof(t_instr));
@@ -100,6 +129,11 @@ int					ft_saveinstructions(t_prgm *prgm, char *operation)
 		// ft_printf(ANSI_COLOR_GREEN"AFTER the SET FUNCTION : instr='%d'\n"ANSI_COLOR_RESET, instr_node->instruction);
 		// print_binary(instr_node->instruction);
 		ft_instr_addend(&prgm, instr_node);
+		if (prgm->exec == 1)
+			ft_printf("%s\n", operation);
+		if ((prgm->options & OPTION_V) && (prgm->exec == 1))
+			ft_print_stacks(stacks);
+		prgm->number_operations += 1;
 	}
 	// ft_print_instructions(prgm);
 	return (0);
