@@ -22,6 +22,16 @@ Running the python script (which executes also the shell script at the same time
 ````
 python3 random_generator.py
 ```
+* You will be asked to give the minimum amount of numbers to test
+* You will be asked to give the max amount of numbers to test
+* If you want to test for only 100 numbers you give 100 to both questions
+* And last you will be asked how many tests per amount of numbers you want to run, eg 10
+
+** The output is one line per test and it shows the following information :
+*** Status OK/KO depending on the success/fail of the test
+*** The amount of numbers for which it run the test
+*** The number of operations it took the algorithm to sort all the numbers
+*** The colors are based on the efficiency of algorithm
 
 Method 2
 Running the shell script separately from the python script :
@@ -42,3 +52,4 @@ python3 random_generator.py
 ````
 ./test_script.sh your_own_file.txt
 ```
+* The rest of the steps are already described in the Method 1

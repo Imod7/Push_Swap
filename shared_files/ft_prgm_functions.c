@@ -6,7 +6,7 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/08 21:57:49 by dsaripap       #+#    #+#                */
-/*   Updated: 2020/03/29 14:39:01 by dominique     ########   odam.nl         */
+/*   Updated: 2020/04/02 19:32:09 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ int					set_prgm_options(char *argv, t_prgm *prgm)
 			if (argv[i] == 'f')
 				prgm->options |= OPTION_F;
 			i += 1;
-			// ft_printf(" '%d' = '%c' \n", argv[i], argv[i]);
 		}
 	}
 	prgm->number_operations = 0;
@@ -85,7 +84,6 @@ t_stack_list		*ft_copy_list(t_stack_list *stacklst)
 	newlist = NULL;
 	if (stacklst == NULL)
 	{
-		// ft_printf("\n NULL \n");
 		return (NULL);
 	}
 	else
@@ -95,8 +93,6 @@ t_stack_list		*ft_copy_list(t_stack_list *stacklst)
 			newnode = ft_stack_newnode(stacklst->num);
 			ft_stack_addend(&newlist, newnode);
 			stacklst = stacklst->next;
-			// ft_printf("\nprinting current list");
-			// ft_print_doublyll(newlist);
 		}
 	}
 	return (newlist);
