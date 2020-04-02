@@ -1,6 +1,10 @@
 import random
 import os
 
+min_num = int(input("Enter min amount of numbers to test : "))
+max_num = int(input("Enter max amount of numbers to test : "))
+group_nums = int(input("Enter how many tests per group : "))
+
 def join_elem_oflist(lst):
 	result = ""
 	for item in lst:
@@ -10,10 +14,10 @@ def join_elem_oflist(lst):
 
 f=open('random_prng.txt', 'w')
 lines = 0
-group = 1
-while group < 530:
+group = min_num
+while group <= max_num:
 	lines = 0
-	while lines < 3:
+	while lines < group_nums:
 		num = 0
 		uniq_lst = []
 		str_nums = ""

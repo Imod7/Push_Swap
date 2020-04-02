@@ -6,7 +6,7 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/24 13:49:21 by dsaripap       #+#    #+#                */
-/*   Updated: 2020/03/29 21:22:19 by dominique     ########   odam.nl         */
+/*   Updated: 2020/04/02 12:03:47 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,19 @@ int     main(int argc, char **argv)
 	ft_build_stackb(&stacks);
 	len = ft_stack_length(stacks->stacka_lst);
 	if (len <= 3)
-		return(ft_sort_small(prgm, &stacks, len));
+		ft_sort_small(prgm, &stacks, len);
 	else
 	{
 		ft_calculate_buckets(prgm, len);
 		// ft_printf("Buckets = %d \n", prgm->buckets);
 		// ft_printf("Bucket Size = %d \n", prgm->bucket_size);
 		ft_presort(prgm, &stacks);
-		ft_update_buckets(&prgm);
-		ft_metrics_calculation(prgm, &stacks, 1);
-		ft_algorithm(prgm, &stacks);
+		if (ft_check_ifsorted(prgm, stacks) == -1)
+		{
+			ft_update_buckets(&prgm);
+			ft_metrics_calculation(prgm, &stacks, 1);
+			ft_algorithm(prgm, &stacks);
+		}
 	}
 	// ft_sorting(prgm, &stacks);
 	// ft_call_operations(instr_lst, &stack_a, &stack_b, prgm);

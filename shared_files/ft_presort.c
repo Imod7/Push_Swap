@@ -6,7 +6,7 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/05 13:06:40 by dsaripap       #+#    #+#                */
-/*   Updated: 2020/03/29 14:29:15 by dominique     ########   odam.nl         */
+/*   Updated: 2020/04/02 12:53:58 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,14 +126,14 @@ void				ft_mergesort(t_stack_list **completelist)
 
 void				ft_presort(t_prgm *prgm, t_stacks **stacks)
 {
-	if (((*stacks)->stacka_lst == NULL) || \
-	((*stacks)->stacka_lst->next == NULL))
-		return ;
-	else
-	{
+	// if (((*stacks)->stacka_lst == NULL) || \
+	// ((*stacks)->stacka_lst->next == NULL))
+	// 	(prgm->exec == 0) ? ft_printf("OK\n") : (void)prgm;
+	// else
+	// {
 		prgm->sorted_stack = ft_copy_list((*stacks)->stacka_lst);
 		ft_mergesort(&(prgm->sorted_stack));
-	}
+	// }
 }
 
 int					ft_check_ifsorted(t_prgm *prgm, t_stacks *stacks)
@@ -141,28 +141,26 @@ int					ft_check_ifsorted(t_prgm *prgm, t_stacks *stacks)
 	if (ft_stack_length(stacks->stacka_lst) != \
 	ft_stack_length(prgm->sorted_stack))
 	{
-		ft_printf("KO\n");
+		ft_printf("Error\n");
+		// max = (n1 > n2) ? n1 : n2; 
 		return (-1);
 	}
 	if ((stacks->stacka_lst == NULL) || \
 	(stacks->stacka_lst->next == NULL))
-	{
-		ft_printf("OK");
-		return (0);
-	}
+		(prgm->exec == 0) ? ft_printf("OK\n") : (void)prgm;
 	else
 	{
 		while (stacks->stacka_lst != NULL)
 		{
 			if (prgm->sorted_stack->num != stacks->stacka_lst->num)
 			{
-				ft_printf("KO\n");
+				(prgm->exec == 0) ? ft_printf("KO\n") : (void)prgm;
 				return (-1);
 			}
 			prgm->sorted_stack = prgm->sorted_stack->next;
 			stacks->stacka_lst = stacks->stacka_lst->next;
 		}
-		ft_printf("OK\n");
-		return (0);
+		(prgm->exec == 0) ? ft_printf("OK\n") : (void)prgm;
 	}
+	return (0);
 }

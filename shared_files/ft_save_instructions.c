@@ -6,7 +6,7 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/24 14:52:10 by dsaripap       #+#    #+#                */
-/*   Updated: 2020/03/29 19:31:33 by dominique     ########   odam.nl         */
+/*   Updated: 2020/04/02 13:10:10 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int					valid_instruction(char *str)
 	}
 	else
 	{
-		// ft_printf(ANSI_COLOR_RED"\n'%s'\n"ANSI_COLOR_RESET, str);
 		return (0);
 	}
 }
@@ -93,7 +92,6 @@ void				ft_instr_addend(t_prgm **prgm, t_instr *new)
 	if ((*prgm)->instr_lst == NULL)
 	{
 		(*prgm)->instr_lst = new;
-		// ft_printf(ANSI_COLOR_GREEN"NULL SO ADD : instr='%d'\n"ANSI_COLOR_RESET, (*prgm)->instr_lst->instruction);
 		return ;
 	}
 	temp = (*prgm)->instr_lst;
@@ -107,12 +105,8 @@ void				ft_instr_addend(t_prgm **prgm, t_instr *new)
 int					ft_saveinstructions(t_prgm *prgm, t_stacks *stacks, \
 										char *operation)
 {
-	// char			**strarr;
 	t_instr			*instr_node;
 
-	// strarr = ft_strsplit(operation, '\n');
-	// operation = strarr[0];
-	// ft_printf("%s\n", operation);
 	if (valid_instruction(operation) == 0)
 	{
 		ft_printf("Error\n");
@@ -120,13 +114,9 @@ int					ft_saveinstructions(t_prgm *prgm, t_stacks *stacks, \
 	}
 	else
 	{
-		// if (prgm->exec == 1)
-		// 	ft_printf("%s\n", operation);
-		// if (prgm->instr_lst == NULL)
 		// 	prgm->instr_lst = ft_memalloc(sizeof(t_instr));
 		instr_node = ft_memalloc(sizeof(t_instr));
 		ft_setinstruction(operation, instr_node);
-		// ft_printf(ANSI_COLOR_GREEN"AFTER the SET FUNCTION : instr='%d'\n"ANSI_COLOR_RESET, instr_node->instruction);
 		// print_binary(instr_node->instruction);
 		ft_instr_addend(&prgm, instr_node);
 		if (prgm->exec == 1)
