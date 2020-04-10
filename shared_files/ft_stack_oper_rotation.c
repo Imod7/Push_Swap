@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/02/24 14:53:01 by dsaripap       #+#    #+#                */
-/*   Updated: 2020/03/29 18:24:48 by dominique     ########   odam.nl         */
+/*   Created: 2020/02/24 14:53:01 by dsaripap      #+#    #+#                 */
+/*   Updated: 2020/04/10 19:41:30 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,12 @@ int					ft_rotate_both(t_prgm *prgm, t_stacks **stacks)
 
 	// ft_printf("rr\n");
 	flag = 0;
-	if (ft_stack_length((*stacks)->stacka_lst) >= 2)
+	if (ft_stack_len((*stacks)->stacka_lst) >= 2)
 	{
 		ft_rotate_a(prgm, stacks);
 		flag = 1;
 	}
-	if (ft_stack_length((*stacks)->stackb_lst) >= 2)
+	if (ft_stack_len((*stacks)->stackb_lst) >= 2)
 	{
 		ft_rotate_b(prgm, stacks);
 		flag = 2;

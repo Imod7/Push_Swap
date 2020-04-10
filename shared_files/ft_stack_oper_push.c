@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/02/24 14:53:01 by dsaripap       #+#    #+#                */
-/*   Updated: 2020/03/29 18:24:30 by dominique     ########   odam.nl         */
+/*   Created: 2020/02/24 14:53:01 by dsaripap      #+#    #+#                 */
+/*   Updated: 2020/04/04 18:04:06 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,11 @@ int					ft_push_b(t_prgm *prgm, t_stacks **stacks)
 
 	// ft_printf("pb\n");
 	first_node = (*stacks)->stacka_lst;
+	// ft_printf("first = %d \n", first_node->num);
 	if (first_node == NULL)
 		return (0);
 	second_node = (*stacks)->stacka_lst->next;
+	// ft_printf("second = %d \n", second_node->num);
 	(*stacks)->stacka_lst = second_node;
 	if (second_node != NULL)
 		second_node->prev = NULL;

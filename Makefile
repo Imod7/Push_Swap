@@ -5,8 +5,8 @@
 #                                                      +:+                     #
 #    By: dsaripap <marvin@codam.nl>                   +#+                      #
 #                                                    +#+                       #
-#    Created: 2020/01/31 13:44:11 by dsaripap       #+#    #+#                 #
-#    Updated: 2020/03/28 11:48:26 by dominique     ########   odam.nl          #
+#    Created: 2020/01/31 13:44:11 by dsaripap      #+#    #+#                  #
+#    Updated: 2020/04/10 20:45:11 by dominique     ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,9 +33,10 @@ SRC_CHECKER =	\
 
 SRC_PUSHSWAP =	\
 		push_swap.c \
-		ft_sorting.c \
+		ft_sort_dummy.c \
 		ft_algorithm.c \
 		ft_sort_small.c \
+		ft_sort_big.c \
 
 SRC_SHARED =	\
 		ft_save_input.c \

@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/02/24 14:53:01 by dsaripap       #+#    #+#                */
-/*   Updated: 2020/03/29 21:24:59 by dominique     ########   odam.nl         */
+/*   Created: 2020/02/24 14:53:01 by dsaripap      #+#    #+#                 */
+/*   Updated: 2020/04/10 20:44:27 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,37 +25,29 @@ int					ft_swap_a(t_prgm *prgm, t_stacks **stacks)
 {
 	int				len;
 
-	// ft_printf("sa\n");
-	len = ft_stack_length((*stacks)->stacka_lst);
+	len = ft_stack_len((*stacks)->stacka_lst);
 	if (len < 2)
 		return (0);
 	swap_nodes((*stacks)->stacka_lst, ((*stacks)->stacka_lst)->next);
-	// prgm->number_operations += 1;
 	if (prgm->exec == 1)
 	{
 		ft_saveinstructions(prgm, *stacks, "sa");
 		if (len > 3)
 			ft_metrics_calculation(prgm, stacks, 0);
 	}
-	// if (prgm->options & OPTION_V)
-	// 	ft_print_stacks(*stacks);
 	return (0);
 }
 
 int					ft_swap_b(t_prgm *prgm, t_stacks **stacks)
 {
-	// ft_printf("sb\n");
-	if (ft_stack_length((*stacks)->stackb_lst) < 2)
+	if (ft_stack_len((*stacks)->stackb_lst) < 2)
 		return (0);
 	swap_nodes((*stacks)->stackb_lst, ((*stacks)->stackb_lst)->next);
-	// prgm->number_operations += 1;
 	if (prgm->exec == 1)
 	{
 		ft_saveinstructions(prgm, *stacks, "sb");
 		ft_metrics_calculation(prgm, stacks, 0);
 	}
-	// if (prgm->options & OPTION_V)
-	// 	ft_print_stacks(*stacks);
 	return (0);
 }
 
@@ -63,26 +55,21 @@ int					ft_swap_both(t_prgm *prgm, t_stacks **stacks)
 {
 	size_t			flag;
 
-	// ft_printf("ss\n");
 	flag = 0;
-	if (ft_stack_length((*stacks)->stacka_lst) >= 2)
+	if (ft_stack_len((*stacks)->stacka_lst) >= 2)
 	{
 		swap_nodes((*stacks)->stacka_lst, (*stacks)->stacka_lst->next);
 		flag = 1;
 	}
-	if (ft_stack_length((*stacks)->stackb_lst) >= 2)
+	if (ft_stack_len((*stacks)->stackb_lst) >= 2)
 	{
 		swap_nodes((*stacks)->stackb_lst, ((*stacks)->stackb_lst)->next);
 		flag = 2;
 	}
-	// if (flag > 0)
-	// 	prgm->number_operations += 1;
 	if ((flag > 0) && (prgm->exec == 1))
 	{
 		ft_saveinstructions(prgm, *stacks, "ss");
 		ft_metrics_calculation(prgm, stacks, 0);
 	}
-	// if (prgm->options & OPTION_V)
-	// 	ft_print_stacks(*stacks);
 	return (0);
 }

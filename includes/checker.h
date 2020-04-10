@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/01/23 12:18:26 by dsaripap       #+#    #+#                */
-/*   Updated: 2020/03/29 21:03:30 by dominique     ########   odam.nl         */
+/*   Created: 2020/01/23 12:18:26 by dsaripap      #+#    #+#                 */
+/*   Updated: 2020/04/10 20:11:09 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,9 @@ typedef struct			s_stack_list
 	struct s_stack_list	*next;
 	struct s_stack_list	*prev;
 	int					cur_pos;
-	int					goal_pos;
+	// int					goal_pos;
 	int					bucket;
-	int					dis_from_goal;
+	// int					dis_from_goal;
 	int					dis_from_top;
 }						t_stack_list;
 
@@ -112,7 +112,7 @@ int						ft_build_stackb(t_stacks **stacks);
 
 t_stack_list			*ft_stack_newnode(int content);
 void					ft_stack_addend(t_stack_list **lst, t_stack_list *new);
-int						ft_stack_length(t_stack_list *lst);
+int						ft_stack_len(t_stack_list *lst);
 void					ft_free_list(t_stack_list **stack_lst);
 int						ft_numexists_instack(t_stack_list *lst, int num);
 t_stack_list			*ft_copy_list(t_stack_list *stacklst);
@@ -124,7 +124,7 @@ t_stack_list			*ft_copy_list(t_stack_list *stacklst);
 void					ft_print_doublyll(t_stack_list *temp);
 void					ft_print_doubly_all(t_stack_list *temp);
 void					ft_print_stacks(t_stacks *stacks);
-void					ft_print_instructions(t_prgm *prgm, t_stacks *stacks);
+void					ft_print_instructions(t_prgm *prgm);
 
 /*
 ** Linked List functions related to the Instructions List
@@ -149,6 +149,7 @@ void					ft_sorting(t_prgm *prgm, t_stacks **stacks);
 void					ft_presort(t_prgm *prgm, t_stacks **stacks);
 // int			ft_find_median(t_stack_list **stacklst);
 int						ft_sort_small(t_prgm *prgm, t_stacks **stacks, int len);
+
 /*
 ** Algorithm functions
 */
@@ -160,11 +161,21 @@ void				ft_calculate_buckets(t_prgm *prgm, int len);
 void				ft_update_buckets(t_prgm **prgm);
 void				ft_algorithm(t_prgm *prgm, t_stacks **stacks);
 int					ft_check_ifsorted(t_prgm *prgm, t_stacks *stacks);
+void				ft_min_ontop_of_b(t_stacks **stacks, t_prgm *prgm);
 
 /*
-** Bonus options
+** Bonus options & descriptive function
 */
 
 void				print_number_of_oper(t_prgm *prgm);
+void				ft_operation_descr(t_prgm *prgm);
+
+/*
+** Functions related to instruction/operations list
+*/
+
+void				ft_setinstruction(char *operation, t_instr *instr);
+// void				ft_instr_addend(t_prgm **prgm, t_instr *new);
+void				ft_instr_addend(t_instr **instr_lst, t_instr *new);
 
 #endif

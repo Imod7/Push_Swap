@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/02/24 14:52:10 by dsaripap       #+#    #+#                */
-/*   Updated: 2020/04/02 13:10:10 by dominique     ########   odam.nl         */
+/*   Created: 2020/02/24 14:52:10 by dsaripap      #+#    #+#                 */
+/*   Updated: 2020/04/04 19:46:34 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,16 +85,28 @@ void				ft_checkinstruction(size_t instruction)
 		ft_printf("rrr\n");
 }
 
-void				ft_instr_addend(t_prgm **prgm, t_instr *new)
+// void				ft_instr_addend(t_prgm **prgm, t_instr *new)
+void				ft_instr_addend(t_instr **instr_lst, t_instr *new)
 {
 	t_instr			*temp;
 
-	if ((*prgm)->instr_lst == NULL)
+	// if ((*prgm)->instr_lst == NULL)
+	// {
+	// 	(*prgm)->instr_lst = new;
+	// 	return ;
+	// }
+	// temp = (*prgm)->instr_lst;
+	// while (temp->next != NULL)
+	// {
+	// 	temp = temp->next;
+	// }
+	// temp->next = new;
+	if (*instr_lst == NULL)
 	{
-		(*prgm)->instr_lst = new;
+		*instr_lst = new;
 		return ;
 	}
-	temp = (*prgm)->instr_lst;
+	temp = *instr_lst;
 	while (temp->next != NULL)
 	{
 		temp = temp->next;
@@ -118,7 +130,7 @@ int					ft_saveinstructions(t_prgm *prgm, t_stacks *stacks, \
 		instr_node = ft_memalloc(sizeof(t_instr));
 		ft_setinstruction(operation, instr_node);
 		// print_binary(instr_node->instruction);
-		ft_instr_addend(&prgm, instr_node);
+		ft_instr_addend(&(prgm->instr_lst), instr_node);
 		if (prgm->exec == 1)
 			ft_printf("%s\n", operation);
 		if ((prgm->options & OPTION_V) && (prgm->exec == 1))

@@ -31,10 +31,10 @@ while group <= max_num:
 		f.write(str_nums)
 		f.write("\n")
 		lines += 1
-	if group < 120:
+	if group < 150:
 		group += 1
 	else:
-		group += 50
+		group += 10
 f.close()
 
 os.system("./test_script.sh random_prng.txt")

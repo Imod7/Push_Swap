@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/02/24 14:53:52 by dsaripap       #+#    #+#                */
-/*   Updated: 2020/03/29 19:18:18 by dominique     ########   odam.nl         */
+/*   Created: 2020/02/24 14:53:52 by dsaripap      #+#    #+#                 */
+/*   Updated: 2020/04/10 20:34:48 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ void				ft_call_operations(t_instr *lst, t_stacks **stacks, \
 	oper_func[9] = ft_reverserotate_b;
 	oper_func[10] = ft_reverserotate_both;
 	temp = lst;
-	if (temp == NULL)
-		;
+	// if (temp == NULL)
+	// 	;
 	while (temp != NULL)
 	{
 		instr = power_of_two_converter(temp->instruction);

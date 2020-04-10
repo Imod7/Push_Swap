@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/01/31 18:57:55 by dsaripap       #+#    #+#                */
-/*   Updated: 2020/03/29 19:31:57 by dominique     ########   odam.nl         */
+/*   Created: 2020/01/31 18:57:55 by dsaripap      #+#    #+#                 */
+/*   Updated: 2020/04/10 20:13:48 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void				ft_print_stacks(t_stacks *stacks)
 	ft_printf("-----------------------------------------\n"ANSI_COLOR_RESET);
 }
 
-void				ft_print_instructions(t_prgm *prgm, t_stacks *stacks)
+void				ft_print_instructions(t_prgm *prgm)
 {
 	t_instr			*temp;
 
@@ -81,7 +81,7 @@ void				ft_print_instructions(t_prgm *prgm, t_stacks *stacks)
 			ft_printf("rrr\n");
 		// if (prgm->options & OPTION_V)
 		// 	ft_print_stacks(stacks);
-		(void)stacks;
+		// (void)stacks;
 		temp = temp->next;
 	}
 }
@@ -131,7 +131,7 @@ void				ft_print_doubly_all(t_stack_list *temp)
 	ft_printf("------------------------------------------------------------\n");
 	ft_printf("|----------------------------------------------------------- ");
 	ft_printf("Doubly Linked List --------------------------------|\n");
-	ft_printf("|prev_num\tcurrent_num\tbucket\t\tgoal_pos\tdis_from_goal\tdis_from_top\t\tnext_num|\n");
+	ft_printf("|prev_num\tcurrent_num\tbucket\tdis_from_top\t\tnext_num|\n");
 	len = 0;
 	if (temp == NULL)
 		ft_printf("|\t\t\t\t\t\t\t\t\t\t\t\t\t\t|\n");
@@ -146,8 +146,8 @@ void				ft_print_doubly_all(t_stack_list *temp)
 			ft_printf("|NULL\t<-\t");
 		ft_printf("%-15d", temp->num);
 		ft_printf("%d\t\t", temp->bucket);
-		ft_printf("%d\t\t", temp->goal_pos);
-		ft_printf("%d\t\t", temp->dis_from_goal);
+		// ft_printf("%d\t\t", temp->goal_pos);
+		// ft_printf("%d\t\t", temp->dis_from_goal);
 		ft_printf("%d\t", temp->dis_from_top);
 		if (nextn != NULL)
 			ft_printf("\t->\t%d\t|\n", nextn->num);

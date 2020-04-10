@@ -15,24 +15,24 @@ sort_quality () {
   # printf "$1 $hun $2 $med \n\n"
   if [ "$x" -eq 100 ] && [ "$y" -lt 700 ]
   then
-    printf "$GREEN $y (< 700) $RESET"
+    printf "$GREEN$y (< 700) $RESET"
   elif [ "$x" -eq 100 ] && [ "$y" -lt 900 ]
   then
-    printf "$YELLOW $y (< 900) $RESET"
+    printf "$YELLOW$y (< 900) $RESET"
   elif [ "$x" -eq 100 ] && [ "$y" -lt 1100 ]
   then
-    printf "$RED $y (< 1100) $RESET"
+    printf "$RED$y (< 1100) $RESET"
   elif [ "$x" -eq 500 ] && [ "$y" -lt 5500 ]
   then
-    printf "$GREEN $y (< 5500) $RESET"
+    printf "$GREEN$y (< 5500) $RESET"
   elif [ "$x" -eq 500 ] && [ "$y" -lt 7000 ]
   then
-    printf "$YELLOW $y (< 7000) $RESET"
+    printf "$YELLOW$y (< 7000) $RESET"
   elif [ "$x" -eq 500 ] && [ "$y" -lt 8500 ]
   then
-    printf "$RED $y (< 8500) $RESET"
+    printf "$RED$y (< 8500) $RESET"
   else
-    printf " $y"
+    printf "$y"
   fi
 }
 
@@ -54,12 +54,14 @@ do
     cleanline=${linetest: -2}
     if [ "$cleanline" == "OK" ]
     then
-      printf "Test $counter\t[$GREEN $cleanline $RESET]\tfor $numbers random numbers with"
+      printf "Test   $counter\t[$GREEN $cleanline $RESET]\tfor $numbers   random numbers with  "
       sort_quality "$numbers" "$operations"
-      printf "\toperations\n"
+      printf "   operations\n"
     elif [ "$cleanline" == "KO" ]
     then
-      printf "Test $counter\t[$RED $cleanline $RESET]\tfor $numbers random numbers with $YELLOW $operations $RESET\toperations\n"
+      printf "Test   $counter\t[$RED $cleanline $RESET]\tfor $numbers   random numbers with  $YELLOW $operations $RESET   operations\n"
+      # echo $line
+      ( echo $line ; echo "" ) >> errorlog.txt
     else
       operations=${linetest##* }
       # printf "$linetest\n"

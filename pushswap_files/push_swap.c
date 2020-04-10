@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/02/24 13:49:21 by dsaripap       #+#    #+#                */
-/*   Updated: 2020/04/02 12:03:47 by dominique     ########   odam.nl         */
+/*   Created: 2020/02/24 13:49:21 by dsaripap      #+#    #+#                 */
+/*   Updated: 2020/04/10 20:43:27 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,23 +35,23 @@ int     main(int argc, char **argv)
 			return (ft_exitprogram(&(stacks->stacka_lst)));
 	}
 	ft_build_stackb(&stacks);
-	len = ft_stack_length(stacks->stacka_lst);
+	len = ft_stack_len(stacks->stacka_lst);
 	if (len <= 3)
 		ft_sort_small(prgm, &stacks, len);
 	else
 	{
 		ft_calculate_buckets(prgm, len);
-		// ft_printf("Buckets = %d \n", prgm->buckets);
-		// ft_printf("Bucket Size = %d \n", prgm->bucket_size);
 		ft_presort(prgm, &stacks);
 		if (ft_check_ifsorted(prgm, stacks) == -1)
 		{
 			ft_update_buckets(&prgm);
 			ft_metrics_calculation(prgm, &stacks, 1);
 			ft_algorithm(prgm, &stacks);
+			// ft_printf("Buckets = %d \n", prgm->buckets);
+			// ft_printf("Bucket Size = %d \n", prgm->bucket_size);
 		}
 	}
-	// ft_sorting(prgm, &stacks);
+	// ft_dummy_sort(prgm, &stacks);
 	// ft_call_operations(instr_lst, &stack_a, &stack_b, prgm);
 	// ft_printf("Stack A");
 	// ft_print_doublyll(stacks->stacka_lst);
@@ -60,10 +60,10 @@ int     main(int argc, char **argv)
 	// ft_printf("Stack C (copy) Sorted");
 	// ft_print_doublyll(prgm->sorted_stack);
 	// ft_print_stacks(stacks);
-	// ft_printf(ANSI_COLOR_YELLOW"Number of Operations = %d\n"ANSI_COLOR_RESET, prgm->number_operations);
 	// ft_print_instructions(prgm, stacks);
 	if (prgm->options & OPTION_N)
 		print_number_of_oper(prgm);
+	// ft_operation_descr(prgm);
 	ft_free_list(&(stacks->stacka_lst));
 	ft_free_list(&(stacks->stackb_lst));
 	ft_free_list(&(prgm->sorted_stack));

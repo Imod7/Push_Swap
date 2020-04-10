@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/02/24 14:55:25 by dsaripap       #+#    #+#                */
-/*   Updated: 2020/03/29 21:11:05 by dominique     ########   odam.nl         */
+/*   Created: 2020/02/24 14:55:25 by dsaripap      #+#    #+#                 */
+/*   Updated: 2020/04/04 17:48:08 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int					ft_build_stacka(int argc, char **argv, t_stacks	**stacks, \
 	i += check_prgm_options(prgm);
 	while (i < argc)
 	{
+		// ft_printf("%s \n", argv[i]);
 		num_len = ft_strlen(argv[i]);
 		num = ft_atoi(argv[i]);
 		if (((num == 0) && ((num_len != 1) || (ft_strcmp(argv[i], "0") != 0))) \

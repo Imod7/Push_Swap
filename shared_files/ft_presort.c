@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/03/05 13:06:40 by dsaripap       #+#    #+#                */
-/*   Updated: 2020/04/02 12:53:58 by dominique     ########   odam.nl         */
+/*   Created: 2020/03/05 13:06:40 by dsaripap      #+#    #+#                 */
+/*   Updated: 2020/04/10 19:41:21 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void				ft_splitlist(t_stack_list *completelist, \
 	int				split;
 	t_stack_list	*splitnode;
 
-	len = ft_stack_length(completelist);
+	len = ft_stack_len(completelist);
 	if (len % 2 == 0)
 		split = len / 2;
 	else
@@ -134,31 +134,45 @@ void				ft_presort(t_prgm *prgm, t_stacks **stacks)
 		prgm->sorted_stack = ft_copy_list((*stacks)->stacka_lst);
 		ft_mergesort(&(prgm->sorted_stack));
 	// }
+		// ft_print_doublyll(prgm->sorted_stack);
 }
 
+/*
+** Checking Stack A against Sorted Stack if they are the same
+** which means Stack A is sorted
+** The check is done in the beginning (in case the input is an 
+** already sorted list) or in the end to check if the algorithm 
+** sorted the Stack successfully
+*/
+
 int					ft_check_ifsorted(t_prgm *prgm, t_stacks *stacks)
-{	
-	if (ft_stack_length(stacks->stacka_lst) != \
-	ft_stack_length(prgm->sorted_stack))
+{
+	t_stack_list	*stacka;
+	t_stack_list	*sorted;
+
+	sorted = prgm->sorted_stack;
+	stacka = stacks->stacka_lst;
+	if (ft_stack_len(stacka) != \
+	ft_stack_len(sorted))
 	{
 		ft_printf("Error\n");
 		// max = (n1 > n2) ? n1 : n2; 
 		return (-1);
 	}
-	if ((stacks->stacka_lst == NULL) || \
-	(stacks->stacka_lst->next == NULL))
+	if ((stacka == NULL) || \
+	(stacka->next == NULL))
 		(prgm->exec == 0) ? ft_printf("OK\n") : (void)prgm;
 	else
 	{
-		while (stacks->stacka_lst != NULL)
+		while (stacka != NULL)
 		{
-			if (prgm->sorted_stack->num != stacks->stacka_lst->num)
+			if (sorted->num != stacka->num)
 			{
 				(prgm->exec == 0) ? ft_printf("KO\n") : (void)prgm;
 				return (-1);
 			}
-			prgm->sorted_stack = prgm->sorted_stack->next;
-			stacks->stacka_lst = stacks->stacka_lst->next;
+			sorted = sorted->next;
+			stacka = stacka->next;
 		}
 		(prgm->exec == 0) ? ft_printf("OK\n") : (void)prgm;
 	}

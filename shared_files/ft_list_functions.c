@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/02/24 14:54:47 by dsaripap       #+#    #+#                */
-/*   Updated: 2020/03/28 11:47:14 by dominique     ########   odam.nl         */
+/*   Created: 2020/02/24 14:54:47 by dsaripap      #+#    #+#                 */
+/*   Updated: 2020/04/10 19:41:08 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void				ft_stack_addend(t_stack_list **lst, t_stack_list *new)
 	new->prev = temp;
 }
 
-int					ft_stack_length(t_stack_list *lst)
+int					ft_stack_len(t_stack_list *lst)
 {
 	t_stack_list	*temp;
 	int				len;

@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/01/23 12:08:15 by dsaripap       #+#    #+#                */
-/*   Updated: 2020/03/29 18:12:37 by dominique     ########   odam.nl         */
+/*   Created: 2020/01/23 12:08:15 by dsaripap      #+#    #+#                 */
+/*   Updated: 2020/04/04 17:22:32 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int					main(int argc, char **argv)
 	ft_call_operations(prgm->instr_lst, &stacks, prgm);
 	if (prgm->options & OPTION_N)
 		print_number_of_oper(prgm);
+	// ft_print_stacks(stacks);
 	if (ft_check_ifsorted(prgm, stacks) == -1)
 		return (-1);
 	// ft_printf("Number of Operations : %d", prgm->number_operations);
