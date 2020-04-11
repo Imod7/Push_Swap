@@ -6,7 +6,7 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/24 14:53:01 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/04/10 19:41:30 by dominique     ########   odam.nl         */
+/*   Updated: 2020/04/11 09:19:06 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ int					ft_rotate_a(t_prgm *prgm, t_stacks **stacks)
 	t_stack_list	*second_node;
 	t_stack_list	*temp_a;
 
-	// ft_printf("ra\n");
-	// (void)(*stacks)->stackb_lst;
 	temp_a = (*stacks)->stacka_lst;
 	if (temp_a == NULL)
 		return (0);
@@ -32,7 +30,6 @@ int					ft_rotate_a(t_prgm *prgm, t_stacks **stacks)
 	first_node->prev = temp_a;
 	first_node->next = NULL;
 	(*stacks)->stacka_lst = second_node;
-	// prgm->number_operations += 1;
 	if (prgm->exec == 1)
 	{
 		ft_saveinstructions(prgm, *stacks, "ra");

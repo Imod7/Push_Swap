@@ -1,8 +1,8 @@
 #!/bin/bash
 
-RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\e[1;33m'
+RED='\033[0;31m'
 RESET='\033[0m'
 
 # $1 is the first argument on the command line from where
@@ -13,7 +13,16 @@ sort_quality () {
   x=`expr $1 + 0`
   y=`expr $2 + 0`
   # printf "$1 $hun $2 $med \n\n"
-  if [ "$x" -eq 100 ] && [ "$y" -lt 700 ]
+  if [ "$x" -eq 5 ] && [ "$y" -lt 9 ]
+  then
+    printf "$GREEN$y (< 9) $RESET"
+  elif [ "$x" -eq 5 ] && [ "$y" -lt 13 ]
+  then
+    printf "$YELLOW$y (< 13) $RESET"
+  elif [ "$x" -eq 5 ] && [ "$y" -gt 12 ]
+  then
+    printf "$RED$y (> 12) $RESET"
+  elif [ "$x" -eq 100 ] && [ "$y" -lt 700 ]
   then
     printf "$GREEN$y (< 700) $RESET"
   elif [ "$x" -eq 100 ] && [ "$y" -lt 900 ]

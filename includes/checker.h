@@ -6,7 +6,7 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/23 12:18:26 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/04/10 20:11:09 by dominique     ########   odam.nl         */
+/*   Updated: 2020/04/11 10:35:26 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ typedef struct			s_instr
 }						t_instr;
 
 /*
-** Testing on using the 1 struct t_stacks with my 2 stacks (A, B) inside
+** The struct t_stacks contains the 2 stacks (A, B) inside
+** and their corresponding id
 */
 
 typedef struct			s_stacks
@@ -69,9 +70,7 @@ typedef struct			s_stack_list
 	struct s_stack_list	*next;
 	struct s_stack_list	*prev;
 	int					cur_pos;
-	// int					goal_pos;
 	int					bucket;
-	// int					dis_from_goal;
 	int					dis_from_top;
 }						t_stack_list;
 
@@ -161,7 +160,7 @@ void				ft_calculate_buckets(t_prgm *prgm, int len);
 void				ft_update_buckets(t_prgm **prgm);
 void				ft_algorithm(t_prgm *prgm, t_stacks **stacks);
 int					ft_check_ifsorted(t_prgm *prgm, t_stacks *stacks);
-void				ft_min_ontop_of_b(t_stacks **stacks, t_prgm *prgm);
+void				ft_find_min(t_stacks **stacks, t_prgm *prgm, size_t flag);
 
 /*
 ** Bonus options & descriptive function

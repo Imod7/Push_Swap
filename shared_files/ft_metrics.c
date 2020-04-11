@@ -6,7 +6,7 @@
 /*   By: dominique <dominique@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/14 15:47:55 by dominique     #+#    #+#                 */
-/*   Updated: 2020/04/10 20:28:54 by dominique     ########   odam.nl         */
+/*   Updated: 2020/04/11 17:55:08 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void				ft_update_buckets(t_prgm **prgm)
 ** In function ft_metrics_calculation I update the metric 
 ** dis_from_top (distance from top) for Stack A and Stack B
 ** by comparing with the numbers in the sorted_list
+** it only calculates if length of Stack A > 3
 */
 
 void				ft_metrics_calculation(t_prgm *prgm, t_stacks **stacks, \
@@ -180,7 +181,7 @@ void				ft_operation_descr(t_prgm *prgm)
 	rr = 0;
 	rrr = 0;
 	ss = 0;
-	// new_lst = ft_memalloc(sizeof(t_instr));
+	new_lst = ft_memalloc(sizeof(t_instr));
 	while (temp->next != NULL)
 	{
 		new_node = ft_memalloc(sizeof(t_instr));
@@ -189,7 +190,6 @@ void				ft_operation_descr(t_prgm *prgm)
 		((temp->instruction & INSTR_RB) && \
 		(temp->next->instruction & INSTR_RA)))
 		{
-			// ft_printf("SAME temp = %d\n", temp->instruction);
 			rr += 1;
 			ft_setinstruction("rr", new_node);
 			temp = temp->next;
@@ -199,7 +199,6 @@ void				ft_operation_descr(t_prgm *prgm)
 		((temp->instruction & INSTR_RRB) && \
 		(temp->next->instruction & INSTR_RRA)))
 		{
-			// ft_printf("SAME temp = %d\n", temp->instruction);
 			rrr += 1;
 			ft_setinstruction("rrr", new_node);
 			temp = temp->next;
@@ -209,7 +208,6 @@ void				ft_operation_descr(t_prgm *prgm)
 		((temp->instruction & INSTR_SB) && \
 		(temp->next->instruction & INSTR_SA)))
 		{
-			// ft_printf("SAME temp = %d\n", temp->instruction);
 			ss += 1;
 			ft_setinstruction("ss", new_node);
 			temp = temp->next;

@@ -6,7 +6,7 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/24 13:49:21 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/04/10 20:43:27 by dominique     ########   odam.nl         */
+/*   Updated: 2020/04/11 17:17:07 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,23 @@ int     main(int argc, char **argv)
 	}
 	ft_build_stackb(&stacks);
 	len = ft_stack_len(stacks->stacka_lst);
-	if (len <= 3)
+	// ft_printf("Stack A");
+	// ft_print_doublyll(stacks->stacka_lst);
+	// ft_printf("Stack B");
+	// ft_print_doublyll(stacks->stackb_lst);
+	// ft_printf("Stack C (copy) Sorted");
+	// ft_print_doublyll(prgm->sorted_stack);
+	// ft_print_stacks(stacks);
+	ft_presort(prgm, &stacks);
+	ft_calculate_buckets(prgm, len);
+	ft_update_buckets(&prgm);
+	ft_metrics_calculation(prgm, &stacks, 1);
+	if (len <= 10)
 		ft_sort_small(prgm, &stacks, len);
 	else
 	{
-		ft_calculate_buckets(prgm, len);
-		ft_presort(prgm, &stacks);
 		if (ft_check_ifsorted(prgm, stacks) == -1)
 		{
-			ft_update_buckets(&prgm);
-			ft_metrics_calculation(prgm, &stacks, 1);
 			ft_algorithm(prgm, &stacks);
 			// ft_printf("Buckets = %d \n", prgm->buckets);
 			// ft_printf("Bucket Size = %d \n", prgm->bucket_size);
@@ -63,7 +70,7 @@ int     main(int argc, char **argv)
 	// ft_print_instructions(prgm, stacks);
 	if (prgm->options & OPTION_N)
 		print_number_of_oper(prgm);
-	// ft_operation_descr(prgm);
+	ft_operation_descr(prgm);
 	ft_free_list(&(stacks->stacka_lst));
 	ft_free_list(&(stacks->stackb_lst));
 	ft_free_list(&(prgm->sorted_stack));

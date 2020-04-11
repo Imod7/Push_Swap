@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/03/12 13:46:56 by dsaripap       #+#    #+#                */
-/*   Updated: 2020/03/29 21:22:51 by dominique     ########   odam.nl         */
+/*   Created: 2020/03/12 13:46:56 by dsaripap      #+#    #+#                 */
+/*   Updated: 2020/04/11 12:51:58 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,18 @@ void				ft_sort_three(t_prgm *prgm, t_stacks **stacks)
 	}
 }
 
+void				ft_sort_lt_ten(t_prgm *prgm, t_stacks **stacks)
+{
+	while (ft_stack_len((*stacks)->stacka_lst) > 3)
+	{
+		ft_find_min(stacks, prgm, 0);
+		ft_push_b(prgm, stacks);
+	}
+	ft_sort_three(prgm, stacks);
+	while (ft_stack_len((*stacks)->stackb_lst) > 0)
+		ft_push_a(prgm, stacks);
+}
+
 int					ft_sort_small(t_prgm *prgm, t_stacks **stacks, int len)
 {
 	t_stack_list	*temp;
@@ -68,7 +80,9 @@ int					ft_sort_small(t_prgm *prgm, t_stacks **stacks, int len)
 			ft_swap_a(prgm, stacks);
 		return (0);
 	}
-	else
+	else if (len == 3)
 		ft_sort_three(prgm, stacks);
+	else if ((len > 3) && (len <= 10))
+		ft_sort_lt_ten(prgm, stacks);
 	return (0);
 }
