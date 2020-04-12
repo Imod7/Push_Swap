@@ -6,7 +6,7 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/31 18:57:55 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/04/11 10:08:04 by dominique     ########   odam.nl         */
+/*   Updated: 2020/04/12 22:51:54 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ void				ft_print_doubly_all(t_stack_list *temp)
 	ft_printf("                      Doubly Linked List                    \n");
 	ft_printf("----------------------------------------");
 	ft_printf("---------------------------------------\n");
-	ft_printf("|prev_num\tcurrent_num\tbucket\t\tdis_from_top\t\tnext_num|\n");
+	ft_printf("|prev_num\tcurrent_num\tbucket\t\tdis_from_top\tpos_index\tnext_num|\n");
 	len = 0;
 	if (temp == NULL)
 		ft_printf("|\t\t\t\t\t\t\t\t\t\t\t\t\t\t|\n");
@@ -144,7 +144,8 @@ void				ft_print_doubly_all(t_stack_list *temp)
 			ft_printf("|NULL\t<-\t");
 		ft_printf("%-15d\t", temp->num);
 		ft_printf("%d\t\t", temp->bucket);
-		ft_printf("%d\t", temp->dis_from_top);
+		ft_printf("%d\t\t", temp->dis_from_top);
+		ft_printf("%d\t", temp->pos_index);
 		if (nextn != NULL)
 			ft_printf("\t->\t%d\t|\n", nextn->num);
 		else

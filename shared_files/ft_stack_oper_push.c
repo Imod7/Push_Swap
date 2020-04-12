@@ -6,7 +6,7 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/24 14:53:01 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/04/04 18:04:06 by dominique     ########   odam.nl         */
+/*   Updated: 2020/04/12 22:53:12 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int					ft_push_a(t_prgm *prgm, t_stacks **stacks)
 	t_stack_list	*temp;
 	t_stack_list 	*newnode;
 
-	// ft_printf("pa\n");
 	first_node = (*stacks)->stackb_lst;
 	if (first_node == NULL)
 		return (0);
@@ -34,14 +33,11 @@ int					ft_push_a(t_prgm *prgm, t_stacks **stacks)
 	(*stacks)->stacka_lst = newnode;
 	if (temp != NULL)
 		newnode->next->prev = newnode;
-	// prgm->number_operations += 1;
 	if (prgm->exec == 1)
 	{
 		ft_saveinstructions(prgm, *stacks, "pa");
 		ft_metrics_calculation(prgm, stacks, 0);
 	}
-	// if (prgm->options & OPTION_V)
-	// 	ft_print_stacks(*stacks);
 	return (0);
 }
 
@@ -54,11 +50,9 @@ int					ft_push_b(t_prgm *prgm, t_stacks **stacks)
 
 	// ft_printf("pb\n");
 	first_node = (*stacks)->stacka_lst;
-	// ft_printf("first = %d \n", first_node->num);
 	if (first_node == NULL)
 		return (0);
 	second_node = (*stacks)->stacka_lst->next;
-	// ft_printf("second = %d \n", second_node->num);
 	(*stacks)->stacka_lst = second_node;
 	if (second_node != NULL)
 		second_node->prev = NULL;
@@ -72,13 +66,10 @@ int					ft_push_b(t_prgm *prgm, t_stacks **stacks)
 	(*stacks)->stackb_lst = newnode;
 	if (temp != NULL)
 		newnode->next->prev = newnode;
-	// prgm->number_operations += 1;
 	if (prgm->exec == 1)
 	{
 		ft_saveinstructions(prgm, *stacks, "pb");
 		ft_metrics_calculation(prgm, stacks, 0);
 	}
-	// if (prgm->options & OPTION_V)
-	// 	ft_print_stacks(*stacks);
 	return (0);
 }

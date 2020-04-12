@@ -6,7 +6,7 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/12 13:46:56 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/04/11 12:51:58 by dominique     ########   odam.nl         */
+/*   Updated: 2020/04/12 20:16:01 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void				ft_sort_lt_ten(t_prgm *prgm, t_stacks **stacks)
 {
 	while (ft_stack_len((*stacks)->stacka_lst) > 3)
 	{
-		ft_find_min(stacks, prgm, 0);
+		ft_find_min_or_max(stacks, prgm, 0);
 		ft_push_b(prgm, stacks);
 	}
 	ft_sort_three(prgm, stacks);

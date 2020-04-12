@@ -6,7 +6,7 @@
 /*   By: dominique <dominique@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/14 15:47:55 by dominique     #+#    #+#                 */
-/*   Updated: 2020/04/11 17:55:08 by dominique     ########   odam.nl         */
+/*   Updated: 2020/04/12 23:30:06 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,36 @@ void				ft_update_buckets(t_prgm **prgm)
 	}
 }
 
+void				ft_calculate_distance(int *i, int *j, t_stack_list **temp, 
+										int len, int middle)
+{
+	if (len == 1)
+	{
+		(*temp)->dis_from_top = 0;
+		(*temp)->pos_index = 0;
+	}
+	else
+	{
+		if (*i < middle)
+		{
+			(*temp)->dis_from_top = *i;
+			(*temp)->pos_index = *i;
+			*i += 1;
+			*j = *i;
+		}
+		else
+		{
+			(*temp)->pos_index = *i;
+			if ((len % 2 == 1) && (*i == middle + 1))
+				*j = middle;
+			else if (*i != middle)
+				*j -= 1;
+			(*temp)->dis_from_top = *j;
+			*i += 1;
+		}
+	}
+}
+
 /*
 ** In function ft_metrics_calculation I update the metric 
 ** dis_from_top (distance from top) for Stack A and Stack B
@@ -71,29 +101,34 @@ void				ft_metrics_calculation(t_prgm *prgm, t_stacks **stacks, \
 	t_stack_list	*temp;
 	// t_stack_list	*sorted;
 	int				i;
+	int				j;
+	int				middle;
+	int				len;
 
 	// sorted = prgm->sorted_stack;
 	i = 0;
 	temp = (*stacks)->stacka_lst;
+	len = ft_stack_len(temp);
+	middle = len / 2;
 	while (temp != NULL)
 	{
 		while (prgm->sorted_stack->num != temp->num)
 			prgm->sorted_stack = prgm->sorted_stack->next;
-		temp->dis_from_top = i;
+		ft_calculate_distance(&i, &j, &temp, len, middle);
 		if (init == 1)
 			temp->bucket = prgm->sorted_stack->bucket;
 		while (prgm->sorted_stack->prev != NULL)
 			prgm->sorted_stack = prgm->sorted_stack->prev;
 		temp = temp->next;
-		i += 1;
 	}
 	i = 0;
 	temp = (*stacks)->stackb_lst;
+	len = ft_stack_len(temp);
+	middle = len / 2;
 	while (temp != NULL)
 	{
-		temp->dis_from_top = i;
+		ft_calculate_distance(&i, &j, &temp, len, middle);
 		temp = temp->next;
-		i += 1;
 	}
 }
 
@@ -164,7 +199,6 @@ size_t				ft_instr_len(t_instr *instr_lst)
 		len += 1;
 		temp = temp->next;
 	}
-	// ft_printf("--%d\n", len);
 	return (len);
 }
 

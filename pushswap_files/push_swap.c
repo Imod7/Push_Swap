@@ -6,7 +6,7 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/24 13:49:21 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/04/11 17:17:07 by dominique     ########   odam.nl         */
+/*   Updated: 2020/04/12 19:12:42 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,19 +53,17 @@ int     main(int argc, char **argv)
 	{
 		if (ft_check_ifsorted(prgm, stacks) == -1)
 		{
+			// ft_printf("Stack A");
+			// ft_print_doubly_all(stacks->stacka_lst);
+			// ft_printf("Stack B");
+			// ft_print_doubly_all(stacks->stackb_lst);
 			ft_algorithm(prgm, &stacks);
-			// ft_printf("Buckets = %d \n", prgm->buckets);
-			// ft_printf("Bucket Size = %d \n", prgm->bucket_size);
 		}
 	}
+	// ft_printf("Buckets = %d \n", prgm->buckets);
+	// ft_printf("Bucket Size = %d \n", prgm->bucket_size);
 	// ft_dummy_sort(prgm, &stacks);
 	// ft_call_operations(instr_lst, &stack_a, &stack_b, prgm);
-	// ft_printf("Stack A");
-	// ft_print_doublyll(stacks->stacka_lst);
-	// ft_printf("Stack B");
-	// ft_print_doublyll(stacks->stackb_lst);
-	// ft_printf("Stack C (copy) Sorted");
-	// ft_print_doublyll(prgm->sorted_stack);
 	// ft_print_stacks(stacks);
 	// ft_print_instructions(prgm, stacks);
 	if (prgm->options & OPTION_N)

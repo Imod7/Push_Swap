@@ -6,7 +6,7 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/11 12:22:18 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/04/11 16:23:56 by dominique     ########   odam.nl         */
+/*   Updated: 2020/04/12 23:14:39 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@ void				ft_common_checks(t_stack_list *stack, t_stack_list **top, \
 void				ft_find_max(t_stack_list **top, t_stack_list **bottom, \
 								t_stack_list **max)
 {
+	int				index;
+
+	index = 0;
 	if ((*top)->num >= (*max)->num)
 		(*max) = (*top);
 	if ((*bottom)->num > (*max)->num)
@@ -64,26 +67,10 @@ void				ft_b_to_a(t_stacks **stacks, t_prgm *prgm, int cur_bucket)
 			ft_find_max(&top, &bottom, &max);
 		if (top->num >= max->num)
 			max = top;
-		while ((max->dis_from_top <= mid) && (max->dis_from_top != 0))
+		while ((max->pos_index <= mid) && (max->pos_index != 0))
 			ft_rotate_b(prgm, stacks);
-		while ((max->dis_from_top > mid) && (max->dis_from_top != 0))
+		while ((max->pos_index > mid) && (max->pos_index != 0))
 			ft_reverserotate_b(prgm, stacks);
-		// if (max->dis_from_top <= mid)
-		// {
-		// 	ft_printf("----- ROTATE MAX number = %d\t\tMax->bucket = %d\n", max->num, max->bucket);
-		// 	ft_printf("----- max->dis=%d, mid=%d\n", max->dis_from_top, mid);
-		// 	while (max->dis_from_top != 0)
-		// 		ft_rotate_b(prgm, stacks);
-		// 		// ft_saveinstructions(prgm, "rb");
-		// }
-		// else
-		// {
-		// 	ft_printf("----- REVERSE ROTATE MAX number = %d\t\tMax->bucket = %d\n", max->num, max->bucket);
-		// 	ft_printf("----- max->dis=%d, mid=%d\n", max->dis_from_top, mid);
-		// 	while (max->dis_from_top != 0)
-		// 		// ft_saveinstructions(prgm, "rrb");
-		// 		ft_reverserotate_b(prgm, stacks);
-		// }
 		ft_push_a(prgm, stacks);
 		ft_common_checks((*stacks)->stackb_lst, &top, &bottom, &mid, &i);
 	}
@@ -115,7 +102,7 @@ void				ft_check_num_to_move(t_prgm *prgm, t_stacks **stacks, \
 			ft_reverserotate_a(prgm, stacks);
 	}
 	if (ft_stack_len((*stacks)->stackb_lst) > 1)
-		ft_find_min(stacks, prgm, 1);
+		ft_find_min_or_max(stacks, prgm, 1);
 	ft_push_b(prgm, stacks);
 	(*stacks)->stackb_lst->bucket = cur_bucket;
 }
@@ -147,7 +134,10 @@ void				ft_algorithm(t_prgm *prgm, t_stacks **stacks)
 		}
 		else
 		{
-			// ft_printf("----- ROTATE TOP Top number = %d\t\tTop->bucket = %d\n", top->num, top->bucket);
+			// ft_printf("Stack A");
+			// ft_print_doubly_all((*stacks)->stacka_lst);
+			// ft_printf("Stack B");
+			// ft_print_doubly_all((*stacks)->stackb_lst);
 			ft_check_num_to_move(prgm, stacks, &top, &bottom, cur_bucket);
 			ft_common_checks((*stacks)->stacka_lst, &top, &bottom, &middle, &i);
 			if (ft_stack_len((*stacks)->stackb_lst) % prgm->bucket_size == 0)
@@ -155,4 +145,6 @@ void				ft_algorithm(t_prgm *prgm, t_stacks **stacks)
 		}
 	}
 	ft_b_to_a(stacks, prgm, cur_bucket);
+	// ft_printf("Stack C (copy) Sorted");
+	// ft_print_doubly_all(prgm->sorted_stack);
 }

@@ -6,7 +6,7 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/08 21:57:49 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/04/11 09:16:44 by dominique     ########   odam.nl         */
+/*   Updated: 2020/04/12 22:54:45 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int					set_prgm_options(char *argv, t_prgm *prgm)
 	if (argv[i] == '-')
 	{
 		i += 1;
-		// ft_printf("%d = %c \n", argv[i], argv[i]);
 		while (argv[i] != 0)
 		{
 			if (argv[i] == 'u')
