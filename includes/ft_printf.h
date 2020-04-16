@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/07/24 13:23:12 by dsaripap       #+#    #+#                */
-/*   Updated: 2020/03/25 17:33:57 by dominique     ########   odam.nl         */
+/*   Created: 2019/07/24 13:23:12 by dsaripap      #+#    #+#                 */
+/*   Updated: 2020/04/14 17:38:09 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,20 +31,22 @@
 # define FLOAT_TOTAL_LEN	40000
 # define FLOAT_MIDDLE		20001
 
-# define FLAG_MINUS 		(1 << 0)
-# define FLAG_PLUS 			(1 << 1)
-# define FLAG_SPACE 		(1 << 2)
-# define FLAG_ZERO 			(1 << 3)
-# define FLAG_HT 			(1 << 4)
-# define FLAG_PADLEN_SET 	(1 << 5)
-# define FLAG_PRECIS 		(1 << 6)
-# define FLAG_ASTER_MINFW 	(1 << 7)
-# define FLAG_NEGAT 		(1 << 8)
-# define FLAG_ASTER_PREC 	(1 << 9)
-# define FLAG_INF_NAN 		(1 << 10)
-# define FLAG_ARG_ZERO 		(1 << 11)
-
-# define NOFLAGS_MASK		(001011011111)
+typedef enum		e_flag
+{
+	FLAG_MINUS = (1 << 0),
+	FLAG_PLUS = (1 << 1),
+	FLAG_SPACE = (1 << 2),
+	FLAG_ZERO = (1 << 3),
+	FLAG_HT = (1 << 4),
+	FLAG_PADLEN_SET = (1 << 5),
+	FLAG_PRECIS = (1 << 6),
+	FLAG_ASTER_MINFW = (1 << 7),
+	FLAG_NEGAT = (1 << 8),
+	FLAG_ASTER_PREC = (1 << 9),
+	FLAG_INF_NAN = (1 << 10),
+	FLAG_ARG_ZERO = (1 << 11),
+	NOFLAGS_MASK = (001011011111)
+}					t_flag;
 
 typedef enum	e_modifier
 {
@@ -58,7 +60,7 @@ typedef enum	e_modifier
 
 typedef struct	s_format
 {
-	int			flags;
+	t_flag		flags;
 	int			minfw;
 	int			precision;
 	char		argtype;

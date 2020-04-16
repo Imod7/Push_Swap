@@ -6,75 +6,54 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/24 13:49:21 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/04/12 19:12:42 by dominique     ########   odam.nl         */
+/*   Updated: 2020/04/16 22:51:20 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/checker.h"
+#include "../includes/push_swap.h"
 
-int     main(int argc, char **argv)
+void		ft_sorting_process(t_prgm *prgm)
 {
-	t_stacks		*stacks;
-	t_prgm			*prgm;
-	int				len;
+	prgm->stack_len = ft_stack_len(prgm->stacks->stacka_lst);
+	ft_calculate_buckets(prgm);
+	ft_presort(prgm);
+	ft_update_buckets(prgm);
+	ft_metrics_calculation(prgm, 1);
+	prgm->stack_len = ft_stack_len(prgm->stacks->stacka_lst);
+	if (prgm->stack_len <= 10)
+		ft_sort_small(prgm);
+	else
+	{
+		if (ft_check_ifsorted(prgm) == -1)
+			ft_algorithm(prgm);
+	}
+}
 
-	stacks = ft_memalloc(sizeof(t_stacks));
-	stacks->stacka_lst = NULL;
-	// prgm->sorted_stack = ft_memalloc(sizeof(t_stack_list));
+int			main(int argc, char **argv)
+{
+	t_prgm	*prgm;
+
 	prgm = ft_memalloc(sizeof(t_prgm));
-	prgm->instr_lst = NULL;
-	prgm->exec = 1;
+	prgm_initialize(prgm, 1);
 	if (argc < 2)
 		return (0);
 	else
 	{
 		if (set_prgm_options(argv[1], prgm) == -1)
 			return (0);
-		// print_binary(prgm->debug_mode);
-		if (ft_build_stacka(argc, argv, &stacks, prgm) == -1)
-			return (ft_exitprogram(&(stacks->stacka_lst)));
+		if (ft_build_stacka(argc, argv, prgm) == -1)
+			return (ft_exitprogram(prgm));
 	}
-	ft_build_stackb(&stacks);
-	len = ft_stack_len(stacks->stacka_lst);
-	// ft_printf("Stack A");
-	// ft_print_doublyll(stacks->stacka_lst);
-	// ft_printf("Stack B");
-	// ft_print_doublyll(stacks->stackb_lst);
-	// ft_printf("Stack C (copy) Sorted");
-	// ft_print_doublyll(prgm->sorted_stack);
-	// ft_print_stacks(stacks);
-	ft_presort(prgm, &stacks);
-	ft_calculate_buckets(prgm, len);
-	ft_update_buckets(&prgm);
-	ft_metrics_calculation(prgm, &stacks, 1);
-	if (len <= 10)
-		ft_sort_small(prgm, &stacks, len);
-	else
-	{
-		if (ft_check_ifsorted(prgm, stacks) == -1)
-		{
-			// ft_printf("Stack A");
-			// ft_print_doubly_all(stacks->stacka_lst);
-			// ft_printf("Stack B");
-			// ft_print_doubly_all(stacks->stackb_lst);
-			ft_algorithm(prgm, &stacks);
-		}
-	}
+	ft_build_stackb(prgm->stacks);
+	ft_sorting_process(prgm);
+	// ft_print_stacks(prgm->stacks);
+	// ft_print_doublyll(prgm->stacks->stacka_lst);
+	// ft_print_doubly_all(prgm->stacks->stacka_lst);
 	// ft_printf("Buckets = %d \n", prgm->buckets);
 	// ft_printf("Bucket Size = %d \n", prgm->bucket_size);
 	// ft_dummy_sort(prgm, &stacks);
-	// ft_call_operations(instr_lst, &stack_a, &stack_b, prgm);
-	// ft_print_stacks(stacks);
-	// ft_print_instructions(prgm, stacks);
-	if (prgm->options & OPTION_N)
-		print_number_of_oper(prgm);
-	ft_operation_descr(prgm);
-	ft_free_list(&(stacks->stacka_lst));
-	ft_free_list(&(stacks->stackb_lst));
-	ft_free_list(&(prgm->sorted_stack));
-	// free(stack_a);
-	// free(stack_b);
-	// free(prgm);
+	// ft_operation_descr(prgm);
+	ft_exitprogram(prgm);
 	// while (1)
 	// 	;
 	return (0);

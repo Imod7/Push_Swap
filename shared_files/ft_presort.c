@@ -6,43 +6,18 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/05 13:06:40 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/04/10 19:41:21 by dominique     ########   odam.nl         */
+/*   Updated: 2020/04/16 20:28:35 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/checker.h"
+#include "../includes/push_swap.h"
 
 /*
-** Calculation of median in a sorted linked list
-*/
-
-// int					ft_find_median(t_stack_list **stacklst)
-// {
-// 	t_stack_list	*slow;
-// 	t_stack_list	*fast;
-
-// 	slow = *stacklst;
-// 	fast = *stacklst;
-// 	if (stacklst != NULL)
-// 	{
-// 		while (fast != NULL && fast->next != NULL)
-// 		{
-// 			slow = slow->next;
-// 			fast = fast->next->next;
-// 		}
-// 	}
-// 	if (fast != NULL)
-// 		return (slow->num);
-// 	else
-// 		return ((slow->prev->num + slow->num) / 2);
-// }
-
-/*
-** The splitting part of merge sort 
+** The splitting part of merge sort
 */
 
 void				ft_splitlist(t_stack_list *completelist, \
-							t_stack_list **ahalf, t_stack_list **bhalf)
+								t_stack_list **ahalf, t_stack_list **bhalf)
 {
 	int				len;
 	int				split;
@@ -75,7 +50,7 @@ void				ft_splitlist(t_stack_list *completelist, \
 }
 
 /*
-** The merging part of merge sort 
+** The merging part of merge sort
 */
 
 t_stack_list		*ft_mergeback(t_stack_list **ahalf, t_stack_list **bhalf)
@@ -106,7 +81,7 @@ t_stack_list		*ft_mergeback(t_stack_list **ahalf, t_stack_list **bhalf)
 }
 
 /*
-** Merge Sort 
+** Merge Sort
 */
 
 void				ft_mergesort(t_stack_list **completelist)
@@ -124,53 +99,52 @@ void				ft_mergesort(t_stack_list **completelist)
 	*completelist = ft_mergeback(&first_half, &second_half);
 }
 
-void				ft_presort(t_prgm *prgm, t_stacks **stacks)
+void				ft_presort(t_prgm *prgm)
 {
-	// if (((*stacks)->stacka_lst == NULL) || \
-	// ((*stacks)->stacka_lst->next == NULL))
-	// 	(prgm->exec == 0) ? ft_printf("OK\n") : (void)prgm;
-	// else
-	// {
-		prgm->sorted_stack = ft_copy_list((*stacks)->stacka_lst);
-		ft_mergesort(&(prgm->sorted_stack));
-	// }
-		// ft_print_doublyll(prgm->sorted_stack);
+	//if (((*stacks)->stacka_lst == NULL) || \
+	//((*stacks)->stacka_lst->next == NULL))
+	//(prgm->exec == 0) ? ft_printf("OK\n") : (void)prgm;
+	//else
+	//{
+	prgm->sorted_stack = ft_copy_list(prgm->stacks->stacka_lst);
+	ft_mergesort(&(prgm->sorted_stack));
+	//}
+}
+
+int					ft_exit_msg(t_prgm *prgm, size_t flag)
+{
+	if (flag == 0)
+		ft_printf("Error\n");
+	if (flag == 1)
+		(prgm->exec == 0) ? ft_printf("KO\n") : (void)prgm;
+	return (-1);
 }
 
 /*
 ** Checking Stack A against Sorted Stack if they are the same
 ** which means Stack A is sorted
-** The check is done in the beginning (in case the input is an 
-** already sorted list) or in the end to check if the algorithm 
+** The check is done in the beginning (in case the input is an
+** already sorted list) or in the end to check if the algorithm
 ** sorted the Stack successfully
 */
 
-int					ft_check_ifsorted(t_prgm *prgm, t_stacks *stacks)
+int					ft_check_ifsorted(t_prgm *prgm)
 {
 	t_stack_list	*stacka;
 	t_stack_list	*sorted;
 
 	sorted = prgm->sorted_stack;
-	stacka = stacks->stacka_lst;
-	if (ft_stack_len(stacka) != \
-	ft_stack_len(sorted))
-	{
-		ft_printf("Error\n");
-		// max = (n1 > n2) ? n1 : n2; 
-		return (-1);
-	}
-	if ((stacka == NULL) || \
-	(stacka->next == NULL))
+	stacka = prgm->stacks->stacka_lst;
+	if (ft_stack_len(stacka) != ft_stack_len(sorted))
+		return(ft_exit_msg(prgm, 0));
+	if ((stacka == NULL) || (stacka->next == NULL))
 		(prgm->exec == 0) ? ft_printf("OK\n") : (void)prgm;
 	else
 	{
 		while (stacka != NULL)
 		{
 			if (sorted->num != stacka->num)
-			{
-				(prgm->exec == 0) ? ft_printf("KO\n") : (void)prgm;
-				return (-1);
-			}
+				return(ft_exit_msg(prgm, 1));
 			sorted = sorted->next;
 			stacka = stacka->next;
 		}

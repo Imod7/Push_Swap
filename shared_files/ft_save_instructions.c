@@ -6,11 +6,11 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/24 14:52:10 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/04/11 17:23:07 by dominique     ########   odam.nl         */
+/*   Updated: 2020/04/16 11:03:45 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/checker.h"
+#include "../includes/push_swap.h"
 
 int					valid_instruction(char *str)
 {
@@ -23,7 +23,6 @@ int					valid_instruction(char *str)
 	!ft_strcmp(str, "rra") || !ft_strcmp(str, "rrb") || \
 	!ft_strcmp(str, "rrr"))
 	{
-		// ft_printf(ANSI_COLOR_GREEN"\n'%s'\n"ANSI_COLOR_RESET, str);
 		return (1);
 	}
 	else
@@ -85,22 +84,10 @@ void				ft_checkinstruction(size_t instruction)
 		ft_printf("rrr\n");
 }
 
-// void				ft_instr_addend(t_prgm **prgm, t_instr *new)
 void				ft_instr_addend(t_instr **instr_lst, t_instr *new)
 {
 	t_instr			*temp;
 
-	// if ((*prgm)->instr_lst == NULL)
-	// {
-	// 	(*prgm)->instr_lst = new;
-	// 	return ;
-	// }
-	// temp = (*prgm)->instr_lst;
-	// while (temp->next != NULL)
-	// {
-	// 	temp = temp->next;
-	// }
-	// temp->next = new;
 	if (*instr_lst == NULL)
 	{
 		*instr_lst = new;
@@ -114,8 +101,7 @@ void				ft_instr_addend(t_instr **instr_lst, t_instr *new)
 	temp->next = new;
 }
 
-int					ft_saveinstructions(t_prgm *prgm, t_stacks *stacks, \
-										char *operation)
+int					ft_saveinstructions(t_prgm *prgm, char *operation)
 {
 	t_instr			*instr_node;
 
@@ -126,17 +112,14 @@ int					ft_saveinstructions(t_prgm *prgm, t_stacks *stacks, \
 	}
 	else
 	{
-		// 	prgm->instr_lst = ft_memalloc(sizeof(t_instr));
 		instr_node = ft_memalloc(sizeof(t_instr));
 		ft_setinstruction(operation, instr_node);
-		// print_binary(instr_node->instruction);
 		ft_instr_addend(&(prgm->instr_lst), instr_node);
 		if (prgm->exec == 1)
 			ft_printf("%s\n", operation);
 		if ((prgm->options & OPTION_V) && (prgm->exec == 1))
-			ft_print_stacks(stacks);
+			ft_print_stacks(prgm->stacks);
 		prgm->number_operations += 1;
 	}
-	// ft_print_instructions(prgm);
 	return (0);
 }

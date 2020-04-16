@@ -58,25 +58,33 @@ do
   done
   # read each of the 2 lines that were printed after the test was executed
   # printf "\n$output\n"
+  # printf "\n numbers = $numbers\n"
   while IFS= read -r linetest
   do
     cleanline=${linetest: -2}
-    if [ "$cleanline" == "OK" ]
+    # printf "\n cleanline = $cleanline\n"
+    if [ "$cleanline" != "OK" ] && [ "$cleanline" != "KO" ]
     then
-      printf "Test   $counter\t[$GREEN $cleanline $RESET]\tfor $numbers   random numbers with  "
-      sort_quality "$numbers" "$operations"
-      printf "   operations\n"
+      operations=${linetest##* }
+      if [ "$status" == "OK" ]
+      then
+        printf "Test   $counter\t[$GREEN $status $RESET]\tfor $numbers   random numbers with  "
+        sort_quality "$numbers" "$operations"
+        printf "   operations\n"
+      elif [ "$status" == "KO" ]
+      then
+        printf "Test   $counter\t[$RED $status $RESET]\tfor $numbers   random numbers with  $YELLOW $operations $RESET   operations\n"
+        # echo $line
+        ( echo $line ; echo "" ) >> errorlog.txt
+      fi
+      let counter++
+    elif [ "$cleanline" == "OK" ]
+    then
+      status="OK"
     elif [ "$cleanline" == "KO" ]
     then
-      printf "Test   $counter\t[$RED $cleanline $RESET]\tfor $numbers   random numbers with  $YELLOW $operations $RESET   operations\n"
-      # echo $line
-      ( echo $line ; echo "" ) >> errorlog.txt
-    else
-      operations=${linetest##* }
-      # printf "$linetest\n"
-      let counter++
+      status="KO"
       # exit 1
     fi
   done <<< "$output"
 done < "$input"
-

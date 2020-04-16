@@ -6,11 +6,11 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/24 14:54:47 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/04/11 10:44:12 by dominique     ########   odam.nl         */
+/*   Updated: 2020/04/16 10:57:20 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/checker.h"
+#include "../includes/push_swap.h"
 
 t_stack_list		*ft_stack_newnode(int content)
 {
@@ -72,4 +72,26 @@ int					ft_numexists_instack(t_stack_list *lst, int num)
 		temp = temp->next;
 	}
 	return (0);
+}
+
+t_stack_list		*ft_copy_list(t_stack_list *stacklst)
+{
+	t_stack_list	*newnode;
+	t_stack_list	*newlist;
+
+	newlist = NULL;
+	if (stacklst == NULL)
+	{
+		return (NULL);
+	}
+	else
+	{
+		while (stacklst != NULL)
+		{
+			newnode = ft_stack_newnode(stacklst->num);
+			ft_stack_addend(&newlist, newnode);
+			stacklst = stacklst->next;
+		}
+	}
+	return (newlist);
 }

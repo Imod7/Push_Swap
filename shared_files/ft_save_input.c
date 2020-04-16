@@ -6,11 +6,11 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/24 14:55:25 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/04/04 17:48:08 by dominique     ########   odam.nl         */
+/*   Updated: 2020/04/16 20:18:35 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/checker.h"
+#include "../includes/push_swap.h"
 
 // int			ft_biggerthanint(char *str)
 // {
@@ -31,17 +31,13 @@ int					ft_isnum(char *str)
 	return (0);
 }
 
-int					ft_build_stackb(t_stacks **stacks)
+int					ft_build_stackb(t_stacks *stacks)
 {
-	// (*stack_b) = NULL;
-	// (*stacks)->stackb_lst = ft_memalloc(sizeof(t_stack));
-	// (*stacks) = ft_memalloc(sizeof(t_stacks));
-	(*stacks)->stackb_id = 'B';
+	stacks->stackb_id = 'B';
 	return (0);
 }
 
-int					ft_build_stacka(int argc, char **argv, t_stacks	**stacks, \
-									t_prgm *prgm)
+int					ft_build_stacka(int argc, char **argv, t_prgm *prgm)
 {
 	int				i;
 	int				num;
@@ -49,13 +45,9 @@ int					ft_build_stacka(int argc, char **argv, t_stacks	**stacks, \
 	t_stack_list	*stack_node;
 
 	stack_node = NULL;
-	// (*stacks) = ft_memalloc(sizeof(t_stacks));
-	// (*stacks)->stacka_lst = ft_memalloc(sizeof(t_stack_list));
-	i = 1;
-	i += check_prgm_options(prgm);
+	i = 1 + check_prgm_options(prgm);
 	while (i < argc)
 	{
-		// ft_printf("%s \n", argv[i]);
 		num_len = ft_strlen(argv[i]);
 		num = ft_atoi(argv[i]);
 		if (((num == 0) && ((num_len != 1) || (ft_strcmp(argv[i], "0") != 0))) \
@@ -66,16 +58,16 @@ int					ft_build_stacka(int argc, char **argv, t_stacks	**stacks, \
 		}
 		else
 		{
-			stack_node = ft_stack_newnode(num);
-			if (ft_numexists_instack((*stacks)->stacka_lst, num) == 1)
+			if (ft_numexists_instack(prgm->stacks->stacka_lst, num) == 1)
 			{
 				ft_printf(ANSI_COLOR_RED"Error\n"ANSI_COLOR_RESET);
 				return (-1);
 			}
-			ft_stack_addend(&(*stacks)->stacka_lst, stack_node);
+			stack_node = ft_stack_newnode(num);
+			ft_stack_addend(&(prgm->stacks)->stacka_lst, stack_node);
 		}
 		i++;
 	}
-	(*stacks)->stacka_id = 'A';
+	prgm->stacks->stacka_id = 'A';
 	return (0);
 }

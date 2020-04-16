@@ -6,11 +6,11 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/10 09:55:39 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/02/10 09:55:41 by dsaripap      ########   odam.nl         */
+/*   Updated: 2020/04/14 17:29:44 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/checker.h"
+#include "../includes/push_swap.h"
 
 void	print_binary(int instr)
 {

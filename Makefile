@@ -6,7 +6,7 @@
 #    By: dsaripap <marvin@codam.nl>                   +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/01/31 13:44:11 by dsaripap      #+#    #+#                  #
-#    Updated: 2020/04/10 20:45:11 by dominique     ########   odam.nl          #
+#    Updated: 2020/04/16 12:31:37 by dominique     ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,7 @@ SRC_SHARED =	\
 		ft_printing.c \
 		ft_presort.c \
 		ft_metrics.c \
+		ft_operations_optimization.c \
 
 OBJ_CHECKER = $(SRC_CHECKER:%.c=$(CHECKER_OBJDIR)/%.o)
 OBJ_PUSHSWAP = $(SRC_PUSHSWAP:%.c=$(PUSHSWAP_OBJDIR)/%.o)

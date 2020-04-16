@@ -6,40 +6,39 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/11 12:22:18 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/04/12 23:14:39 by dominique     ########   odam.nl         */
+/*   Updated: 2020/04/16 17:28:06 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/checker.h"
+#include "../includes/push_swap.h"
 
-void				ft_common_checks(t_stack_list *stack, t_stack_list **top, \
-									t_stack_list **bottom, int *middle, int *i)
+void				ft_common_checks(t_stack_list *stack, t_prgm *prgm, \
+									size_t *i)
 {
 	if (stack != NULL)
 	{
-		(*top) = stack;
-		(*bottom) = stack;
-		while ((*bottom)->next != NULL)
-			(*bottom) = (*bottom)->next;
-		*middle = ft_stack_len((*top)) / 2;
+		prgm->top = stack;
+		prgm->bottom = stack;
+		while (prgm->bottom->next != NULL)
+			prgm->bottom = prgm->bottom->next;
+		prgm->stack_middle = ft_stack_len(prgm->top) / 2;
 		*i = 0;
 	}
 	else
 		*i += 1;
 }
 
-void				ft_find_max(t_stack_list **top, t_stack_list **bottom, \
-								t_stack_list **max)
+void				ft_find_max(t_prgm *prgm, t_stack_list **max)
 {
 	int				index;
 
 	index = 0;
-	if ((*top)->num >= (*max)->num)
-		(*max) = (*top);
-	if ((*bottom)->num > (*max)->num)
-		(*max) = (*bottom);
-	(*top) = (*top)->next;
-	(*bottom) = (*bottom)->prev;
+	if (prgm->top->num >= (*max)->num)
+		(*max) = prgm->top;
+	if (prgm->bottom->num > (*max)->num)
+		(*max) = prgm->bottom;
+	prgm->top = prgm->top->next;
+	prgm->bottom = prgm->bottom->prev;
 }
 
 /*
@@ -47,104 +46,90 @@ void				ft_find_max(t_stack_list **top, t_stack_list **bottom, \
 ** and move this number to Stack A
 */
 
-void				ft_b_to_a(t_stacks **stacks, t_prgm *prgm, int cur_bucket)
+void				ft_b_to_a(t_prgm *prgm, int cur_bucket)
 {
-	t_stack_list	*top;
-	t_stack_list	*bottom;
 	t_stack_list	*max;
-	int				mid;
-	int				i;
+	size_t			i;
 
-	ft_common_checks((*stacks)->stackb_lst, &top, &bottom, &mid, &i);
-	while ((*stacks)->stackb_lst != NULL)
+	ft_common_checks(prgm->stacks->stackb_lst, prgm, &i);
+	while (prgm->stacks->stackb_lst != NULL)
 	{
-		if (ft_stack_len((*stacks)->stackb_lst) % prgm->bucket_size == 0)
+		if (ft_stack_len(prgm->stacks->stackb_lst) % prgm->bucket_size == 0)
 			cur_bucket -= 1;
-		max = (*stacks)->stackb_lst;
-		while (((top->bucket == cur_bucket) || \
-		(bottom->bucket == cur_bucket)) && \
-		(top->dis_from_top != bottom->dis_from_top) && (ft_stack_len(top) != 1))
-			ft_find_max(&top, &bottom, &max);
-		if (top->num >= max->num)
-			max = top;
-		while ((max->pos_index <= mid) && (max->pos_index != 0))
-			ft_rotate_b(prgm, stacks);
-		while ((max->pos_index > mid) && (max->pos_index != 0))
-			ft_reverserotate_b(prgm, stacks);
-		ft_push_a(prgm, stacks);
-		ft_common_checks((*stacks)->stackb_lst, &top, &bottom, &mid, &i);
+		max = prgm->stacks->stackb_lst;
+		while (((prgm->top->bucket == cur_bucket) || \
+		(prgm->bottom->bucket == cur_bucket)) && \
+		(prgm->top->dis_from_top != prgm->bottom->dis_from_top) && \
+		(ft_stack_len(prgm->top) != 1))
+			ft_find_max(prgm, &max);
+		if (prgm->top->num >= max->num)
+			max = prgm->top;
+		while ((max->pos_index <= prgm->stack_middle) && (max->pos_index != 0))
+			ft_rotate_b(prgm);
+		while ((max->pos_index > prgm->stack_middle) && (max->pos_index != 0))
+			ft_reverserotate_b(prgm);
+		ft_push_a(prgm);
+		ft_common_checks(prgm->stacks->stackb_lst, prgm, &i);
 	}
 }
 
-void				ft_check_num_to_move(t_prgm *prgm, t_stacks **stacks, \
-									t_stack_list **top, t_stack_list **bottom, \
-									int cur_bucket)
+void				ft_check_num_to_move(t_prgm *prgm, int bucket)
 {
-	if (((*top)->bucket == cur_bucket) && ((*bottom)->bucket == cur_bucket))
+	if ((prgm->top->bucket == bucket) && (prgm->bottom->bucket == bucket))
 	{
-		while (((*top)->dis_from_top <= (*bottom)->dis_from_top) && \
-		((*top)->dis_from_top != 0))
-			ft_rotate_a(prgm, stacks);
-		while (((*top)->dis_from_top > (*bottom)->dis_from_top) && \
-		((*bottom)->dis_from_top != 0))
-			ft_reverserotate_a(prgm, stacks);
+		while ((prgm->top->dis_from_top <= prgm->bottom->dis_from_top) && \
+		(prgm->top->dis_from_top != 0))
+			ft_rotate_a(prgm);
+		while ((prgm->top->dis_from_top > prgm->bottom->dis_from_top) && \
+		(prgm->bottom->dis_from_top != 0))
+			ft_reverserotate_a(prgm);
 	}
-	else if (((*top)->bucket == cur_bucket) && \
-	((*bottom)->bucket != cur_bucket))
+	else if ((prgm->top->bucket == bucket) && (prgm->bottom->bucket != bucket))
 	{
-		while ((*top)->dis_from_top != 0)
-			ft_rotate_a(prgm, stacks);
+		while (prgm->top->dis_from_top != 0)
+			ft_rotate_a(prgm);
 	}
-	else if (((*top)->bucket != cur_bucket) && \
-	((*bottom)->bucket == cur_bucket))
+	else if ((prgm->top->bucket != bucket) && (prgm->bottom->bucket == bucket))
 	{
-		while ((*bottom)->dis_from_top != 0)
-			ft_reverserotate_a(prgm, stacks);
+		while (prgm->bottom->dis_from_top != 0)
+			ft_reverserotate_a(prgm);
 	}
-	if (ft_stack_len((*stacks)->stackb_lst) > 1)
-		ft_find_min_or_max(stacks, prgm, 1);
-	ft_push_b(prgm, stacks);
-	(*stacks)->stackb_lst->bucket = cur_bucket;
+	if (ft_stack_len(prgm->stacks->stackb_lst) > 1)
+		ft_move_num_to_top_of_stack(prgm, 1);
+	ft_push_b(prgm);
+	prgm->stacks->stackb_lst->bucket = bucket;
 }
 
 /*
-** Iterating Stack A from top to bottom and bottom to top 
+** Iterating Stack A from top to bottom and bottom to top
 ** at the same time to find the number that is in the current bucket
 ** Once we find the number then we decide to move on top of Stack A
-** based on the distance 
+** based on the distance
 */
 
-void				ft_algorithm(t_prgm *prgm, t_stacks **stacks)
+void				ft_algorithm(t_prgm *prgm)
 {
-	t_stack_list	*top;
-	t_stack_list	*bottom;
 	int				cur_bucket;
-	int				middle;
-	int				i;
+	size_t			i;
 
-	ft_common_checks((*stacks)->stacka_lst, &top, &bottom, &middle, &i);
+	ft_common_checks(prgm->stacks->stacka_lst, prgm, &i);
 	cur_bucket = 0;
-	while (((*stacks)->stacka_lst != NULL) && (i <= middle))
+	while ((prgm->stacks->stacka_lst != NULL) && (i <= prgm->stack_middle))
 	{
-		if ((top->bucket != cur_bucket) && (bottom->bucket != cur_bucket))
+		if ((prgm->top->bucket != cur_bucket) && \
+		(prgm->bottom->bucket != cur_bucket))
 		{
-			top = top->next;
-			bottom = bottom->prev;
+			prgm->top = prgm->top->next;
+			prgm->bottom = prgm->bottom->prev;
 			i += 1;
 		}
 		else
 		{
-			// ft_printf("Stack A");
-			// ft_print_doubly_all((*stacks)->stacka_lst);
-			// ft_printf("Stack B");
-			// ft_print_doubly_all((*stacks)->stackb_lst);
-			ft_check_num_to_move(prgm, stacks, &top, &bottom, cur_bucket);
-			ft_common_checks((*stacks)->stacka_lst, &top, &bottom, &middle, &i);
-			if (ft_stack_len((*stacks)->stackb_lst) % prgm->bucket_size == 0)
+			ft_check_num_to_move(prgm, cur_bucket);
+			ft_common_checks(prgm->stacks->stacka_lst, prgm, &i);
+			if (ft_stack_len(prgm->stacks->stackb_lst) % prgm->bucket_size == 0)
 				cur_bucket += 1;
 		}
 	}
-	ft_b_to_a(stacks, prgm, cur_bucket);
-	// ft_printf("Stack C (copy) Sorted");
-	// ft_print_doubly_all(prgm->sorted_stack);
+	ft_b_to_a(prgm, cur_bucket);
 }
