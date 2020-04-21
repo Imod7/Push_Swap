@@ -1,5 +1,5 @@
 # Push_Swap
-Project Push Swap from Codam College (42 network)
+Solving a two stack sorting problem with least amount of instructions (project from Codam College/42 network)
 
 ## Compiling
 - Clone the repository
