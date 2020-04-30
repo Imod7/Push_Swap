@@ -6,7 +6,7 @@
 /*   By: dominique <dominique@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/14 15:47:55 by dominique     #+#    #+#                 */
-/*   Updated: 2020/04/16 15:22:39 by dominique     ########   odam.nl         */
+/*   Updated: 2020/04/30 19:13:29 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void				ft_calculate_buckets(t_prgm *prgm)
 
 	temp = prgm->stack_len;
 	prgm->buckets = 2;
-	while (temp > 10)
+	while (temp > 25)
 	{
 		prgm->buckets += 2;
 		temp = temp / 2;

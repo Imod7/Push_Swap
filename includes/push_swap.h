@@ -6,14 +6,14 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/23 12:18:26 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/04/16 19:04:54 by dominique     ########   odam.nl         */
+/*   Updated: 2020/04/30 17:45:08 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# include "ft_printf.h"
+# include "libft.h"
 # include <fcntl.h>
 
 typedef enum			e_instruction
@@ -42,8 +42,9 @@ typedef enum			e_option
 
 typedef struct			s_instr
 {
-	t_instruction		instruction;
+	t_instruction		name;
 	struct s_instr		*next;
+	struct s_instr		*prev;
 }						t_instr;
 
 typedef struct			s_stack_list
@@ -54,6 +55,7 @@ typedef struct			s_stack_list
 	size_t				pos_index;
 	int					bucket;
 	int					dis_from_top;
+	int					rel_dis;
 }						t_stack_list;
 
 /*
@@ -104,18 +106,16 @@ int						ft_reverserotate_both(t_prgm *prgm);
 */
 
 void					prgm_initialize(t_prgm *prgm, size_t flag);
-// int					ft_exitprogram(int signal, t_stack_list **stacklst_ref);
-int						ft_exitprogram(t_prgm *prgm);
 int						set_prgm_options(char *argv, t_prgm *prgm);
 size_t					check_prgm_options(t_prgm *prgm);
+int						ft_exitprogram(t_prgm *prgm);
+int						ft_exit_msg(t_prgm *prgm, size_t flag);
 
 /*
 ** Check User Input functions
 */
 
-int						ft_build_stacka(int argc, char **argv, t_prgm *prgm);
-// int						ft_build_stackb(t_stacks **stacks);
-int						ft_build_stackb(t_stacks *stacks);
+int						ft_build_stacks(int argc, char **argv, t_prgm *prgm);
 
 /*
 ** Linked List functions related to the Stack List
@@ -135,31 +135,24 @@ t_stack_list			*ft_copy_list(t_stack_list *stacklst);
 void					ft_print_doublyll(t_stack_list *temp);
 void					ft_print_doubly_all(t_stack_list *temp);
 void					ft_print_stacks(t_stacks *stacks);
-// void					ft_print_instructions(t_prgm *prgm);
+void					ft_print_instructions(t_prgm *prgm);
+void					ft_print_doublyll_instr(t_instr *temp);
+void					ft_print_borders(size_t flag, char a, char b);
 
 /*
 ** Linked List functions related to the Instructions List
 */
 
 int						ft_saveinstructions(t_prgm *prgm, char *operation);
-// void					ft_call_operations(t_instr *instr_lst, \
-// 										t_stacks **stacks, t_prgm *prgm_sets);
 void					ft_call_operations(t_instr *instr_lst, t_prgm *prgm);
 void					ft_checkinstruction(size_t instruction);
-/*
-** Auxiliary functions
-*/
-
-// void		print_binary(int instr);
 
 /*
 ** Sorting functions
 */
 
 void					ft_sorting(t_prgm *prgm);
-// void					ft_presort(t_prgm *prgm, t_stacks **stacks);
-void					ft_presort(t_prgm *prgm);
-// int					ft_find_median(t_stack_list **stacklst);
+void					ft_presort(t_stack_list **completelist);
 int						ft_sort_small(t_prgm *prgm);
 
 /*
@@ -186,7 +179,7 @@ void					ft_operation_descr(t_prgm *prgm);
 */
 
 void					ft_setinstruction(char *operation, t_instr *instr);
-// void					ft_instr_addend(t_prgm **prgm, t_instr *new);
-void					ft_instr_addend(t_instr **instr_lst, t_instr *new);
+int						ft_instr_add_or_optmz(t_prgm *prgm, t_instr *new, \
+									char **operation);
 
 #endif

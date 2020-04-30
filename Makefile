@@ -6,14 +6,15 @@
 #    By: dsaripap <marvin@codam.nl>                   +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/01/31 13:44:11 by dsaripap      #+#    #+#                  #
-#    Updated: 2020/04/16 12:31:37 by dominique     ########   odam.nl          #
+#    Updated: 2020/04/30 17:34:24 by dominique     ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME_CHECKER = checker
 NAME_PUSHSWAP = push_swap
 LIBFT = libft/libft.a
-CC = gcc -Wall -Wextra -Werror -g
+CC = gcc
+FLAGS = -Wall -Wextra -Werror -g
 CHECKER_SRCDIR = checker_files
 CHECKER_OBJDIR = .obj-checker
 PUSHSWAP_SRCDIR = pushswap_files
@@ -29,11 +30,9 @@ NC=\033[0m # No Color
 
 SRC_CHECKER =	\
 		checker.c \
-		ft_bitwise.c \
 
 SRC_PUSHSWAP =	\
 		push_swap.c \
-		ft_sort_dummy.c \
 		ft_algorithm.c \
 		ft_sort_small.c \
 		ft_sort_big.c \
@@ -41,18 +40,19 @@ SRC_PUSHSWAP =	\
 SRC_SHARED =	\
 		ft_save_input.c \
 		ft_list_functions.c \
+		ft_optmz_instructions.c \
 		ft_save_instructions.c \
 		ft_prgm_functions.c \
 		ft_call_instructions.c \
-		ft_freelist.c \
+		ft_exit_prgm.c \
 		ft_stack_oper_push.c \
 		ft_stack_oper_rotation.c \
 		ft_stack_oper_rrotation.c \
 		ft_stack_oper_swap.c \
-		ft_printing.c \
+		ft_print_stacks.c \
+		ft_print_instructions.c \
 		ft_presort.c \
 		ft_metrics.c \
-		ft_operations_optimization.c \
 
 OBJ_CHECKER = $(SRC_CHECKER:%.c=$(CHECKER_OBJDIR)/%.o)
 OBJ_PUSHSWAP = $(SRC_PUSHSWAP:%.c=$(PUSHSWAP_OBJDIR)/%.o)
@@ -70,24 +70,24 @@ $(EXEDIR)$(NAME_CHECKER): $(OBJ_CHECKER) $(OBJ_SHARED) $(LIBFT)
 	@echo "${GREEN} [ + ] ${NC}Creating checker object files"
 	@echo "${GREEN} [ + ] ${NC}Creating shared object files"
 	@echo "${GREEN} [ + ] ${NC}Creating checker executable"
-	@$(CC) $(OBJ_CHECKER) $(OBJ_SHARED) -o $(EXEDIR)$(NAME_CHECKER) $(INCL)
+	@$(CC) $(FLAGS) $(OBJ_CHECKER) $(OBJ_SHARED) -o $(EXEDIR)$(NAME_CHECKER) $(INCL)
 
 $(EXEDIR)$(NAME_PUSHSWAP): $(OBJ_PUSHSWAP) $(LIBFT)
 	@echo "${GREEN} [ + ] ${NC}Creating push_swap object files"
 	@echo "${GREEN} [ + ] ${NC}Creating push_swap executable"
-	@$(CC) $(OBJ_PUSHSWAP) $(OBJ_SHARED) -o $(EXEDIR)$(NAME_PUSHSWAP) $(INCL)
+	@$(CC) $(FLAGS) $(OBJ_PUSHSWAP) $(OBJ_SHARED) -o $(EXEDIR)$(NAME_PUSHSWAP) $(INCL)
 
 $(SHARED_OBJDIR)/%.o: $(SHARED_SRCDIR)/%.c $(INCL)
 	@mkdir -p $(SHARED_OBJDIR)
-	@$(CC) -c -o $@ $<
+	@$(CC) $(FLAGS) -c -o $@ $<
 
 $(CHECKER_OBJDIR)/%.o: $(CHECKER_SRCDIR)/%.c $(INCL)
 	@mkdir -p $(CHECKER_OBJDIR)
-	@$(CC) -c -o $@ $<
+	@$(CC) $(FLAGS) -c -o $@ $<
 
 $(PUSHSWAP_OBJDIR)/%.o: $(PUSHSWAP_SRCDIR)/%.c $(INCL)
 	@mkdir -p $(PUSHSWAP_OBJDIR)
-	@$(CC) -c -o $@ $<
+	@$(CC) $(FLAGS) -c -o $@ $<
 
 .PHONY: clean
 

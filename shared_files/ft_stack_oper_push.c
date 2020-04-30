@@ -6,7 +6,7 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/24 14:53:01 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/04/16 10:50:19 by dominique     ########   odam.nl         */
+/*   Updated: 2020/04/30 07:19:16 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,23 @@
 
 int					ft_push_a(t_prgm *prgm)
 {
-	t_stack_list	*first_node;
-	t_stack_list	*second_node;
-	t_stack_list	*temp;
-	t_stack_list	*newnode;
+	t_stack_list	*first_node_b;
+	t_stack_list	*second_node_b;
+	t_stack_list	*first_node_a;
 
-	first_node = prgm->stacks->stackb_lst;
-	if (first_node == NULL)
+	first_node_b = prgm->stacks->stackb_lst;
+	if (first_node_b == NULL)
 		return (0);
-	second_node = prgm->stacks->stackb_lst->next;
-	prgm->stacks->stackb_lst = second_node;
-	if (second_node != NULL)
-		second_node->prev = NULL;
-	temp = prgm->stacks->stacka_lst;
-	newnode = ft_stack_newnode(first_node->num);
-	newnode->next = temp;
-	newnode->prev = NULL;
-	prgm->stacks->stacka_lst = newnode;
-	if (temp != NULL)
-		newnode->next->prev = newnode;
+	second_node_b = prgm->stacks->stackb_lst->next;
+	prgm->stacks->stackb_lst = second_node_b;
+	if (second_node_b != NULL)
+		second_node_b->prev = NULL;
+	first_node_a = prgm->stacks->stacka_lst;
+	first_node_b->next = first_node_a;
+	first_node_b->prev = NULL;
+	prgm->stacks->stacka_lst = first_node_b;
+	if (first_node_a != NULL)
+		first_node_b->next->prev = first_node_b;
 	if (prgm->exec == 1)
 	{
 		ft_saveinstructions(prgm, "pa");
@@ -43,25 +41,23 @@ int					ft_push_a(t_prgm *prgm)
 
 int					ft_push_b(t_prgm *prgm)
 {
-	t_stack_list	*first_node;
-	t_stack_list	*second_node;
-	t_stack_list	*temp;
-	t_stack_list	*newnode;
+	t_stack_list	*first_node_a;
+	t_stack_list	*second_node_a;
+	t_stack_list	*first_node_b;
 
-	first_node = prgm->stacks->stacka_lst;
-	if (first_node == NULL)
+	first_node_a = prgm->stacks->stacka_lst;
+	if (first_node_a == NULL)
 		return (0);
-	second_node = prgm->stacks->stacka_lst->next;
-	prgm->stacks->stacka_lst = second_node;
-	if (second_node != NULL)
-		second_node->prev = NULL;
-	temp = prgm->stacks->stackb_lst;
-	newnode = ft_stack_newnode(first_node->num);
-	newnode->next = temp;
-	newnode->prev = NULL;
-	prgm->stacks->stackb_lst = newnode;
-	if (temp != NULL)
-		newnode->next->prev = newnode;
+	second_node_a = prgm->stacks->stacka_lst->next;
+	prgm->stacks->stacka_lst = second_node_a;
+	if (second_node_a != NULL)
+		second_node_a->prev = NULL;
+	first_node_b = prgm->stacks->stackb_lst;
+	first_node_a->next = first_node_b;
+	first_node_a->prev = NULL;
+	prgm->stacks->stackb_lst = first_node_a;
+	if (first_node_b != NULL)
+		first_node_a->next->prev = first_node_a;
 	if (prgm->exec == 1)
 	{
 		ft_saveinstructions(prgm, "pb");

@@ -6,18 +6,13 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/24 14:55:25 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/04/16 20:18:35 by dominique     ########   odam.nl         */
+/*   Updated: 2020/04/30 17:31:03 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-// int			ft_biggerthanint(char *str)
-// {
-// 	long	num;
-// }
-
-int					ft_isnum(char *str)
+static int			ft_isnum(char *str)
 {
 	int		i;
 
@@ -31,17 +26,20 @@ int					ft_isnum(char *str)
 	return (0);
 }
 
-int					ft_build_stackb(t_stacks *stacks)
+static int			ft_isvalid(char *argv, long long num, int num_len)
 {
-	stacks->stackb_id = 'B';
-	return (0);
+	if (((num == 0) && ((num_len != 1) || (ft_strcmp(argv, "0") != 0))) \
+	|| (ft_isnum(argv) == -1) || (num > 2147483647) || (num < -2147483648))
+		return (-1);
+	else
+		return (0);
 }
 
-int					ft_build_stacka(int argc, char **argv, t_prgm *prgm)
+int					ft_build_stacks(int argc, char **argv, t_prgm *prgm)
 {
-	int				i;
-	int				num;
+	long long		num;
 	int				num_len;
+	int				i;
 	t_stack_list	*stack_node;
 
 	stack_node = NULL;
@@ -49,25 +47,19 @@ int					ft_build_stacka(int argc, char **argv, t_prgm *prgm)
 	while (i < argc)
 	{
 		num_len = ft_strlen(argv[i]);
-		num = ft_atoi(argv[i]);
-		if (((num == 0) && ((num_len != 1) || (ft_strcmp(argv[i], "0") != 0))) \
-		|| (ft_isnum(argv[i]) == -1))
-		{
-			ft_printf(ANSI_COLOR_RED"Error\n"ANSI_COLOR_RESET);
-			return (-1);
-		}
+		num = ft_atoll(argv[i]);
+		if (ft_isvalid(argv[i], num, num_len) == -1)
+			return (ft_exit_msg(prgm, 0));
 		else
 		{
 			if (ft_numexists_instack(prgm->stacks->stacka_lst, num) == 1)
-			{
-				ft_printf(ANSI_COLOR_RED"Error\n"ANSI_COLOR_RESET);
-				return (-1);
-			}
+				return (ft_exit_msg(prgm, 0));
 			stack_node = ft_stack_newnode(num);
 			ft_stack_addend(&(prgm->stacks)->stacka_lst, stack_node);
 		}
 		i++;
 	}
 	prgm->stacks->stacka_id = 'A';
+	prgm->stacks->stackb_id = 'B';
 	return (0);
 }

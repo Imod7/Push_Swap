@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_printing.c                                      :+:    :+:            */
+/*   ft_print_stacks.c                                  :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/31 18:57:55 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/04/16 19:58:19 by dominique     ########   odam.nl         */
+/*   Updated: 2020/04/30 08:32:21 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void				ft_print_borders(size_t flag, char a, char b)
 		ft_printf("----------------------------------------");
 		ft_printf("----------------------------------------\n");
 		ft_printf("|prev_num\tcurrent_num\tbucket\tdis_from_top\tpos_index");
-		ft_printf("\tnext_num|\n");
+		ft_printf("rel_dis\tnext_num|\n");
 	}
 }
 
@@ -113,8 +113,8 @@ void				ft_print_doubly_all(t_stack_list *temp)
 		else
 			ft_printf("|NULL\t\t");
 		ft_printf("%-15d\t%d\t", temp->num, temp->bucket);
-		ft_printf("%d\t\t", temp->dis_from_top);
-		ft_printf("%d\t", temp->pos_index);
+		ft_printf("%d\t\t%d\t", temp->dis_from_top, temp->pos_index);
+		ft_printf("%d\t", temp->rel_dis);
 		if (nextn != NULL)
 			ft_printf("\t%d\t|\n", nextn->num);
 		else
@@ -123,4 +123,26 @@ void				ft_print_doubly_all(t_stack_list *temp)
 	}
 	ft_printf("--------------------------------------");
 	ft_printf("------------------------------------------\n"ANSI_COLOR_RESET);
+}
+
+void				print_binary(int instr)
+{
+	unsigned short	mask;
+	int				bit;
+
+	bit = 16;
+	while (bit >= 0)
+	{
+		mask = instr >> bit;
+		if (mask & 1)
+		{
+			ft_printf(ANSI_COLOR_CYAN);
+			ft_printf("1 ");
+			ft_printf(ANSI_COLOR_RESET);
+		}
+		else
+			ft_printf("0 ");
+		bit--;
+	}
+	ft_printf("\n");
 }

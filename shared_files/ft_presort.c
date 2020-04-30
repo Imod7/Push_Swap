@@ -6,7 +6,7 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/05 13:06:40 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/04/16 20:28:35 by dominique     ########   odam.nl         */
+/*   Updated: 2020/04/30 07:18:09 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,7 @@ void				ft_splitlist(t_stack_list *completelist, \
 	t_stack_list	*splitnode;
 
 	len = ft_stack_len(completelist);
-	if (len % 2 == 0)
-		split = len / 2;
-	else
-		split = (len / 2) + 1;
+	split = (len % 2 == 0) ? (len / 2) : ((len / 2) + 1);
 	if (len == 1)
 	{
 		*ahalf = completelist;
@@ -81,10 +78,11 @@ t_stack_list		*ft_mergeback(t_stack_list **ahalf, t_stack_list **bhalf)
 }
 
 /*
-** Merge Sort
+** Doing a presort in the Sorted Stack by implementing
+** the Merge Sort algorithm
 */
 
-void				ft_mergesort(t_stack_list **completelist)
+void				ft_presort(t_stack_list **completelist)
 {
 	t_stack_list	*first_half;
 	t_stack_list	*second_half;
@@ -93,31 +91,10 @@ void				ft_mergesort(t_stack_list **completelist)
 	second_half = NULL;
 	if ((*completelist)->next == NULL)
 		return ;
-	ft_splitlist(*completelist, &first_half, &second_half);
-	ft_mergesort(&first_half);
-	ft_mergesort(&second_half);
+	ft_splitlist((*completelist), &first_half, &second_half);
+	ft_presort(&first_half);
+	ft_presort(&second_half);
 	*completelist = ft_mergeback(&first_half, &second_half);
-}
-
-void				ft_presort(t_prgm *prgm)
-{
-	//if (((*stacks)->stacka_lst == NULL) || \
-	//((*stacks)->stacka_lst->next == NULL))
-	//(prgm->exec == 0) ? ft_printf("OK\n") : (void)prgm;
-	//else
-	//{
-	prgm->sorted_stack = ft_copy_list(prgm->stacks->stacka_lst);
-	ft_mergesort(&(prgm->sorted_stack));
-	//}
-}
-
-int					ft_exit_msg(t_prgm *prgm, size_t flag)
-{
-	if (flag == 0)
-		ft_printf("Error\n");
-	if (flag == 1)
-		(prgm->exec == 0) ? ft_printf("KO\n") : (void)prgm;
-	return (-1);
 }
 
 /*
@@ -136,7 +113,7 @@ int					ft_check_ifsorted(t_prgm *prgm)
 	sorted = prgm->sorted_stack;
 	stacka = prgm->stacks->stacka_lst;
 	if (ft_stack_len(stacka) != ft_stack_len(sorted))
-		return(ft_exit_msg(prgm, 0));
+		return (ft_exit_msg(prgm, 0));
 	if ((stacka == NULL) || (stacka->next == NULL))
 		(prgm->exec == 0) ? ft_printf("OK\n") : (void)prgm;
 	else
@@ -144,7 +121,7 @@ int					ft_check_ifsorted(t_prgm *prgm)
 		while (stacka != NULL)
 		{
 			if (sorted->num != stacka->num)
-				return(ft_exit_msg(prgm, 1));
+				return (ft_exit_msg(prgm, 1));
 			sorted = sorted->next;
 			stacka = stacka->next;
 		}

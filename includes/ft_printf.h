@@ -6,18 +6,15 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/07/24 13:23:12 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/04/14 17:38:09 by dominique     ########   odam.nl         */
+/*   Updated: 2020/04/30 07:43:32 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include <stdarg.h>
-# include <unistd.h>
-# include <stdlib.h>
 # include "libft.h"
-# include "get_next_line.h"
+# include <stdarg.h>
 
 # define ANSI_COLOR_RESET   "\x1b[0m"
 # define ANSI_COLOR_RED     "\x1b[31m"
@@ -86,7 +83,7 @@ typedef struct	s_print
 typedef union	u_float
 {
 	long double	f_num;
-	uint64_t	mantissa;
+	long long	mantissa;
 	short		exponent[5];
 }				t_float;
 

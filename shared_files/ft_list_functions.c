@@ -6,7 +6,7 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/24 14:54:47 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/04/16 10:57:20 by dominique     ########   odam.nl         */
+/*   Updated: 2020/04/29 18:57:06 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_stack_list		*ft_stack_newnode(int content)
 {
 	t_stack_list	*newnode;
 
-	newnode = malloc(sizeof(t_stack_list));
+	newnode = ft_memalloc(sizeof(t_stack_list));
 	if (newnode == NULL)
 		return (NULL);
 	newnode->num = content;

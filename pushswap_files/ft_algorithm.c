@@ -6,11 +6,18 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/11 12:22:18 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/04/16 17:28:06 by dominique     ########   odam.nl         */
+/*   Updated: 2020/04/30 19:02:23 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
+
+/*
+** top and bottom pointers point to whichever stack I pass
+** in this function
+** and I pass either Stack A or Stack B depending on which
+** Stack I am iterating everytime
+*/
 
 void				ft_common_checks(t_stack_list *stack, t_prgm *prgm, \
 									size_t *i)
@@ -77,12 +84,16 @@ void				ft_check_num_to_move(t_prgm *prgm, int bucket)
 {
 	if ((prgm->top->bucket == bucket) && (prgm->bottom->bucket == bucket))
 	{
-		while ((prgm->top->dis_from_top <= prgm->bottom->dis_from_top) && \
-		(prgm->top->dis_from_top != 0))
-			ft_rotate_a(prgm);
-		while ((prgm->top->dis_from_top > prgm->bottom->dis_from_top) && \
-		(prgm->bottom->dis_from_top != 0))
-			ft_reverserotate_a(prgm);
+		if (prgm->top->num < prgm->bottom->num)
+		{
+			while (prgm->top->dis_from_top != 0)
+				ft_rotate_a(prgm);
+		}
+		else
+		{
+			while (prgm->bottom->dis_from_top != 0)
+				ft_reverserotate_a(prgm);
+		}
 	}
 	else if ((prgm->top->bucket == bucket) && (prgm->bottom->bucket != bucket))
 	{
@@ -96,8 +107,6 @@ void				ft_check_num_to_move(t_prgm *prgm, int bucket)
 	}
 	if (ft_stack_len(prgm->stacks->stackb_lst) > 1)
 		ft_move_num_to_top_of_stack(prgm, 1);
-	ft_push_b(prgm);
-	prgm->stacks->stackb_lst->bucket = bucket;
 }
 
 /*
@@ -126,6 +135,8 @@ void				ft_algorithm(t_prgm *prgm)
 		else
 		{
 			ft_check_num_to_move(prgm, cur_bucket);
+			ft_push_b(prgm);
+			prgm->stacks->stackb_lst->bucket = cur_bucket;
 			ft_common_checks(prgm->stacks->stacka_lst, prgm, &i);
 			if (ft_stack_len(prgm->stacks->stackb_lst) % prgm->bucket_size == 0)
 				cur_bucket += 1;

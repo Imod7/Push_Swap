@@ -6,7 +6,7 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/11 12:22:18 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/04/16 17:48:46 by dominique     ########   odam.nl         */
+/*   Updated: 2020/04/30 15:33:42 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void				ft_move_to_top_of_stack(t_prgm *prgm, int num, size_t flag)
 	}
 	else
 	{
-		// ft_printf("CHECK if this part ever RUNS");
 		while (temp->dis_from_top != 0)
 		{
 			if (flag == 1)

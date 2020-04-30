@@ -6,7 +6,7 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/08 21:57:49 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/04/16 22:47:44 by dominique     ########   odam.nl         */
+/*   Updated: 2020/04/19 21:09:30 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,6 @@ void			prgm_initialize(t_prgm *prgm, size_t flag)
 	prgm->stacks->stacka_lst = NULL;
 	prgm->instr_lst = NULL;
 	prgm->exec = flag;
-}
-
-int				ft_exitprogram(t_prgm *prgm)
-{
-	if (prgm->options & OPTION_N)
-	{
-		ft_printf(ANSI_COLOR_YELLOW);
-		ft_printf("Total number of operations %d\n", prgm->number_operations);
-	}
-	ft_free_list(prgm->stacks->stacka_lst);
-	ft_free_list(prgm->stacks->stackb_lst);
-	ft_free_list(prgm->sorted_stack);
-	free(prgm->stacks);
-	free(prgm);
-	return (0);
 }
 
 int				print_usage(t_prgm *prgm)
@@ -78,4 +63,13 @@ size_t			check_prgm_options(t_prgm *prgm)
 	if (prgm->options != 0)
 		i = 1;
 	return (i);
+}
+
+int				ft_exit_msg(t_prgm *prgm, size_t flag)
+{
+	if (flag == 0)
+		ft_printf(ANSI_COLOR_RED"Error\n"ANSI_COLOR_RESET);
+	if (flag == 1)
+		(prgm->exec == 0) ? ft_printf("KO\n") : (void)prgm;
+	return (-1);
 }
