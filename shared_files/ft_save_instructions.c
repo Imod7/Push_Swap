@@ -6,7 +6,7 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/24 14:52:10 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/04/30 17:35:27 by dominique     ########   odam.nl         */
+/*   Updated: 2020/05/13 15:50:45 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,7 @@ int					ft_saveinstructions(t_prgm *prgm, char *operation)
 	t_instr			*instr_node;
 
 	if (valid_instruction(operation) == 0)
-	{
-		ft_printf("Error\n");
-		return (-1);
-	}
+		return (ft_exit_msg(prgm, 0));
 	else
 	{
 		instr_node = (t_instr *)ft_memalloc(sizeof(t_instr));

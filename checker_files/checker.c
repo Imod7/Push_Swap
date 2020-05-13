@@ -6,7 +6,7 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/23 12:08:15 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/04/30 17:39:42 by dominique     ########   odam.nl         */
+/*   Updated: 2020/05/13 16:29:14 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int			read_input(t_prgm *prgm)
 			if (ft_saveinstructions(prgm, returned_line) == -1)
 				return (-1);
 		}
+		free(returned_line);
 	}
 	return (0);
 }
