@@ -79,6 +79,7 @@ typedef struct			s_prgm
 	t_option			options;
 	size_t				stack_len;
 	size_t				stack_middle;
+	int					distance;
 	t_stack_list		*top;
 	t_stack_list		*bottom;
 	size_t				exec;

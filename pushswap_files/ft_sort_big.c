@@ -14,14 +14,14 @@
 
 /*
 ** Checks the distance of the 2nd number from top of Stack B
-** from its adjacent ones and also compared to the number 
+** from its adjacent ones and also compared to the number
 ** at the bottom of Stack B
 */
 
 static int			ft_check_distance(t_prgm *prgm, t_stack_list **tmp, \
 									t_stack_list *temp)
 {
-	int 			dis1;
+	int				dis1;
 	int				dis2;
 	int				dis3;
 
@@ -30,9 +30,9 @@ static int			ft_check_distance(t_prgm *prgm, t_stack_list **tmp, \
 		dis1 = (*tmp)->next->num - (*tmp)->prev->num;
 		dis2 = (*tmp)->prev->num - temp->num;
 		dis3 = (*tmp)->next->num - (*tmp)->num;
-		dis1 = (dis1 < 0) ? (dis1)*(-1) : dis1;
-		dis2 = (dis2 < 0) ? (dis2)*(-1) : dis2;
-		dis3 = (dis3 < 0) ? (dis3)*(-1) : dis3;
+		dis1 = (dis1 < 0) ? (dis1) * (-1) : dis1;
+		dis2 = (dis2 < 0) ? (dis2) * (-1) : dis2;
+		dis3 = (dis3 < 0) ? (dis3) * (-1) : dis3;
 	}
 	if ((prgm->stack_len > 2) && ((*tmp)->dis_from_top == 1) && \
 	(temp->bucket == (*tmp)->prev->bucket) && (dis1 < dis2) && (dis3 > dis1))
@@ -45,7 +45,7 @@ static int			ft_check_distance(t_prgm *prgm, t_stack_list **tmp, \
 }
 
 /*
-** If this function is called with flag 0 then 
+** If this function is called with flag 0 then
 ** we check Stack B, otherwise we check Stack A
 ** Here we choose the operation that will move
 ** the number either based on its distance from the adjacent ones
