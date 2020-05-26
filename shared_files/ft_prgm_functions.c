@@ -6,7 +6,7 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/08 21:57:49 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/04/19 21:09:30 by dominique     ########   odam.nl         */
+/*   Updated: 2020/05/26 10:59:06 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ size_t			check_prgm_options(t_prgm *prgm)
 int				ft_exit_msg(t_prgm *prgm, size_t flag)
 {
 	if (flag == 0)
-		ft_printf(ANSI_COLOR_RED"Error\n"ANSI_COLOR_RESET);
+		write(2, "Error\n", 6);
 	if (flag == 1)
 		(prgm->exec == 0) ? ft_printf("KO\n") : (void)prgm;
 	return (-1);

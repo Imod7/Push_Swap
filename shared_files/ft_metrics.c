@@ -6,7 +6,7 @@
 /*   By: dominique <dominique@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/14 15:47:55 by dominique     #+#    #+#                 */
-/*   Updated: 2020/04/30 19:13:29 by dominique     ########   odam.nl         */
+/*   Updated: 2020/05/26 09:47:15 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void				ft_calculate_buckets(t_prgm *prgm)
 		prgm->buckets += 2;
 		temp = temp / 2;
 	}
+	if (prgm->stack_len == 500)
+		prgm->buckets = 14;
 	if (temp % 2 != 0)
 		prgm->bucket_size = (prgm->stack_len / prgm->buckets) + 1;
 	else

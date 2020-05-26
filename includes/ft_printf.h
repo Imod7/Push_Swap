@@ -6,7 +6,7 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/07/24 13:23:12 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/04/30 07:43:32 by dominique     ########   odam.nl         */
+/*   Updated: 2020/05/26 13:36:58 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ typedef struct	s_print
 typedef union	u_float
 {
 	long double	f_num;
-	long long	mantissa;
+	uint64_t	mantissa;
 	short		exponent[5];
 }				t_float;
 

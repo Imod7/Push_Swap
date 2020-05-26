@@ -6,7 +6,7 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/23 12:18:26 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/04/30 17:45:08 by dominique     ########   odam.nl         */
+/*   Updated: 2020/05/26 12:33:50 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,6 +164,7 @@ void					ft_sort_three(t_prgm *prgm);
 void					ft_calculate_buckets(t_prgm *prgm);
 void					ft_update_buckets(t_prgm *prgm);
 void					ft_algorithm(t_prgm *prgm);
+void					ft_check_num_to_move(t_prgm *prgm, int bucket);
 int						ft_check_ifsorted(t_prgm *prgm);
 void					ft_move_num_to_top_of_stack(t_prgm *prgm, size_t flag);
 

@@ -6,7 +6,7 @@
 #    By: dsaripap <marvin@codam.nl>                   +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/01/31 13:44:11 by dsaripap      #+#    #+#                  #
-#    Updated: 2020/04/30 17:34:24 by dominique     ########   odam.nl          #
+#    Updated: 2020/05/26 13:04:30 by dominique     ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ SRC_PUSHSWAP =	\
 		ft_algorithm.c \
 		ft_sort_small.c \
 		ft_sort_big.c \
+		ft_move_on_distance.c \
 
 SRC_SHARED =	\
 		ft_save_input.c \
