@@ -6,7 +6,7 @@
 #    By: dsaripap <marvin@codam.nl>                   +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/01/31 13:44:11 by dsaripap      #+#    #+#                  #
-#    Updated: 2020/05/26 13:04:30 by dominique     ########   odam.nl          #
+#    Updated: 2020/05/29 12:27:24 by dominique     ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,6 +54,7 @@ SRC_SHARED =	\
 		ft_print_instructions.c \
 		ft_presort.c \
 		ft_metrics.c \
+		ft_set_colors.c \
 
 OBJ_CHECKER = $(SRC_CHECKER:%.c=$(CHECKER_OBJDIR)/%.o)
 OBJ_PUSHSWAP = $(SRC_PUSHSWAP:%.c=$(PUSHSWAP_OBJDIR)/%.o)
@@ -73,7 +74,7 @@ $(EXEDIR)$(NAME_CHECKER): $(OBJ_CHECKER) $(OBJ_SHARED) $(LIBFT)
 	@echo "${GREEN} [ + ] ${NC}Creating checker executable"
 	@$(CC) $(FLAGS) $(OBJ_CHECKER) $(OBJ_SHARED) -o $(EXEDIR)$(NAME_CHECKER) $(INCL)
 
-$(EXEDIR)$(NAME_PUSHSWAP): $(OBJ_PUSHSWAP) $(LIBFT)
+$(EXEDIR)$(NAME_PUSHSWAP): $(OBJ_PUSHSWAP) $(OBJ_SHARED) $(LIBFT)
 	@echo "${GREEN} [ + ] ${NC}Creating push_swap object files"
 	@echo "${GREEN} [ + ] ${NC}Creating push_swap executable"
 	@$(CC) $(FLAGS) $(OBJ_PUSHSWAP) $(OBJ_SHARED) -o $(EXEDIR)$(NAME_PUSHSWAP) $(INCL)

@@ -6,7 +6,7 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/11 12:22:18 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/05/26 12:49:16 by dominique     ########   odam.nl         */
+/*   Updated: 2020/05/30 11:02:24 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@
 ** at the bottom of Stack B
 */
 
-static int			ft_check_distance(t_prgm *prgm, t_stack_list **tmp, \
+static int			ft_check_distance_in_b(t_prgm *prgm, t_stack_list **tmp, \
 									t_stack_list *temp)
 {
 	int				dis1;
 	int				dis2;
 	int				dis3;
 
-	if (prgm->stack_len > 2)
+	if (prgm->stackb_len > 2)
 	{
 		dis1 = (*tmp)->next->num - (*tmp)->prev->num;
 		dis2 = (*tmp)->prev->num - temp->num;
@@ -34,7 +34,7 @@ static int			ft_check_distance(t_prgm *prgm, t_stack_list **tmp, \
 		dis2 = (dis2 < 0) ? (dis2) * (-1) : dis2;
 		dis3 = (dis3 < 0) ? (dis3) * (-1) : dis3;
 	}
-	if ((prgm->stack_len > 2) && ((*tmp)->dis_from_top == 1) && \
+	if ((prgm->stackb_len > 2) && ((*tmp)->dis_from_top == 1) && \
 	(temp->bucket == (*tmp)->prev->bucket) && (dis1 < dis2) && (dis3 > dis1))
 	{
 		ft_swap_b(prgm);
@@ -52,20 +52,19 @@ static int			ft_check_distance(t_prgm *prgm, t_stack_list **tmp, \
 ** either based on its value compared to its adjacent ones
 */
 
-void				ft_choose_move(t_prgm *prgm, t_stack_list **tmp, \
+static void			ft_choose_move(t_prgm *prgm, t_stack_list **tmp, \
 									size_t flag)
 {
 	t_stack_list	*temp;
 
 	if (flag == 1)
 	{
-		prgm->stack_len = ft_stack_len(prgm->stacks->stackb_lst);
 		temp = prgm->stacks->stackb_lst;
 		while (temp->next != NULL)
 			temp = temp->next;
-		if (ft_check_distance(prgm, tmp, temp) == 1)
+		if (ft_check_distance_in_b(prgm, tmp, temp) == 1)
 			;
-		else if ((prgm->stack_len > 2) && \
+		else if ((prgm->stackb_len > 2) && \
 		((*tmp)->dis_from_top == 1) && \
 		((*tmp)->num > (*tmp)->prev->num) && \
 		((*tmp)->prev->num > (*tmp)->next->num))
@@ -80,7 +79,7 @@ void				ft_choose_move(t_prgm *prgm, t_stack_list **tmp, \
 		ft_rotate_a(prgm);
 }
 
-void				ft_move_to_top_of_stack(t_prgm *prgm, int num, size_t flag)
+static void			ft_move_to_top_of_stack(t_prgm *prgm, int num, size_t flag)
 {
 	t_stack_list	*temp;
 

@@ -6,7 +6,7 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/11 12:22:18 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/05/26 13:26:59 by dominique     ########   odam.nl         */
+/*   Updated: 2020/05/29 15:24:25 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,6 @@ void				ft_common_checks(t_stack_list *stack, t_prgm *prgm, \
 
 void				ft_find_max(t_prgm *prgm, t_stack_list **max)
 {
-	int				index;
-
-	index = 0;
 	if (prgm->top->num >= (*max)->num)
 		(*max) = prgm->top;
 	if (prgm->bottom->num > (*max)->num)
@@ -58,6 +55,7 @@ void				ft_b_to_a(t_prgm *prgm, int cur_bucket)
 	t_stack_list	*max;
 	size_t			i;
 
+	i = 0;
 	ft_common_checks(prgm->stacks->stackb_lst, prgm, &i);
 	while (prgm->stacks->stackb_lst != NULL)
 	{
@@ -80,11 +78,14 @@ void				ft_b_to_a(t_prgm *prgm, int cur_bucket)
 	}
 }
 
-void				ft_move_and_push(t_prgm *prgm, int cur_bucket)
+int					ft_move_and_push(t_prgm *prgm, int cur_bucket)
 {
 	ft_check_num_to_move(prgm, cur_bucket);
+	if (ft_check_ifsorted(prgm) != -1)
+		return (SUCCESS);
 	ft_push_b(prgm);
 	prgm->stacks->stackb_lst->bucket = cur_bucket;
+	return (CONTINUE);
 }
 
 /*
@@ -94,13 +95,14 @@ void				ft_move_and_push(t_prgm *prgm, int cur_bucket)
 ** based on the distance
 */
 
-void				ft_algorithm(t_prgm *prgm)
+int					ft_algorithm(t_prgm *prgm)
 {
 	int				cur_bucket;
 	size_t			i;
 
-	ft_common_checks(prgm->stacks->stacka_lst, prgm, &i);
+	// i = 0;
 	cur_bucket = 0;
+	ft_common_checks(prgm->stacks->stacka_lst, prgm, &i);
 	while ((prgm->stacks->stacka_lst != NULL) && (i <= prgm->stack_middle))
 	{
 		if ((prgm->top->bucket != cur_bucket) && \
@@ -112,11 +114,13 @@ void				ft_algorithm(t_prgm *prgm)
 		}
 		else
 		{
-			ft_move_and_push(prgm, cur_bucket);
+			if (ft_move_and_push(prgm, cur_bucket) == SUCCESS)
+				return (SUCCESS);
 			ft_common_checks(prgm->stacks->stacka_lst, prgm, &i);
 			if (ft_stack_len(prgm->stacks->stackb_lst) % prgm->bucket_size == 0)
 				cur_bucket += 1;
 		}
 	}
 	ft_b_to_a(prgm, cur_bucket);
+	return (0);
 }

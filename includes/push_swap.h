@@ -6,7 +6,7 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/23 12:18:26 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/05/26 12:33:50 by dominique     ########   odam.nl         */
+/*   Updated: 2020/05/29 14:45:42 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,13 @@
 
 # include "libft.h"
 # include <fcntl.h>
+
+typedef enum			e_prgm_result
+{
+	SUCCESS = 0,
+	ERROR = -1,
+	CONTINUE = 1
+}						t_prgm_result;
 
 typedef enum			e_instruction
 {
@@ -35,9 +42,8 @@ typedef enum			e_option
 {
 	OPTION_U = (1 << 0),
 	OPTION_V = (1 << 1),
-	OPTION_C = (1 << 2),
-	OPTION_N = (1 << 3),
-	OPTION_F = (1 << 4)
+	OPTION_N = (1 << 2),
+	OPTION_C = (1 << 3)
 }						t_option;
 
 typedef struct			s_instr
@@ -55,7 +61,7 @@ typedef struct			s_stack_list
 	size_t				pos_index;
 	int					bucket;
 	int					dis_from_top;
-	int					rel_dis;
+	int					colored;
 }						t_stack_list;
 
 /*
@@ -78,6 +84,9 @@ typedef struct			s_prgm
 	t_instr				*instr_lst;
 	t_option			options;
 	size_t				stack_len;
+	size_t				stacka_len;
+	size_t				stackb_len;
+	size_t				total_numbers;
 	size_t				stack_middle;
 	int					distance;
 	t_stack_list		*top;
@@ -108,8 +117,8 @@ int						ft_reverserotate_both(t_prgm *prgm);
 
 void					prgm_initialize(t_prgm *prgm, size_t flag);
 int						set_prgm_options(char *argv, t_prgm *prgm);
-size_t					check_prgm_options(t_prgm *prgm);
-int						ft_exitprogram(t_prgm *prgm);
+int						check_prgm_options(t_prgm *prgm, int argc);
+int						ft_exitprogram(t_prgm *prgm, int argc);
 int						ft_exit_msg(t_prgm *prgm, size_t flag);
 
 /*
@@ -124,7 +133,7 @@ int						ft_build_stacks(int argc, char **argv, t_prgm *prgm);
 
 t_stack_list			*ft_stack_newnode(int content);
 void					ft_stack_addend(t_stack_list **lst, t_stack_list *new);
-int						ft_stack_len(t_stack_list *lst);
+size_t					ft_stack_len(t_stack_list *lst);
 void					ft_free_list(t_stack_list *stack_lst);
 int						ft_numexists_instack(t_stack_list *lst, int num);
 t_stack_list			*ft_copy_list(t_stack_list *stacklst);
@@ -133,12 +142,13 @@ t_stack_list			*ft_copy_list(t_stack_list *stacklst);
 ** Printing functions
 */
 
-void					ft_print_doublyll(t_stack_list *temp);
-void					ft_print_doubly_all(t_stack_list *temp);
-void					ft_print_stacks(t_stacks *stacks);
+void					ft_print_doublyll(t_prgm *prgm, t_stack_list *temp);
+void					ft_print_doubly_all(t_prgm *prgm, t_stack_list *temp);
+void					ft_print_stacks(t_prgm *prgm, char *operation);
 void					ft_print_instructions(t_prgm *prgm);
 void					ft_print_doublyll_instr(t_instr *temp);
-void					ft_print_borders(size_t flag, char a, char b);
+void					ft_set_color_moving_num(t_prgm *prgm, char *operation);
+// void					ft_print_borders(size_t flag, char a, char b);
 
 /*
 ** Linked List functions related to the Instructions List
@@ -146,7 +156,6 @@ void					ft_print_borders(size_t flag, char a, char b);
 
 int						ft_saveinstructions(t_prgm *prgm, char *operation);
 void					ft_call_operations(t_instr *instr_lst, t_prgm *prgm);
-void					ft_checkinstruction(size_t instruction);
 
 /*
 ** Sorting functions
@@ -164,7 +173,7 @@ void					ft_metrics_calculation(t_prgm *prgm, int init);
 void					ft_sort_three(t_prgm *prgm);
 void					ft_calculate_buckets(t_prgm *prgm);
 void					ft_update_buckets(t_prgm *prgm);
-void					ft_algorithm(t_prgm *prgm);
+int						ft_algorithm(t_prgm *prgm);
 void					ft_check_num_to_move(t_prgm *prgm, int bucket);
 int						ft_check_ifsorted(t_prgm *prgm);
 void					ft_move_num_to_top_of_stack(t_prgm *prgm, size_t flag);

@@ -6,7 +6,7 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/07/24 13:23:12 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/05/26 13:36:58 by dominique     ########   odam.nl         */
+/*   Updated: 2020/05/30 11:08:43 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,20 @@
 
 # include "libft.h"
 # include <stdarg.h>
+# include <stdint.h>
 
-# define ANSI_COLOR_RESET   "\x1b[0m"
-# define ANSI_COLOR_RED     "\x1b[31m"
-# define ANSI_COLOR_GREEN   "\x1b[32m"
-# define ANSI_COLOR_YELLOW	"\x1b[33m"
-# define ANSI_COLOR_BLUE	"\x1b[34m"
-# define ANSI_COLOR_MAGENTA	"\x1b[35m"
-# define ANSI_COLOR_CYAN    "\x1b[36m"
+# define ANSI_COLOR_RESET		"\x1b[0m"
+# define ANSI_COLOR_RED			"\x1b[31m"
+# define ANSI_COLOR_RED_CINA	"\x1b[38;2;227;66;52m"
+# define ANSI_COLOR_RED_BOLD	"\033[31;1m"
+# define ANSI_COLOR_GREEN   	"\x1b[32m"
+# define ANSI_COLOR_GREEN_BOLD  "\x1b[32;1m"
+# define ANSI_COLOR_GREEN_EMER	"\x1b[38;2;80;200;120m"
+# define ANSI_COLOR_YELLOW		"\x1b[33m"
+# define ANSI_COLOR_YELLOW_PAST	"\x1b[38;2;253;253;150m"
+# define ANSI_COLOR_BLUE		"\x1b[38;2;40;177;249m"
+# define ANSI_COLOR_MAGENTA		"\x1b[35m"
+# define ANSI_COLOR_CYAN    	"\x1b[36m"
 
 # define BUFFER_SIZE		1024
 # define FLOAT_TOTAL_LEN	40000

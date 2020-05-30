@@ -6,36 +6,38 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/24 14:53:52 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/04/30 12:14:33 by dominique     ########   odam.nl         */
+/*   Updated: 2020/05/29 15:27:33 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void					ft_checkinstruction(size_t instruction)
+static void					ft_checkinstruction(size_t instruction, \
+												char **oper)
 {
 	if (instruction & INSTR_SA)
-		ft_printf("sa\n");
+		*oper = "sa";
 	if (instruction & INSTR_SB)
-		ft_printf("sb\n");
+		*oper = "sb";
 	if (instruction & INSTR_SS)
-		ft_printf("ss\n");
+		*oper = "ss";
 	if (instruction & INSTR_PA)
-		ft_printf("pa\n");
+		*oper = "pa";
 	if (instruction & INSTR_PB)
-		ft_printf("pb\n");
+		*oper = "pb";
 	if (instruction & INSTR_RA)
-		ft_printf("ra\n");
+		*oper = "ra";
 	if (instruction & INSTR_RB)
-		ft_printf("rb\n");
+		*oper = "rb";
 	if (instruction & INSTR_RR)
-		ft_printf("rr\n");
+		*oper = "rr";
 	if (instruction & INSTR_RRA)
-		ft_printf("rra\n");
+		*oper = "rra";
 	if (instruction & INSTR_RRB)
-		ft_printf("rrb\n");
+		*oper = "rrb";
 	if (instruction & INSTR_RRR)
-		ft_printf("rrr\n");
+		*oper = "rrr";
+	ft_printf("%s\n", *oper);
 }
 
 size_t					power_of_two_converter(size_t power)
@@ -75,6 +77,7 @@ void					ft_call_operations(t_instr *lst, t_prgm *prgm)
 	t_instr				*temp;
 	size_t				instr;
 	t_operation_func	oper_func[11];
+	char				*oper;
 
 	ft_initialize_array(oper_func);
 	temp = lst;
@@ -84,8 +87,11 @@ void					ft_call_operations(t_instr *lst, t_prgm *prgm)
 		oper_func[instr](prgm);
 		if (prgm->options & OPTION_V)
 		{
-			ft_checkinstruction(temp->name);
-			ft_print_stacks(prgm->stacks);
+			if (prgm->options & OPTION_C)
+				ft_printf(ANSI_COLOR_GREEN_EMER);
+			ft_checkinstruction(temp->name, &oper);
+			ft_printf(ANSI_COLOR_RESET);
+			ft_print_stacks(prgm, oper);
 		}
 		temp = temp->next;
 	}

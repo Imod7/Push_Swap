@@ -6,7 +6,7 @@
 /*   By: dominique <dominique@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/30 07:42:58 by dominique     #+#    #+#                 */
-/*   Updated: 2020/04/30 12:14:41 by dominique     ########   odam.nl         */
+/*   Updated: 2020/05/28 19:15:44 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void				ft_print_doublyll_instr(t_instr *temp)
 	t_instr			*prevn;
 	t_instr			*nextn;
 
-	ft_print_borders(2, '/', '/');
+	// ft_print_borders(2, '/', '/');
 	if (temp == NULL)
 		ft_printf("|\t\t\t\t\t\t\t\t|\n");
 	while (temp != NULL)

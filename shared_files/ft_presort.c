@@ -6,7 +6,7 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/05 13:06:40 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/05/13 16:05:22 by dominique     ########   odam.nl         */
+/*   Updated: 2020/05/30 10:52:36 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,8 +112,10 @@ int					ft_check_ifsorted(t_prgm *prgm)
 
 	sorted = prgm->sorted_stack;
 	stacka = prgm->stacks->stacka_lst;
-	if ((ft_stack_len(stacka) != ft_stack_len(sorted)) && \
-	(ft_stack_len(prgm->stacks->stackb_lst) == 0))
+	if (prgm->stacka_len != prgm->total_numbers)
+		return (ft_exit_msg(prgm, 1));
+	if ((prgm->stacka_len != ft_stack_len(sorted)) && \
+	(prgm->stackb_len == 0))
 		return (ft_exit_msg(prgm, 0));
 	if ((stacka == NULL) || (stacka->next == NULL))
 		(prgm->exec == 0) ? ft_printf("OK\n") : (void)prgm;

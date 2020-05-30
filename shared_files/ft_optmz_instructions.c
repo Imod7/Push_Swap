@@ -6,7 +6,7 @@
 /*   By: dominique <dominique@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/30 17:32:25 by dominique     #+#    #+#                 */
-/*   Updated: 2020/04/30 17:35:35 by dominique     ########   odam.nl         */
+/*   Updated: 2020/05/29 15:29:04 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static int			ft_merge_operations(t_instr *instr_lst, t_instr *new, \
 	}
 	else if (!ft_strcmp(oper, "ss"))
 	{
+		ft_printf("merging we are %d\n", instr_lst->prev->name);
 		while ((instr_lst->prev != NULL) && (((instr_lst->name & INSTR_SA) && \
 		(new->name & INSTR_SB)) || ((instr_lst->name & INSTR_SB) && \
 		(new->name & INSTR_SA))))
@@ -44,6 +45,7 @@ static int			ft_merge_operations(t_instr *instr_lst, t_instr *new, \
 static int			ft_instr_optimize(t_instr *instr, t_instr *new, \
 											char **operation)
 {
+	// ft_printf(ANSI_COLOR_BLUE"OPTIMIZE ins = %d \n"ANSI_COLOR_RESET, instr->name);
 	if (((instr->name & INSTR_RA) && (new->name & INSTR_RB)) \
 	|| ((instr->name & INSTR_RB) && (new->name & INSTR_RA)))
 	{
@@ -72,7 +74,6 @@ int					ft_instr_add_or_optmz(t_prgm *prgm, t_instr *new, \
 									char **operation)
 {
 	t_instr			*temp;
-	t_instruction	instr;
 
 	if (prgm->instr_lst == NULL)
 	{
@@ -84,8 +85,7 @@ int					ft_instr_add_or_optmz(t_prgm *prgm, t_instr *new, \
 	temp = prgm->instr_lst;
 	while (temp->next != NULL)
 		temp = temp->next;
-	instr = temp->name;
-	if (ft_instr_optimize(temp, new, operation) == 1)
+	if ((prgm->exec == 1) && (ft_instr_optimize(temp, new, operation) == 1))
 		return (1);
 	else
 	{

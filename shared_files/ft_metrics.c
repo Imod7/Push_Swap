@@ -6,7 +6,7 @@
 /*   By: dominique <dominique@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/14 15:47:55 by dominique     #+#    #+#                 */
-/*   Updated: 2020/05/26 09:47:15 by dominique     ########   odam.nl         */
+/*   Updated: 2020/05/30 10:41:35 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,19 @@ void				ft_calculate_buckets(t_prgm *prgm)
 {
 	int				temp;
 
-	temp = prgm->stack_len;
+	temp = prgm->stacka_len;
 	prgm->buckets = 2;
 	while (temp > 25)
 	{
 		prgm->buckets += 2;
 		temp = temp / 2;
 	}
-	if (prgm->stack_len == 500)
+	if (prgm->stacka_len == 500)
 		prgm->buckets = 14;
 	if (temp % 2 != 0)
-		prgm->bucket_size = (prgm->stack_len / prgm->buckets) + 1;
+		prgm->bucket_size = (prgm->stacka_len / prgm->buckets) + 1;
 	else
-		prgm->bucket_size = prgm->stack_len / prgm->buckets;
+		prgm->bucket_size = prgm->stacka_len / prgm->buckets;
 }
 
 /*
@@ -90,15 +90,15 @@ void				ft_calculate_distance(t_prgm *prgm, size_t *i, size_t *j, \
 	}
 }
 
-void				ft_metrics_calc(t_prgm *prgm, size_t j)
+static void			ft_metrics_stackb(t_prgm *prgm, size_t j)
 {
 	t_stack_list	*temp;
 	size_t			i;
 
 	i = 0;
 	temp = prgm->stacks->stackb_lst;
-	prgm->stack_len = ft_stack_len(temp);
-	prgm->stack_middle = prgm->stack_len / 2;
+	prgm->stack_len = prgm->stackb_len;
+	prgm->stack_middle = prgm->stackb_len / 2;
 	while (temp != NULL)
 	{
 		ft_calculate_distance(prgm, &i, &j, &temp);
@@ -121,8 +121,10 @@ void				ft_metrics_calculation(t_prgm *prgm, int init)
 
 	i = 0;
 	temp = prgm->stacks->stacka_lst;
-	prgm->stack_len = ft_stack_len(temp);
-	prgm->stack_middle = prgm->stack_len / 2;
+	prgm->stacka_len = ft_stack_len(prgm->stacks->stacka_lst);
+	prgm->stackb_len = prgm->total_numbers - prgm->stacka_len;
+	prgm->stack_len = prgm->stacka_len;
+	prgm->stack_middle = prgm->stacka_len / 2;
 	while (temp != NULL)
 	{
 		while (prgm->sorted_stack->num != temp->num)
@@ -134,5 +136,5 @@ void				ft_metrics_calculation(t_prgm *prgm, int init)
 			prgm->sorted_stack = prgm->sorted_stack->prev;
 		temp = temp->next;
 	}
-	ft_metrics_calc(prgm, j);
+	ft_metrics_stackb(prgm, j);
 }

@@ -6,7 +6,7 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/24 14:55:25 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/04/30 17:31:03 by dominique     ########   odam.nl         */
+/*   Updated: 2020/05/29 10:56:03 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int			ft_isnum(char *str)
 {
-	int		i;
+	int				i;
 
 	i = 0;
 	while (str[i] != '\0')
@@ -29,21 +29,22 @@ static int			ft_isnum(char *str)
 static int			ft_isvalid(char *argv, long long num, int num_len)
 {
 	if (((num == 0) && ((num_len != 1) || (ft_strcmp(argv, "0") != 0))) \
-	|| (ft_isnum(argv) == -1) || (num > 2147483647) || (num < -2147483648))
+	|| (ft_isnum(argv) == -1) || (num > 2147483647) || (num < -2147483648) \
+	|| (num_len > 11))
 		return (-1);
 	else
 		return (0);
 }
 
-int					ft_build_stacks(int argc, char **argv, t_prgm *prgm)
+static int			ft_saving_arguments(int argc, char **argv, t_prgm *prgm, \
+										int i)
 {
 	long long		num;
 	int				num_len;
-	int				i;
 	t_stack_list	*stack_node;
 
 	stack_node = NULL;
-	i = 1 + check_prgm_options(prgm);
+	prgm->total_numbers = 0;
 	while (i < argc)
 	{
 		num_len = ft_strlen(argv[i]);
@@ -57,8 +58,24 @@ int					ft_build_stacks(int argc, char **argv, t_prgm *prgm)
 			stack_node = ft_stack_newnode(num);
 			ft_stack_addend(&(prgm->stacks)->stacka_lst, stack_node);
 		}
+		prgm->total_numbers += 1;
 		i++;
 	}
+	prgm->stacka_len = ft_stack_len(prgm->stacks->stacka_lst);
+	return (0);
+}
+
+int					ft_build_stacks(int argc, char **argv, t_prgm *prgm)
+{
+	int				i;
+
+	i = 0;
+	if (check_prgm_options(prgm, argc) == -1)
+		return (-1);
+	else
+		i = 1 + check_prgm_options(prgm, argc);
+	if (ft_saving_arguments(argc, argv, prgm, i) == -1)
+		return (-1);
 	prgm->stacks->stacka_id = 'A';
 	prgm->stacks->stackb_id = 'B';
 	return (0);

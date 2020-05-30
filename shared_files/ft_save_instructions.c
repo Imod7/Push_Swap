@@ -6,7 +6,7 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/24 14:52:10 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/05/13 15:50:45 by dominique     ########   odam.nl         */
+/*   Updated: 2020/05/29 13:53:41 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,13 @@ int					ft_saveinstructions(t_prgm *prgm, char *operation)
 		ft_setinstruction(operation, instr_node);
 		ft_instr_add_or_optmz(prgm, instr_node, &operation);
 		if ((prgm->options & OPTION_V) && (prgm->exec == 1))
-			ft_print_stacks(prgm->stacks);
+		{
+			if (prgm->options & OPTION_C)
+				ft_printf(ANSI_COLOR_GREEN_EMER);
+			ft_printf("%s\n", operation);
+			ft_printf(ANSI_COLOR_RESET);
+			ft_print_stacks(prgm, operation);
+		}
 	}
 	return (0);
 }

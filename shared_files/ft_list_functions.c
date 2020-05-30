@@ -6,7 +6,7 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/24 14:54:47 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/04/29 18:57:06 by dominique     ########   odam.nl         */
+/*   Updated: 2020/05/29 10:51:49 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ void				ft_stack_addend(t_stack_list **lst, t_stack_list *new)
 	new->prev = temp;
 }
 
-int					ft_stack_len(t_stack_list *lst)
+size_t				ft_stack_len(t_stack_list *lst)
 {
 	t_stack_list	*temp;
-	int				len;
+	size_t			len;
 
 	temp = lst;
 	len = 0;

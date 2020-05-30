@@ -6,7 +6,7 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/31 18:57:55 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/04/30 07:47:11 by dominique     ########   odam.nl         */
+/*   Updated: 2020/05/28 14:20:30 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,17 @@ static void			ft_free_instr_list(t_instr *instr_lst)
 	instr_lst = NULL;
 }
 
-int					ft_exitprogram(t_prgm *prgm)
+int					ft_exitprogram(t_prgm *prgm, int argc)
 {
-	if (prgm->options & OPTION_N)
+	if ((prgm->options != 0) && (argc == 2))
 	{
-		ft_printf(ANSI_COLOR_YELLOW);
+		free(prgm->stacks);
+		free(prgm);
+		return (0);
+	}
+	else if ((prgm->options & OPTION_N) && (argc != 2))
+	{
+		ft_printf(ANSI_COLOR_YELLOW_PAST);
 		ft_printf("Total number of operations %d\n", prgm->number_operations);
 	}
 	ft_free_stack_list(prgm->stacks->stacka_lst);

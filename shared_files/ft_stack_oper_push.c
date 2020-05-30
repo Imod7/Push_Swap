@@ -6,7 +6,7 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/24 14:53:01 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/04/30 07:19:16 by dominique     ########   odam.nl         */
+/*   Updated: 2020/05/30 10:30:55 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,9 @@ int					ft_push_a(t_prgm *prgm)
 	prgm->stacks->stacka_lst = first_node_b;
 	if (first_node_a != NULL)
 		first_node_b->next->prev = first_node_b;
+	ft_metrics_calculation(prgm, 0);
 	if (prgm->exec == 1)
-	{
 		ft_saveinstructions(prgm, "pa");
-		ft_metrics_calculation(prgm, 0);
-	}
 	return (0);
 }
 
@@ -58,10 +56,8 @@ int					ft_push_b(t_prgm *prgm)
 	prgm->stacks->stackb_lst = first_node_a;
 	if (first_node_b != NULL)
 		first_node_a->next->prev = first_node_a;
+	ft_metrics_calculation(prgm, 0);
 	if (prgm->exec == 1)
-	{
 		ft_saveinstructions(prgm, "pb");
-		ft_metrics_calculation(prgm, 0);
-	}
 	return (0);
 }
