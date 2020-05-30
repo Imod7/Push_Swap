@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   ft_move_on_distance.c                              :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: dominique <dominique@student.codam.nl>       +#+                     */
+/*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/05/26 12:20:18 by dominique     #+#    #+#                 */
-/*   Updated: 2020/05/29 15:18:29 by dominique     ########   odam.nl         */
+/*   Created: 2020/05/30 15:16:02 by dsaripap      #+#    #+#                 */
+/*   Updated: 2020/05/30 15:16:04 by dsaripap      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 

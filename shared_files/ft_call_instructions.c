@@ -6,13 +6,13 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/24 14:53:52 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/05/29 15:27:33 by dominique     ########   odam.nl         */
+/*   Updated: 2020/05/30 17:39:28 by dsaripap      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-static void					ft_checkinstruction(size_t instruction, \
+static void				ft_checkinstruction(size_t instruction, \
 												char **oper)
 {
 	if (instruction & INSTR_SA)

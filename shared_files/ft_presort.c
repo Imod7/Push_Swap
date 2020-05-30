@@ -6,7 +6,7 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/05 13:06:40 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/05/30 10:52:36 by dominique     ########   odam.nl         */
+/*   Updated: 2020/05/30 16:21:17 by dsaripap      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,8 @@ void				ft_presort(t_stack_list **completelist)
 ** which means Stack A is sorted
 ** The check is done in the beginning (in case the input is an
 ** already sorted list) or in the end to check if the algorithm
-** sorted the Stack successfully
+** sorted the Stack successfully.
+** This function can return ERROR, KO or SUCCESS.
 */
 
 int					ft_check_ifsorted(t_prgm *prgm)
@@ -130,5 +131,5 @@ int					ft_check_ifsorted(t_prgm *prgm)
 		}
 		(prgm->exec == 0) ? ft_printf("OK\n") : (void)prgm;
 	}
-	return (0);
+	return (SUCCESS);
 }

@@ -3,19 +3,17 @@
 /*                                                        ::::::::            */
 /*   ft_set_colors.c                                    :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: dominique <dominique@student.codam.nl>       +#+                     */
+/*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/05/29 08:18:55 by dominique     #+#    #+#                 */
-/*   Updated: 2020/05/30 11:02:47 by dominique     ########   odam.nl         */
+/*   Created: 2020/05/30 15:15:33 by dsaripap      #+#    #+#                 */
+/*   Updated: 2020/05/30 17:39:02 by dsaripap      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void				ft_set_color_when_rotating(t_prgm *prgm, char *operation)
+void				ft_set_color_when_revrotating(t_prgm *prgm, char *operation)
 {
-	t_stack_list	*temp;
-
 	if (!ft_strcmp(operation, "rrr"))
 	{
 		if (prgm->stacka_len > 1)
@@ -23,6 +21,12 @@ void				ft_set_color_when_rotating(t_prgm *prgm, char *operation)
 		if (prgm->stackb_len > 1)
 			prgm->stacks->stackb_lst->colored = 1;
 	}
+}
+
+void				ft_set_color_when_rotating(t_prgm *prgm, char *operation)
+{
+	t_stack_list	*temp;
+
 	if (!ft_strcmp(operation, "rr"))
 	{
 		if (prgm->stacka_len > 1)
@@ -40,7 +44,7 @@ void				ft_set_color_when_rotating(t_prgm *prgm, char *operation)
 			temp->colored = 1;
 		}
 	}
-}	
+}
 
 void				ft_set_color_stack_a(t_prgm *prgm, char *operation)
 {
@@ -79,7 +83,7 @@ void				ft_set_color_stack_b(t_prgm *prgm, char *operation)
 			temp->colored = 1;
 		}
 	}
-	if ((prgm->stackb_len > 0) && \
+	if ((prgm->stackb_len > 0) && (prgm->stacka_len > 0) && \
 	((!ft_strcmp(operation, "pb")) || (!ft_strcmp(operation, "rrb"))))
 		prgm->stacks->stackb_lst->colored = 1;
 }
@@ -89,6 +93,7 @@ void				ft_set_color_moving_num(t_prgm *prgm, char *operation)
 	ft_set_color_stack_a(prgm, operation);
 	ft_set_color_stack_b(prgm, operation);
 	ft_set_color_when_rotating(prgm, operation);
+	ft_set_color_when_revrotating(prgm, operation);
 	if (!ft_strcmp(operation, "ss"))
 	{
 		if (prgm->stacka_len > 1)

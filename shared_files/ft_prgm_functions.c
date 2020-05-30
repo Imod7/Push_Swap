@@ -6,7 +6,7 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/08 21:57:49 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/05/30 10:53:38 by dominique     ########   odam.nl         */
+/*   Updated: 2020/05/30 16:03:54 by dsaripap      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int				print_usage(t_prgm *prgm)
 	prgm->options |= OPTION_U;
 	ft_printf("usage: ./program_name [-u | -vnc] [num1] [num2] [num3] ...\n");
 	ft_printf("program_name can be push_swap or checker\n");
-	return (-1);
+	return (ERROR);
 }
 
 int				set_prgm_options(char *argv, t_prgm *prgm)
@@ -50,7 +50,7 @@ int				set_prgm_options(char *argv, t_prgm *prgm)
 		}
 	}
 	prgm->number_operations = 0;
-	return (0);
+	return (SUCCESS);
 }
 
 int				check_prgm_options(t_prgm *prgm, int argc)
@@ -61,15 +61,23 @@ int				check_prgm_options(t_prgm *prgm, int argc)
 	if (prgm->options != 0)
 		i = 1;
 	if ((prgm->options != 0) && (argc == 2))
-		return (-1);
+		return (ERROR);
 	return (i);
 }
 
 int				ft_exit_msg(t_prgm *prgm, size_t flag)
 {
 	if (flag == 0)
+	{
 		write(2, "Error\n", 6);
+		prgm->signal = ERROR;
+		return (ERROR);
+	}
 	if (flag == 1)
+	{
 		(prgm->exec == 0) ? ft_printf("KO\n") : (void)prgm;
-	return (-1);
+		prgm->signal = KO;
+		return (KO);
+	}
+	return (SUCCESS);
 }

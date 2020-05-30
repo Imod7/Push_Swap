@@ -6,7 +6,7 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/23 12:08:15 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/05/29 12:04:57 by dominique     ########   odam.nl         */
+/*   Updated: 2020/05/30 16:19:47 by dsaripap      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,18 +44,17 @@ int			main(int argc, char **argv)
 		return (0);
 	else
 	{
-		if (set_prgm_options(argv[1], prgm) == -1)
+		if (set_prgm_options(argv[1], prgm) == ERROR)
 			return (0);
-		if (ft_build_stacks(argc, argv, prgm) == -1)
+		if (ft_build_stacks(argc, argv, prgm) == ERROR)
 			return (ft_exitprogram(prgm, argc));
 	}
-	if (read_input(prgm) == -1)
+	if (read_input(prgm) == ERROR)
 		return (ft_exitprogram(prgm, argc));
-	// ft_printf("numbers : %d\n", prgm->total_numbers);
 	prgm->sorted_stack = ft_copy_list(prgm->stacks->stacka_lst);
 	ft_presort(&(prgm->sorted_stack));
 	ft_call_operations(prgm->instr_lst, prgm);
-	if (ft_check_ifsorted(prgm) == -1)
+	if (ft_check_ifsorted(prgm) != SUCCESS)
 		return (ft_exitprogram(prgm, argc));
 	ft_exitprogram(prgm, argc);
 	return (0);

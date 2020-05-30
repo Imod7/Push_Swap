@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   ft_optmz_instructions.c                            :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: dominique <dominique@student.codam.nl>       +#+                     */
+/*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/04/30 17:32:25 by dominique     #+#    #+#                 */
-/*   Updated: 2020/05/29 15:29:04 by dominique     ########   odam.nl         */
+/*   Created: 2020/05/30 15:14:56 by dsaripap      #+#    #+#                 */
+/*   Updated: 2020/05/30 15:14:58 by dsaripap      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ static int			ft_merge_operations(t_instr *instr_lst, t_instr *new, \
 	}
 	else if (!ft_strcmp(oper, "ss"))
 	{
-		ft_printf("merging we are %d\n", instr_lst->prev->name);
 		while ((instr_lst->prev != NULL) && (((instr_lst->name & INSTR_SA) && \
 		(new->name & INSTR_SB)) || ((instr_lst->name & INSTR_SB) && \
 		(new->name & INSTR_SA))))
@@ -45,7 +44,6 @@ static int			ft_merge_operations(t_instr *instr_lst, t_instr *new, \
 static int			ft_instr_optimize(t_instr *instr, t_instr *new, \
 											char **operation)
 {
-	// ft_printf(ANSI_COLOR_BLUE"OPTIMIZE ins = %d \n"ANSI_COLOR_RESET, instr->name);
 	if (((instr->name & INSTR_RA) && (new->name & INSTR_RB)) \
 	|| ((instr->name & INSTR_RB) && (new->name & INSTR_RA)))
 	{

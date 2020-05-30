@@ -6,7 +6,7 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/24 14:55:25 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/05/29 10:56:03 by dominique     ########   odam.nl         */
+/*   Updated: 2020/05/30 15:45:51 by dsaripap      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int			ft_isnum(char *str)
 			return (-1);
 		i++;
 	}
-	return (0);
+	return (SUCCESS);
 }
 
 static int			ft_isvalid(char *argv, long long num, int num_len)
@@ -31,9 +31,9 @@ static int			ft_isvalid(char *argv, long long num, int num_len)
 	if (((num == 0) && ((num_len != 1) || (ft_strcmp(argv, "0") != 0))) \
 	|| (ft_isnum(argv) == -1) || (num > 2147483647) || (num < -2147483648) \
 	|| (num_len > 11))
-		return (-1);
+		return (ERROR);
 	else
-		return (0);
+		return (SUCCESS);
 }
 
 static int			ft_saving_arguments(int argc, char **argv, t_prgm *prgm, \
@@ -62,7 +62,7 @@ static int			ft_saving_arguments(int argc, char **argv, t_prgm *prgm, \
 		i++;
 	}
 	prgm->stacka_len = ft_stack_len(prgm->stacks->stacka_lst);
-	return (0);
+	return (SUCCESS);
 }
 
 int					ft_build_stacks(int argc, char **argv, t_prgm *prgm)
@@ -70,13 +70,13 @@ int					ft_build_stacks(int argc, char **argv, t_prgm *prgm)
 	int				i;
 
 	i = 0;
-	if (check_prgm_options(prgm, argc) == -1)
-		return (-1);
+	if (check_prgm_options(prgm, argc) == ERROR)
+		return (ERROR);
 	else
 		i = 1 + check_prgm_options(prgm, argc);
 	if (ft_saving_arguments(argc, argv, prgm, i) == -1)
-		return (-1);
+		return (ERROR);
 	prgm->stacks->stacka_id = 'A';
 	prgm->stacks->stackb_id = 'B';
-	return (0);
+	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/31 18:57:55 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/05/28 14:20:30 by dominique     ########   odam.nl         */
+/*   Updated: 2020/05/30 16:07:53 by dsaripap      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ int					ft_exitprogram(t_prgm *prgm, int argc)
 		free(prgm);
 		return (0);
 	}
-	else if ((prgm->options & OPTION_N) && (argc != 2))
+	else if ((prgm->options & OPTION_N) && (argc != 2) && \
+	(prgm->signal != ERROR))
 	{
 		ft_printf(ANSI_COLOR_YELLOW_PAST);
 		ft_printf("Total number of operations %d\n", prgm->number_operations);

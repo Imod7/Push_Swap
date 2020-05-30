@@ -6,7 +6,7 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/11 12:22:18 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/05/29 15:24:25 by dominique     ########   odam.nl         */
+/*   Updated: 2020/05/30 16:20:02 by dsaripap      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void				ft_b_to_a(t_prgm *prgm, int cur_bucket)
 int					ft_move_and_push(t_prgm *prgm, int cur_bucket)
 {
 	ft_check_num_to_move(prgm, cur_bucket);
-	if (ft_check_ifsorted(prgm) != -1)
+	if (ft_check_ifsorted(prgm) == SUCCESS)
 		return (SUCCESS);
 	ft_push_b(prgm);
 	prgm->stacks->stackb_lst->bucket = cur_bucket;
@@ -100,7 +100,6 @@ int					ft_algorithm(t_prgm *prgm)
 	int				cur_bucket;
 	size_t			i;
 
-	// i = 0;
 	cur_bucket = 0;
 	ft_common_checks(prgm->stacks->stacka_lst, prgm, &i);
 	while ((prgm->stacks->stacka_lst != NULL) && (i <= prgm->stack_middle))

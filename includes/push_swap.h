@@ -6,7 +6,7 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/23 12:18:26 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/05/29 14:45:42 by dominique     ########   odam.nl         */
+/*   Updated: 2020/05/30 16:07:28 by dsaripap      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,13 @@
 # include "libft.h"
 # include <fcntl.h>
 
-typedef enum			e_prgm_result
+typedef enum			e_prgm_signal
 {
 	SUCCESS = 0,
 	ERROR = -1,
-	CONTINUE = 1
-}						t_prgm_result;
+	CONTINUE = 1,
+	KO = 2
+}						t_prgm_signal;
 
 typedef enum			e_instruction
 {
@@ -95,6 +96,7 @@ typedef struct			s_prgm
 	int					number_operations;
 	int					buckets;
 	int					bucket_size;
+	t_prgm_signal		signal;				
 }						t_prgm;
 
 typedef int				(*t_operation_func)(t_prgm *prgm);
@@ -147,8 +149,9 @@ void					ft_print_doubly_all(t_prgm *prgm, t_stack_list *temp);
 void					ft_print_stacks(t_prgm *prgm, char *operation);
 void					ft_print_instructions(t_prgm *prgm);
 void					ft_print_doublyll_instr(t_instr *temp);
+void					ft_print_borders(t_prgm *prgm, size_t flag, char a, \
+										char b);
 void					ft_set_color_moving_num(t_prgm *prgm, char *operation);
-// void					ft_print_borders(size_t flag, char a, char b);
 
 /*
 ** Linked List functions related to the Instructions List

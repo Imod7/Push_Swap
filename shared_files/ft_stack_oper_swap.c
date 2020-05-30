@@ -6,7 +6,7 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/24 14:53:01 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/05/30 10:34:44 by dominique     ########   odam.nl         */
+/*   Updated: 2020/05/30 12:09:58 by dominique     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int					ft_swap_a(t_prgm *prgm)
 		return (0);
 	swap_nodes(prgm->stacks->stacka_lst, (prgm->stacks->stacka_lst)->next);
 	if (prgm->stacka_len > 3)
-			ft_metrics_calculation(prgm, 0);
+		ft_metrics_calculation(prgm, 0);
 	if (prgm->exec == 1)
 		ft_saveinstructions(prgm, "sa");
 	return (0);

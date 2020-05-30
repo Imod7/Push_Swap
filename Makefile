@@ -6,7 +6,7 @@
 #    By: dsaripap <marvin@codam.nl>                   +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/01/31 13:44:11 by dsaripap      #+#    #+#                  #
-#    Updated: 2020/05/29 12:27:24 by dominique     ########   odam.nl          #
+#    Updated: 2020/05/30 15:07:20 by dominique     ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,7 @@ SRC_SHARED =	\
 		ft_stack_oper_swap.c \
 		ft_print_stacks.c \
 		ft_print_instructions.c \
+		ft_print_lists.c \
 		ft_presort.c \
 		ft_metrics.c \
 		ft_set_colors.c \

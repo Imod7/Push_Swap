@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   ft_metrics.c                                       :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: dominique <dominique@student.codam.nl>       +#+                     */
+/*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/03/14 15:47:55 by dominique     #+#    #+#                 */
-/*   Updated: 2020/05/30 10:41:35 by dominique     ########   odam.nl         */
+/*   Created: 2020/05/30 15:14:32 by dsaripap      #+#    #+#                 */
+/*   Updated: 2020/05/30 17:38:41 by dsaripap      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
