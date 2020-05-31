@@ -6,7 +6,7 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/08 21:57:49 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/05/30 16:03:54 by dsaripap      ########   odam.nl         */
+/*   Updated: 2020/05/31 11:19:41 by dsaripap      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,18 @@ int				print_usage(t_prgm *prgm)
 	prgm->options |= OPTION_U;
 	ft_printf("usage: ./program_name [-u | -vnc] [num1] [num2] [num3] ...\n");
 	ft_printf("program_name can be push_swap or checker\n");
+	ft_printf("-u : prints the usage\n");
+	ft_printf("-v : displays the stack's status after each operation\n");
+	ft_printf("-c : shows in colours the last operation & colors the stacks\n");
+	ft_printf("-n : displays the total number of operations\n");
+	free(prgm->stacks);
+	free(prgm);
 	return (ERROR);
 }
+
+/*
+** This function can return ERROR, USAGE or SUCCESS
+*/
 
 int				set_prgm_options(char *argv, t_prgm *prgm)
 {

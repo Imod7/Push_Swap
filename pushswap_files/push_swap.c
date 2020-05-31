@@ -6,7 +6,7 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/24 13:49:21 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/05/30 16:20:25 by dsaripap      ########   odam.nl         */
+/*   Updated: 2020/05/30 18:55:25 by dsaripap      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,14 @@ int				main(int argc, char **argv)
 {
 	t_prgm		*prgm;
 
+	if (argc < 2)
+		return (SUCCESS);
 	prgm = ft_memalloc(sizeof(t_prgm));
 	prgm_initialize(prgm, 1);
-	if (argc < 2)
-		return (0);
-	else
-	{
-		if (set_prgm_options(argv[1], prgm) == ERROR)
-			return (0);
-		if (ft_build_stacks(argc, argv, prgm) == ERROR)
-			return (ft_exitprogram(prgm, argc));
-	}
+	if (set_prgm_options(argv[1], prgm) == ERROR)
+		return (ERROR);
+	if (ft_build_stacks(argc, argv, prgm) == ERROR)
+		return (ft_exitprogram(prgm, argc));
 	ft_sorting_prep_calls(prgm);
 	ft_print_instructions(prgm);
 	ft_exitprogram(prgm, argc);
