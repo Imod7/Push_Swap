@@ -6,7 +6,7 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/23 12:18:26 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/05/31 14:05:53 by dsaripap      ########   odam.nl         */
+/*   Updated: 2020/06/04 17:26:35 by dsaripap      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,14 @@ int						ft_exitprogram(t_prgm *prgm, int argc);
 int						ft_exit_msg(t_prgm *prgm, size_t flag);
 
 /*
-** Check User Input functions
+** Functions that check if the input is valid
+*/
+
+int						ft_check_length(char *str);
+int						ft_isvalid(char *argv, long long num);
+
+/*
+** Building the Stacks
 */
 
 int						ft_build_stacks(int argc, char **argv, t_prgm *prgm);

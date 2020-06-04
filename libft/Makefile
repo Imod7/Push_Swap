@@ -6,7 +6,7 @@
 #    By: dsaripap <marvin@codam.nl>                   +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/03/27 14:38:43 by dsaripap      #+#    #+#                  #
-#    Updated: 2020/04/29 16:18:58 by dominique     ########   odam.nl          #
+#    Updated: 2020/06/04 10:09:41 by dsaripap      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ SRC = ft_atoi.c \
 	  ft_isalnum.c \
 	  ft_isascii.c \
 	  ft_isprint.c \
+	  ft_lltoa.c \
 	  ft_lstlen.c \
 	  ft_lstfindelem.c \
 	  ft_lstsort.c \

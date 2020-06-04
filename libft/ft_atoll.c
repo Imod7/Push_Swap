@@ -6,7 +6,7 @@
 /*   By: dominique <dominique@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/29 15:34:33 by dominique     #+#    #+#                 */
-/*   Updated: 2020/04/29 15:35:25 by dominique     ########   odam.nl         */
+/*   Updated: 2020/06/04 17:27:44 by dsaripap      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@ static long long	make_num(unsigned char *s, int sign)
 {
 	long long		num;
 	int				len;
-	int				units;
+	long long		units;
 
 	len = 0;
 	num = 0;
