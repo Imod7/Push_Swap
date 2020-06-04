@@ -6,7 +6,7 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/23 12:18:26 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/05/30 18:11:21 by dsaripap      ########   odam.nl         */
+/*   Updated: 2020/05/31 14:05:53 by dsaripap      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ typedef struct			s_prgm
 	int					number_operations;
 	int					buckets;
 	int					bucket_size;
-	t_prgm_signal		signal;	
+	t_prgm_signal		signal;
 }						t_prgm;
 
 typedef int				(*t_operation_func)(t_prgm *prgm);

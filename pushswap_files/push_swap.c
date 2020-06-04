@@ -6,7 +6,7 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/24 13:49:21 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/05/30 18:55:25 by dsaripap      ########   odam.nl         */
+/*   Updated: 2020/06/02 10:19:17 by dsaripap      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,6 @@ int				main(int argc, char **argv)
 	ft_print_instructions(prgm);
 	ft_exitprogram(prgm, argc);
 	return (SUCCESS);
+	while (1)
+		;
 }
