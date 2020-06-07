@@ -6,7 +6,7 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/11 12:22:18 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/05/30 16:20:02 by dsaripap      ########   odam.nl         */
+/*   Updated: 2020/06/07 14:04:45 by dsaripap      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,9 @@ int					ft_move_and_push(t_prgm *prgm, int cur_bucket)
 	ft_check_num_to_move(prgm, cur_bucket);
 	if (ft_check_ifsorted(prgm) == SUCCESS)
 		return (SUCCESS);
+	if ((ft_bnums_smaller_anums(prgm) == SUCCESS) || \
+	(ft_bnums_smaller_anums(prgm) == SUCCESS))
+		return (SUCCESS);
 	ft_push_b(prgm);
 	prgm->stacks->stackb_lst->bucket = cur_bucket;
 	return (CONTINUE);
@@ -114,7 +117,7 @@ int					ft_algorithm(t_prgm *prgm)
 		else
 		{
 			if (ft_move_and_push(prgm, cur_bucket) == SUCCESS)
-				return (SUCCESS);
+				break ;
 			ft_common_checks(prgm->stacks->stacka_lst, prgm, &i);
 			if (ft_stack_len(prgm->stacks->stackb_lst) % prgm->bucket_size == 0)
 				cur_bucket += 1;

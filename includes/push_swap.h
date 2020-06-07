@@ -6,7 +6,7 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/23 12:18:26 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/06/04 17:26:35 by dsaripap      ########   odam.nl         */
+/*   Updated: 2020/06/07 15:18:23 by dsaripap      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@
 # include "libft.h"
 # include <fcntl.h>
 
+/*
+** Enum types to have a more explanatory flow
+** in the program
+*/
+
 typedef enum			e_prgm_signal
 {
 	SUCCESS = 0,
@@ -23,6 +28,11 @@ typedef enum			e_prgm_signal
 	CONTINUE = 1,
 	KO = 2
 }						t_prgm_signal;
+
+/*
+** The enum t_instruction helps to easily check
+** which operation is being called
+*/
 
 typedef enum			e_instruction
 {
@@ -39,6 +49,11 @@ typedef enum			e_instruction
 	INSTR_RRR = (1 << 10)
 }						t_instruction;
 
+/*
+** The enum t_option helps to set the options of the program
+** which are the bonuses of the project
+*/
+
 typedef enum			e_option
 {
 	OPTION_U = (1 << 0),
@@ -46,6 +61,11 @@ typedef enum			e_option
 	OPTION_N = (1 << 2),
 	OPTION_C = (1 << 3)
 }						t_option;
+
+/*
+** The struct t_instr is a doubly linked list where
+** all the instructions/operations are saved
+*/
 
 typedef struct			s_instr
 {
@@ -78,6 +98,11 @@ typedef struct			s_stacks
 	t_stack_list		*stackb_lst;
 }						t_stacks;
 
+/*
+** Struct t_prgm where all the main elements of the project
+** and all the main settings are declared and saved
+*/
+
 typedef struct			s_prgm
 {
 	t_stacks			*stacks;
@@ -99,6 +124,13 @@ typedef struct			s_prgm
 	t_prgm_signal		signal;
 }						t_prgm;
 
+/*
+** All operations functions are set as function pointers
+** of type "t_operation_func" which is then set as a member
+** in the struct t_prgm as an array of 11 elements which
+** is the amount of different operations
+*/
+
 typedef int				(*t_operation_func)(t_prgm *prgm);
 
 int						ft_swap_b(t_prgm *prgm);
@@ -117,7 +149,7 @@ int						ft_reverserotate_both(t_prgm *prgm);
 ** Program Checks
 */
 
-void					prgm_initialize(t_prgm *prgm, size_t flag);
+void					prgm_initialize(t_prgm **prgm, size_t flag);
 int						set_prgm_options(char *argv, t_prgm *prgm);
 int						check_prgm_options(t_prgm *prgm, int argc);
 int						ft_exitprogram(t_prgm *prgm, int argc);
@@ -127,7 +159,7 @@ int						ft_exit_msg(t_prgm *prgm, size_t flag);
 ** Functions that check if the input is valid
 */
 
-int						ft_check_length(char *str);
+int						ft_check_str_length(char *str);
 int						ft_isvalid(char *argv, long long num);
 
 /*
@@ -171,29 +203,26 @@ void					ft_call_operations(t_instr *instr_lst, t_prgm *prgm);
 ** Sorting functions
 */
 
-void					ft_sorting(t_prgm *prgm);
 void					ft_presort(t_stack_list **completelist);
 int						ft_sort_small(t_prgm *prgm);
+void					ft_sort_three(t_prgm *prgm);
 
 /*
-** Algorithm functions
+** Algorithm functions that implement the main algorithm,
+** calculate matrics that are needed during the program
+** and check and decide based on these metrics which
+** number to move and where
 */
 
+int						ft_algorithm(t_prgm *prgm);
 void					ft_metrics_calculation(t_prgm *prgm, int init);
-void					ft_sort_three(t_prgm *prgm);
 void					ft_calculate_buckets(t_prgm *prgm);
 void					ft_update_buckets(t_prgm *prgm);
-int						ft_algorithm(t_prgm *prgm);
 void					ft_check_num_to_move(t_prgm *prgm, int bucket);
 int						ft_check_ifsorted(t_prgm *prgm);
 void					ft_move_num_to_top_of_stack(t_prgm *prgm, size_t flag);
-
-/*
-** Bonus options & descriptive function
-*/
-
-void					print_number_of_oper(t_prgm *prgm);
-void					ft_operation_descr(t_prgm *prgm);
+int						ft_bnums_smaller_anums(t_prgm *prgm);
+int						ft_bnums_bigger_anums(t_prgm *prgm);
 
 /*
 ** Functions related to instruction/operations list

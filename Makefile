@@ -6,7 +6,7 @@
 #    By: dsaripap <marvin@codam.nl>                   +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/01/31 13:44:11 by dsaripap      #+#    #+#                  #
-#    Updated: 2020/06/04 17:23:23 by dsaripap      ########   odam.nl          #
+#    Updated: 2020/06/07 15:19:20 by dsaripap      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ SRC_PUSHSWAP =	\
 		ft_sort_small.c \
 		ft_sort_big.c \
 		ft_move_on_distance.c \
+		ft_stacka_vs_stackb.c \
 
 SRC_SHARED =	\
 		ft_save_input.c \
@@ -64,7 +65,7 @@ OBJ_SHARED = $(SRC_SHARED:%.c=$(SHARED_OBJDIR)/%.o)
 
 INCL = libft/libft.a
 
-all: $(EXEDIR)$(NAME_CHECKER) $(EXEDIR)$(NAME_PUSHSWAP) 
+all: $(EXEDIR)$(NAME_CHECKER) $(EXEDIR)$(NAME_PUSHSWAP)
 
 $(LIBFT):
 	@echo "${CYAN} [ * ] ${NC}Calling libft makefile from push_swap"

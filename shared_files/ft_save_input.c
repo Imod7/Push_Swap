@@ -6,7 +6,7 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/24 14:55:25 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/06/04 17:48:49 by dsaripap      ########   odam.nl         */
+/*   Updated: 2020/06/07 15:11:26 by dsaripap      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int			ft_saving_arguments(int argc, char **argv, t_prgm *prgm, \
 	prgm->total_numbers = 0;
 	while (i < argc)
 	{
-		if (ft_check_length(argv[i]) == ERROR)
+		if (ft_check_str_length(argv[i]) == ERROR)
 			return (ft_exit_msg(prgm, 0));
 		num = ft_atoll(argv[i]);
 		if (ft_isvalid(argv[i], num) == -1)

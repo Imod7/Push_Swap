@@ -6,7 +6,7 @@
 /*   By: dsaripap <dsaripap@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/04 17:22:24 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/06/04 17:56:21 by dsaripap      ########   odam.nl         */
+/*   Updated: 2020/06/07 10:05:42 by dsaripap      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static size_t		ft_calculate_length(char *str)
 ** <= 10 digits if there are no signs in front
 */
 
-int					ft_check_length(char *str)
+int					ft_check_str_length(char *str)
 {
 	size_t			len;
 

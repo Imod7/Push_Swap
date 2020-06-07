@@ -6,7 +6,7 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/24 14:53:52 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/05/30 17:39:28 by dsaripap      ########   odam.nl         */
+/*   Updated: 2020/06/07 10:00:57 by dsaripap      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void				ft_checkinstruction(size_t instruction, \
 	ft_printf("%s\n", *oper);
 }
 
-size_t					power_of_two_converter(size_t power)
+static size_t			power_of_two_converter(size_t power)
 {
 	size_t				i;
 	size_t				j;
@@ -57,7 +57,7 @@ size_t					power_of_two_converter(size_t power)
 	return (j);
 }
 
-void					ft_initialize_array(t_operation_func *oper_func)
+static void				ft_initialize_array(t_operation_func *oper_func)
 {
 	oper_func[0] = ft_swap_a;
 	oper_func[1] = ft_swap_b;

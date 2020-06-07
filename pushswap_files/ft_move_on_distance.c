@@ -6,7 +6,7 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/30 15:16:02 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/05/30 15:16:04 by dsaripap      ########   odam.nl         */
+/*   Updated: 2020/06/07 15:12:17 by dsaripap      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,10 @@ static void			ft_different_buckets(t_prgm *prgm, int bucket)
 			ft_reverserotate_a(prgm);
 	}
 }
+
+/*
+** Checking which number to push from Stack A to Stack B
+*/
 
 void				ft_check_num_to_move(t_prgm *prgm, int bucket)
 {

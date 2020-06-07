@@ -6,7 +6,7 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/31 18:57:55 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/05/30 16:07:53 by dsaripap      ########   odam.nl         */
+/*   Updated: 2020/06/07 15:13:24 by dsaripap      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,21 @@ int					ft_exitprogram(t_prgm *prgm, int argc)
 	ft_free_instr_list(prgm->instr_lst);
 	free(prgm);
 	return (0);
+}
+
+int					ft_exit_msg(t_prgm *prgm, size_t flag)
+{
+	if (flag == 0)
+	{
+		write(2, "Error\n", 6);
+		prgm->signal = ERROR;
+		return (ERROR);
+	}
+	if (flag == 1)
+	{
+		(prgm->exec == 0) ? ft_printf("KO\n") : (void)prgm;
+		prgm->signal = KO;
+		return (KO);
+	}
+	return (SUCCESS);
 }

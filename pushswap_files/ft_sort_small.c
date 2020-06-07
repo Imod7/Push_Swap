@@ -6,15 +6,16 @@
 /*   By: dsaripap <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/12 13:46:56 by dsaripap      #+#    #+#                 */
-/*   Updated: 2020/05/30 16:20:16 by dsaripap      ########   odam.nl         */
+/*   Updated: 2020/06/07 10:24:55 by dsaripap      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
 /*
-** When Stack_A has only 3 numbers then
-** there are only 6 possible permutations
+** Sorting function that is called when Stack_A
+** has only 3 numbers so then there are only
+** 6 possible permutations
 */
 
 void				ft_sort_three(t_prgm *prgm)
@@ -43,6 +44,11 @@ void				ft_sort_three(t_prgm *prgm)
 	else if ((a->num > b->num) && (b->num < c->num) && (c->num < a->num))
 		ft_rotate_a(prgm);
 }
+
+/*
+** Sorting function that is called when the amount of numbers
+** that we want to sort is less than 10
+*/
 
 static int			ft_sort_lt_ten(t_prgm *prgm)
 {
