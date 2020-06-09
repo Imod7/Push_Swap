@@ -52,6 +52,4 @@ int				main(int argc, char **argv)
 	ft_print_instructions(prgm);
 	ft_exitprogram(prgm, argc);
 	return (SUCCESS);
-	while (1)
-		;
 }
