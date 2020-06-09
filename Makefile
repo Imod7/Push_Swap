@@ -6,7 +6,7 @@
 #    By: dsaripap <marvin@codam.nl>                   +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/01/31 13:44:11 by dsaripap      #+#    #+#                  #
-#    Updated: 2020/06/07 15:19:20 by dsaripap      ########   odam.nl          #
+#    Updated: 2020/06/09 12:40:56 by dsaripap      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,12 +75,14 @@ $(EXEDIR)$(NAME_CHECKER): $(OBJ_CHECKER) $(OBJ_SHARED) $(LIBFT)
 	@echo "${GREEN} [ + ] ${NC}Creating checker object files"
 	@echo "${GREEN} [ + ] ${NC}Creating shared object files"
 	@echo "${GREEN} [ + ] ${NC}Creating checker executable"
-	@$(CC) $(FLAGS) $(OBJ_CHECKER) $(OBJ_SHARED) -o $(EXEDIR)$(NAME_CHECKER) $(INCL)
+	@$(CC) $(FLAGS) $(OBJ_CHECKER) $(OBJ_SHARED) -o $(EXEDIR)$(NAME_CHECKER) \
+	$(INCL)
 
 $(EXEDIR)$(NAME_PUSHSWAP): $(OBJ_PUSHSWAP) $(OBJ_SHARED) $(LIBFT)
 	@echo "${GREEN} [ + ] ${NC}Creating push_swap object files"
 	@echo "${GREEN} [ + ] ${NC}Creating push_swap executable"
-	@$(CC) $(FLAGS) $(OBJ_PUSHSWAP) $(OBJ_SHARED) -o $(EXEDIR)$(NAME_PUSHSWAP) $(INCL)
+	@$(CC) $(FLAGS) $(OBJ_PUSHSWAP) $(OBJ_SHARED) -o $(EXEDIR)$(NAME_PUSHSWAP) \
+	$(INCL)
 
 $(SHARED_OBJDIR)/%.o: $(SHARED_SRCDIR)/%.c $(INCL)
 	@mkdir -p $(SHARED_OBJDIR)

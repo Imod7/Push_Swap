@@ -53,3 +53,6 @@ python3 random_generator.py
 ./test_script.sh your_own_file.txt
 ```
 * The rest of the steps are already described in the Method 1
+
+
+![random generator](https://github.com/Imod7/Push_Swap/images/random-gen.png)

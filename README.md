@@ -21,9 +21,19 @@ And it shows OK/KO if the stack was sorted/not respectively.
 You can also run push_swap and checker together :
 >./push_swap 22 -5 0 123 9 | ./checker 22 -5 0 123 9
 
-Extra options
-Some extra options can be used :
+## Bonus
+
+Some extra options can be used when running the programs like :
 - n : prints the number of operations executed
 - v : prints the stack after each operation
+- c : prints the operation that was called & the stacks after each operation in colors (it is used in combination with -v option)
 - u : prints the usage
 
+### Bonus option -vc for Printing Operations & Stacks in Colors
+![bonus colors](/images/bonus-colors.png)
+
+### Bonus option -n for Operations Count
+![bonus operations counter](/images/bonus-operationscount.png)
+
+### Bonus option -u for Usage
+![bonus usage](/images/bonus-usage.png)
