@@ -55,4 +55,5 @@ python3 random_generator.py
 * The rest of the steps are already described in the Method 1
 
 
-![random generator](https://github.com/Imod7/Push_Swap/blob/master/images/random-gen.png)
+![random generator]
+(https://github.com/Imod7/Push_Swap/blob/master/images/random-gen.png)
